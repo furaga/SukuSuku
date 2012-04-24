@@ -4,5 +4,16 @@
 
 外部ライブラリ
 
-・IronRuby(http://www.ironruby.net)
-・OpenCVSharp(http://code.google.com/p/opencvsharp)
+・IronRuby-1.0
+	
+	http://www.ironruby.net
+
+・OpenCVSharp-2.3.1
+	
+	http://code.google.com/p/opencvsharp
+
+・OpenCV-2.3.1
+	
+	http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
+
+
