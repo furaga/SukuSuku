@@ -1,0 +1,8 @@
+開発環境
+
+・Visual Studio 2010(.NET Framework 4)
+
+外部ライブラリ
+
+・IronRuby(http://www.ironruby.net)
+・OpenCVSharp(http://code.google.com/p/opencvsharp)
