@@ -43,5 +43,18 @@ namespace SukuSuku
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void commandView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        BlackForm blackForm = null;
+
+        private void screenshotButton_Click(object sender, EventArgs e)
+        {
+            blackForm = new BlackForm();
+            blackForm.Show(this);
+        }
     }
 }
