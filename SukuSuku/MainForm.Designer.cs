@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Click(image)");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("DoubleClick(image)");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("type(text)");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("type(image, text)");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Click(image)");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("DoubleClick(image)");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("type(text)");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("type(image, text)");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -149,14 +149,15 @@
                         | Sgry.Azuki.DrawingOption.ShowsLineNumber)
                         | Sgry.Azuki.DrawingOption.ShowsDirtBar)));
             this.textBox.FirstVisibleLine = 0;
-            this.textBox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox.ForeColor = System.Drawing.Color.Black;
             this.textBox.HighlightsCurrentLine = false;
             this.textBox.Location = new System.Drawing.Point(0, 0);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(681, 355);
+            this.textBox.Size = new System.Drawing.Size(651, 355);
             this.textBox.TabIndex = 1;
-            this.textBox.ViewWidth = 4147;
+            this.textBox.TabWidth = 4;
+            this.textBox.ViewWidth = 4153;
             // 
             // thumbNailView
             // 
@@ -165,7 +166,7 @@
             this.thumbNailView.LargeImageList = this.thumbNailList;
             this.thumbNailView.Location = new System.Drawing.Point(0, 0);
             this.thumbNailView.Name = "thumbNailView";
-            this.thumbNailView.Size = new System.Drawing.Size(133, 494);
+            this.thumbNailView.Size = new System.Drawing.Size(128, 494);
             this.thumbNailView.TabIndex = 2;
             this.thumbNailView.UseCompatibleStateImageBehavior = false;
             // 
@@ -197,28 +198,30 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(991, 494);
-            this.splitContainer1.SplitterDistance = 169;
+            this.splitContainer1.SplitterDistance = 204;
             this.splitContainer1.TabIndex = 5;
             // 
             // treeView1
             // 
+            this.treeView1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeView1.Font = new System.Drawing.Font("メイリオ", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode9.Name = "ノード0";
-            treeNode9.Text = "Click(image)";
-            treeNode10.Name = "ノード1";
-            treeNode10.Text = "DoubleClick(image)";
-            treeNode11.Name = "ノード2";
-            treeNode11.Text = "type(text)";
-            treeNode12.Name = "ノード3";
-            treeNode12.Text = "type(image, text)";
+            treeNode5.Name = "ノード0";
+            treeNode5.Text = "Click(image)";
+            treeNode6.Name = "ノード1";
+            treeNode6.Text = "DoubleClick(image)";
+            treeNode7.Name = "ノード2";
+            treeNode7.Text = "type(text)";
+            treeNode8.Name = "ノード3";
+            treeNode8.Text = "type(image, text)";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
-            this.treeView1.Size = new System.Drawing.Size(169, 494);
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8});
+            this.treeView1.Size = new System.Drawing.Size(204, 494);
             this.treeView1.TabIndex = 0;
             // 
             // splitContainer2
@@ -234,8 +237,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.thumbNailView);
-            this.splitContainer2.Size = new System.Drawing.Size(818, 494);
-            this.splitContainer2.SplitterDistance = 681;
+            this.splitContainer2.Size = new System.Drawing.Size(783, 494);
+            this.splitContainer2.SplitterDistance = 651;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -252,7 +255,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer3.Size = new System.Drawing.Size(681, 494);
+            this.splitContainer3.Size = new System.Drawing.Size(651, 494);
             this.splitContainer3.SplitterDistance = 355;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -263,7 +266,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(681, 135);
+            this.tabControl1.Size = new System.Drawing.Size(651, 135);
             this.tabControl1.TabIndex = 0;
             // 
             // outputTab
@@ -272,7 +275,7 @@
             this.outputTab.Location = new System.Drawing.Point(4, 25);
             this.outputTab.Name = "outputTab";
             this.outputTab.Padding = new System.Windows.Forms.Padding(3);
-            this.outputTab.Size = new System.Drawing.Size(673, 106);
+            this.outputTab.Size = new System.Drawing.Size(643, 106);
             this.outputTab.TabIndex = 1;
             this.outputTab.Text = "出力";
             this.outputTab.UseVisualStyleBackColor = true;
@@ -282,7 +285,7 @@
             this.outputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.outputTextBox.Location = new System.Drawing.Point(3, 3);
             this.outputTextBox.Name = "outputTextBox";
-            this.outputTextBox.Size = new System.Drawing.Size(667, 100);
+            this.outputTextBox.Size = new System.Drawing.Size(637, 100);
             this.outputTextBox.TabIndex = 0;
             this.outputTextBox.Text = "";
             // 

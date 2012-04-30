@@ -15,6 +15,7 @@ namespace SukuSuku
     public partial class MainForm : Form
     {
         Microsoft.Scripting.Hosting.ScriptEngine engine;
+        UI ui;
 
         public MainForm()
         {
@@ -30,13 +31,16 @@ namespace SukuSuku
         {
             textBox.Highlighter = Highlighters.Ruby;
             engine = IronRuby.Ruby.CreateEngine();
+            ui = new UI(this);
         }
 
         private void 実行RToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             try
             {
-                engine.Execute(textBox.Text);
+                var scope = engine.CreateScope();
+                scope.SetVariable("ui", ui);
+                engine.Execute(textBox.Text, scope);
             }
             catch (Exception ex)
             {
@@ -56,5 +60,11 @@ namespace SukuSuku
             blackForm = new BlackForm();
             blackForm.Show(this);
         }
+
+        public void SetCursor(int x, int y)
+        {
+            Cursor.Position = new Point(x, y);
+        }
+
     }
 }
