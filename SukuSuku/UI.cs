@@ -58,9 +58,9 @@ namespace SukuSuku
             System.Threading.Thread.Sleep(100);
         }
 
-        private void click(int imageIndex, MouseEventFlags flg1, MouseEventFlags flg2, int cnt)
+        private void click(string imageName, MouseEventFlags flg1, MouseEventFlags flg2, int cnt, double threshold)
         {
-            var position = owner.findTemplate(imageIndex);
+            var position = owner.findTemplate(imageName, threshold);
             if (position == null) return;
             click(position.Value.X, position.Value.Y, flg1, flg2, cnt);
         }
@@ -71,53 +71,53 @@ namespace SukuSuku
 
         // 左クリック
         public void leftClick(int x, int y) { click(x, y, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 1); }
-        public void leftClick(int imageIndex) { click(imageIndex, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 1); }
+        public void leftClick(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 1, threshold); }
 
         // 右クリック
         public void rightClick(int x, int y) { click(x, y, MouseEventFlags.RIGHTDOWN, MouseEventFlags.RIGHTUP, 1); }
-        public void rightClick(int imageIndex) { click(imageIndex, MouseEventFlags.RIGHTDOWN, MouseEventFlags.RIGHTUP, 1); }
+        public void rightClick(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.RIGHTDOWN, MouseEventFlags.RIGHTUP, 1, threshold); }
 
         // ダブルクリック
         public void doubleClick(int x, int y) { click(x, y, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 2); }
-        public void doubleClick(int imageIndex) { click(imageIndex, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 2); }
+        public void doubleClick(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 2, threshold); }
         
         // カーソル移動（無駄に2回同じ所に移動させてるけど特に問題ないはず）
         public void mouseMove(int x, int y) { click(x, y, MouseEventFlags.ABSOLUTE, MouseEventFlags.ABSOLUTE, 1); }
-        public void mouseMove(int imageIndex) { click(imageIndex, MouseEventFlags.ABSOLUTE, MouseEventFlags.ABSOLUTE, 1); }
+        public void mouseMove(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.ABSOLUTE, MouseEventFlags.ABSOLUTE, 1, threshold); }
 
         // キー入力
         public void type(string text) { SendKeys.SendWait(text); }
         public void type(int x, int y, string text) { leftClick(x, y); type(text); }
-        public void type(int imageIndex, string text) { leftClick(imageIndex); type(text); }
+        public void type(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); type(text); }
 
         // 貼り付け（outputTextBoxに貼ろうとするとなぜかtextBoxに貼り付けられる・・）
         public void paste(string text) { Clipboard.SetText(text); type("^v"); }
         public void paste(int x, int y, string text) { leftClick(x, y); paste(text); }
-        public void paste(int imageIndex, string text) { leftClick(imageIndex); paste(text); }
+        public void paste(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); paste(text); }
 /*
         // 指定された画像が存在するか
-        public bool exist(int imageIndex) { return owner.findTemplate(imageIndex) != null; }
+        public bool exist(int imageNameIndex) { return owner.findTemplate(imageNameIndex) != null; }
 
         // 画像が見つかるまで待機（ポーリング）
-        public void wait(int imageIndex, int timeout)
+        public void wait(int imageNameIndex, int timeout)
         {
             var sw = new Stopwatch();
             while (sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
-                if (owner.findTemplate(imageIndex) != null) return;
+                if (owner.findTemplate(imageNameIndex) != null) return;
                 sw.Stop();
             }
         }
 
         // 画像がスクリーンから消えるまで待機（ポーリング）
-        public void waitVanish(int imageIndex, int timeout)
+        public void waitVanish(int imageNameIndex, int timeout)
         {
             var sw = new Stopwatch();
             while (sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
-                if (owner.findTemplate(imageIndex) == null) return;
+                if (owner.findTemplate(imageNameIndex) == null) return;
                 sw.Stop();
             }
         }
@@ -138,11 +138,11 @@ namespace SukuSuku
             System.Threading.Thread.Sleep(100);
         }
 
-        public void dragAndDrop(int imageIndex1, int imageIndex2)
+        public void dragAndDrop(string imageName1, string imageName2, double threshold1 = -1, double threshold2 = -1)
         {
-            var position1 = owner.findTemplate(imageIndex1);
+            var position1 = owner.findTemplate(imageName1, threshold1);
             if (position1 == null) return;
-            var position2 = owner.findTemplate(imageIndex2);
+            var position2 = owner.findTemplate(imageName2, threshold2);
             if (position2 == null) return;
 
             dragAndDrop(position1.Value.X, position1.Value.Y, position2.Value.X, position2.Value.Y);

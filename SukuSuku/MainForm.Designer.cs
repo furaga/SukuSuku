@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Click(image)");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("DoubleClick(image)");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("type(text)");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("type(image, text)");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Click(image)");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("DoubleClick(image)");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("type(text)");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("type(image, text)");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +57,8 @@
             this.screenshotButton = new System.Windows.Forms.ToolStripButton();
             this.insertImageButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.thresholdUpDown = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -73,6 +75,7 @@
             this.tabControl1.SuspendLayout();
             this.outputTab.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -192,6 +195,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.thresholdUpDown);
             this.splitContainer1.Panel1.Controls.Add(this.treeView1);
             // 
             // splitContainer1.Panel2
@@ -208,19 +213,19 @@
             this.treeView1.Font = new System.Drawing.Font("メイリオ", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode5.Name = "ノード0";
-            treeNode5.Text = "Click(image)";
-            treeNode6.Name = "ノード1";
-            treeNode6.Text = "DoubleClick(image)";
-            treeNode7.Name = "ノード2";
-            treeNode7.Text = "type(text)";
-            treeNode8.Name = "ノード3";
-            treeNode8.Text = "type(image, text)";
+            treeNode13.Name = "ノード0";
+            treeNode13.Text = "Click(image)";
+            treeNode14.Name = "ノード1";
+            treeNode14.Text = "DoubleClick(image)";
+            treeNode15.Name = "ノード2";
+            treeNode15.Text = "type(text)";
+            treeNode16.Name = "ノード3";
+            treeNode16.Text = "type(image, text)";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8});
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16});
             this.treeView1.Size = new System.Drawing.Size(204, 494);
             this.treeView1.TabIndex = 0;
             // 
@@ -329,6 +334,27 @@
             this.statusStrip1.TabIndex = 7;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // thresholdUpDown
+            // 
+            this.thresholdUpDown.Location = new System.Drawing.Point(73, 465);
+            this.thresholdUpDown.Name = "thresholdUpDown";
+            this.thresholdUpDown.Size = new System.Drawing.Size(120, 22);
+            this.thresholdUpDown.TabIndex = 1;
+            this.thresholdUpDown.Value = new decimal(new int[] {
+            90,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(3, 447);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(190, 15);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "マッチ判定の最低値（0 ~ 100）";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -346,6 +372,7 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -361,6 +388,7 @@
             this.outputTab.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,6 +419,8 @@
         private System.Windows.Forms.ToolStripButton screenshotButton;
         private System.Windows.Forms.ToolStripButton insertImageButton;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown thresholdUpDown;
     }
 }
 

@@ -38,13 +38,22 @@ namespace SukuSuku
             templates.Add(BitmapConverter.ToIplImage(bmp));
         }
 
-        public Point? findTemplate(int imageIndex)
+        public Point? findTemplate(string imageName, double threshold = -1)
         {
+            var imageIndex = imageName.Last() - '0';
+
             if (imageIndex >= templates.Count)
             {
                 MessageBox.Show("Error! Out of index");
                 return null;
             }
+
+            if (threshold < 0)
+            {
+                threshold = (double)thresholdUpDown.Value;
+            }
+
+            threshold *= 0.01;
 
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
@@ -81,7 +90,13 @@ namespace SukuSuku
             var x = max_loc.X + tmpl.Size.Width / 2;
             var y = max_loc.Y + tmpl.Size.Height / 2;
 
-            return new Point(x, y);
+            if (threshold <= max_val)
+            {
+                return new Point(x, y);
+            }
+
+            MessageBox.Show("画像" + imageName + "がスクリーン内で見つかりませんでした。");
+            return null;
         }
     }
 }
