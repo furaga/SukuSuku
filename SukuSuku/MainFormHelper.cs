@@ -16,6 +16,7 @@ namespace SukuSuku
     {
         List<IplImage> templates = new List<IplImage>();
 
+        // rectの領域内のスクリーンショットを撮ってbitmapデータを返す
         private Bitmap GetScreenshotBmp(Rectangle rect)
         {
             var size = new Size(rect.Width, rect.Height);
@@ -25,10 +26,11 @@ namespace SukuSuku
             {
                 g.CopyFromScreen(rect.X, rect.Y, 0, 0, size, CopyPixelOperation.SourceCopy);
             }
-
+            
             return bmp;
         }
 
+        // rectの領域内のスクリーンショットを撮って保存
         public void takeScreenshot(Rectangle rect)
         {
             var bmp = GetScreenshotBmp(rect);
@@ -38,40 +40,36 @@ namespace SukuSuku
             templates.Add(BitmapConverter.ToIplImage(bmp));
         }
 
-        public Point? findTemplate(string imageName, double threshold = -1)
+        // スクリーン画像とimageNameで指定した画像とのマッチング
+        public Rectangle findTemplate(string imageName, double threshold = -1)
         {
             var imageIndex = imageName.Last() - '0';
 
             if (imageIndex >= templates.Count)
             {
                 MessageBox.Show("Error! Out of index");
-                return null;
+                return Rectangle.Empty;
             }
 
-            if (threshold < 0)
-            {
-                threshold = (double)thresholdUpDown.Value;
-            }
+            // thresholdが不当な値だったらthresholdUpDownに書かれている数値を使う
+            if (threshold < 0 || 100 < threshold) threshold = (double)thresholdUpDown.Value;
 
+            // 0 ~ 1.0にスケールを合わせる
             threshold *= 0.01;
 
+            // 時間計測開始
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
 
+            // 比較する2つの画像を用意
             var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
             var target = BitmapConverter.ToIplImage(bmp);
-
-            /*
-            using (var win = new CvWindow("win", BitmapConverter.ToIplImage(bmp)))
-            {
-                CvWindow.WaitKey();
-            }
-            */
-
             var tmpl = templates[imageIndex];
 
+            // 画像マッチング
             double min_val, max_val;
             CvPoint min_loc, max_loc;
+
             var size = new CvSize(target.Width - tmpl.Width + 1, target.Height - tmpl.Height + 1);
             using (var dst = Cv.CreateImage(size, BitDepth.F32, 1))
             {
@@ -79,6 +77,7 @@ namespace SukuSuku
                 Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
             }
 
+            // 時間計測終了
             stopwatch.Stop();
 
             Console.WriteLine("Ellapsed Time = " + stopwatch.ElapsedMilliseconds + " ms");
@@ -90,13 +89,14 @@ namespace SukuSuku
             var x = max_loc.X + tmpl.Size.Width / 2;
             var y = max_loc.Y + tmpl.Size.Height / 2;
 
-            if (threshold <= max_val)
+            // max_valがthresholdを超えなければマッチしなかったと判断する
+            if (threshold > max_val)
             {
-                return new Point(x, y);
+                MessageBox.Show("画像 " + imageName + " はスクリーン内で見つかりませんでした。");
+                return Rectangle.Empty;
             }
 
-            MessageBox.Show("画像" + imageName + "がスクリーン内で見つかりませんでした。");
-            return null;
+            return new Rectangle(max_loc.X, max_loc.Y, tmpl.Size.Width, tmpl.Size.Height);
         }
     }
 }

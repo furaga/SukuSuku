@@ -33,11 +33,25 @@ namespace SukuSuku
             XUP = 0x00000100
         }
 
+        // メインフォームへの参照
         MainForm owner;
 
+        // コンスタラクタ
         public UI(MainForm owner)
         {
             this.owner = owner;
+        }
+
+        // MainForm.findTemplate()で帰ってきた矩形の中心座標を返す(Rectangle.Emptyだったらnullを返す)
+        private Point? findTemplatePoint(string imageName, double threshold)
+        {
+            var rect = owner.findTemplate(imageName, threshold);
+            if (rect == Rectangle.Empty) return null;
+
+            var x = (rect.Left + rect.Right) / 2;
+            var y = (rect.Top + rect.Bottom) / 2;
+
+            return new Point(x, y);
         }
 
         // クリック系のテンプレート関数
@@ -58,15 +72,18 @@ namespace SukuSuku
             System.Threading.Thread.Sleep(100);
         }
 
+        // クリック系のテンプレート関数
         private void click(string imageName, MouseEventFlags flg1, MouseEventFlags flg2, int cnt, double threshold)
         {
-            var position = owner.findTemplate(imageName, threshold);
-            if (position == null) return;
-            click(position.Value.X, position.Value.Y, flg1, flg2, cnt);
+            var pos = findTemplatePoint(imageName, threshold);
+            if (pos == null) return;
+            click(pos.Value.X, pos.Value.Y, flg1, flg2, cnt);
         }
 
         //-----------------------------------------------------------------------------------------
+        //
         // 公開メソッドたち
+        //
         //-----------------------------------------------------------------------------------------
 
         // 左クリック
@@ -125,27 +142,30 @@ namespace SukuSuku
         // (x1, y1)にあるものをから(x2, y2)へドラッグアンドドロップ
         public void dragAndDrop(int x1, int y1, int x2, int y2)
         {
+            // マウスカーソルを(x1, y1)にセット
             Cursor.Position = new Point(x1, y1);
             System.Threading.Thread.Sleep(100);
 
+            // 左ボタンを押す
             mouse_event((UInt32)MouseEventFlags.LEFTDOWN, 0, 0, 0, IntPtr.Zero);
             System.Threading.Thread.Sleep(100);
 
+            // マウスカーソルを(x2, y2)の移動
             Cursor.Position = new Point(x2, y2);
             System.Threading.Thread.Sleep(100);
             
+            // 左ボタンを離す
             mouse_event((UInt32)MouseEventFlags.LEFTUP, 0, 0, 0, IntPtr.Zero);
             System.Threading.Thread.Sleep(100);
         }
 
         public void dragAndDrop(string imageName1, string imageName2, double threshold1 = -1, double threshold2 = -1)
         {
-            var position1 = owner.findTemplate(imageName1, threshold1);
-            if (position1 == null) return;
-            var position2 = owner.findTemplate(imageName2, threshold2);
-            if (position2 == null) return;
-
-            dragAndDrop(position1.Value.X, position1.Value.Y, position2.Value.X, position2.Value.Y);
+            var pos1 = findTemplatePoint(imageName1, threshold1);
+            if (pos1 == null) return;
+            var pos2 = findTemplatePoint(imageName2, threshold2);
+            if (pos2 == null) return;
+            dragAndDrop(pos1.Value.X, pos1.Value.Y, pos2.Value.X, pos2.Value.Y);
         }
     }
 }
