@@ -107,5 +107,29 @@ namespace SukuSuku
             textBox.Document.Replace("", beginPos, endPos);
         }
 
+        private void 保存SToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Save();
+            SetTitle();
+        }
+
+        private void 名前をつけて保存AToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Save(false);
+            SetTitle();
+        }
+
+        private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CheckSave()) NewFile();
+            SetTitle();
+        }
+
+        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (CheckSave()) OpenFile();
+            SetTitle();
+        }
+
     }
 }

@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Click(image)");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("DoubleClick(image)");
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("type(text)");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("type(image, text)");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Click(image)");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("DoubleClick(image)");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("type(text)");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("type(image, text)");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.ファイルFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +79,8 @@
             this.一行削除LToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -130,7 +132,7 @@
             // 終了XToolStripMenuItem
             // 
             this.終了XToolStripMenuItem.Name = "終了XToolStripMenuItem";
-            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(224, 28);
+            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(328, 28);
             this.終了XToolStripMenuItem.Text = "終了(&X)";
             this.終了XToolStripMenuItem.Click += new System.EventHandler(this.終了XToolStripMenuItem_Click);
             // 
@@ -166,7 +168,7 @@
             // 
             this.実行RToolStripMenuItem1.Name = "実行RToolStripMenuItem1";
             this.実行RToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.実行RToolStripMenuItem1.Size = new System.Drawing.Size(162, 28);
+            this.実行RToolStripMenuItem1.Size = new System.Drawing.Size(208, 28);
             this.実行RToolStripMenuItem1.Text = "実行(&R)";
             this.実行RToolStripMenuItem1.Click += new System.EventHandler(this.実行RToolStripMenuItem1_Click);
             // 
@@ -274,19 +276,19 @@
             this.treeView1.Font = new System.Drawing.Font("メイリオ", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.treeView1.Location = new System.Drawing.Point(0, 0);
             this.treeView1.Name = "treeView1";
-            treeNode41.Name = "ノード0";
-            treeNode41.Text = "Click(image)";
-            treeNode42.Name = "ノード1";
-            treeNode42.Text = "DoubleClick(image)";
-            treeNode43.Name = "ノード2";
-            treeNode43.Text = "type(text)";
-            treeNode44.Name = "ノード3";
-            treeNode44.Text = "type(image, text)";
+            treeNode1.Name = "ノード0";
+            treeNode1.Text = "Click(image)";
+            treeNode2.Name = "ノード1";
+            treeNode2.Text = "DoubleClick(image)";
+            treeNode3.Name = "ノード2";
+            treeNode3.Text = "type(text)";
+            treeNode4.Name = "ノード3";
+            treeNode4.Text = "type(image, text)";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode41,
-            treeNode42,
-            treeNode43,
-            treeNode44});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4});
             this.treeView1.Size = new System.Drawing.Size(204, 494);
             this.treeView1.TabIndex = 0;
             // 
@@ -401,6 +403,7 @@
             this.新規作成NToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.新規作成NToolStripMenuItem.Size = new System.Drawing.Size(328, 28);
             this.新規作成NToolStripMenuItem.Text = "新規作成(&N)";
+            this.新規作成NToolStripMenuItem.Click += new System.EventHandler(this.新規作成NToolStripMenuItem_Click);
             // 
             // 開くOToolStripMenuItem
             // 
@@ -408,6 +411,7 @@
             this.開くOToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.開くOToolStripMenuItem.Size = new System.Drawing.Size(328, 28);
             this.開くOToolStripMenuItem.Text = "開く(&O)";
+            this.開くOToolStripMenuItem.Click += new System.EventHandler(this.開くOToolStripMenuItem_Click);
             // 
             // 保存SToolStripMenuItem
             // 
@@ -415,6 +419,7 @@
             this.保存SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.保存SToolStripMenuItem.Size = new System.Drawing.Size(328, 28);
             this.保存SToolStripMenuItem.Text = "保存(&S)";
+            this.保存SToolStripMenuItem.Click += new System.EventHandler(this.保存SToolStripMenuItem_Click);
             // 
             // 名前をつけて保存AToolStripMenuItem
             // 
@@ -423,14 +428,16 @@
                         | System.Windows.Forms.Keys.S)));
             this.名前をつけて保存AToolStripMenuItem.Size = new System.Drawing.Size(328, 28);
             this.名前をつけて保存AToolStripMenuItem.Text = "名前をつけて保存(&A)";
+            this.名前をつけて保存AToolStripMenuItem.Click += new System.EventHandler(this.名前をつけて保存AToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(325, 6);
             // 
             // 停止SToolStripMenuItem
             // 
+            this.停止SToolStripMenuItem.Enabled = false;
             this.停止SToolStripMenuItem.Name = "停止SToolStripMenuItem";
             this.停止SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
             this.停止SToolStripMenuItem.Size = new System.Drawing.Size(208, 28);
@@ -506,12 +513,12 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(235, 6);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(235, 6);
             // 
             // 一行削除LToolStripMenuItem
             // 
@@ -530,6 +537,10 @@
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(325, 6);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // MainForm
             // 
@@ -617,6 +628,8 @@
         private System.Windows.Forms.ToolStripMenuItem 一行削除LToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 
