@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using OpenCvSharp;
-using Sgry.Azuki.Highlighter;
+using Sgry.Azuki.Windows;
 
 namespace SukuSuku
 {

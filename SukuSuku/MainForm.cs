@@ -66,5 +66,46 @@ namespace SukuSuku
             Cursor.Position = new Point(x, y);
         }
 
+        private void もとに戻すUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.Undo();
+        }
+
+        private void やり直しRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.Redo();
+        }
+
+        private void 切り取りTToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.Cut();
+        }
+
+        private void コピーCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.Copy();
+        }
+
+        private void 貼り付けPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.Paste();
+        }
+
+        private void すべて選択AToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBox.SelectAll();
+        }
+
+        private void 一行削除LToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int start, end;
+            textBox.GetSelection(out start, out end);
+            var beginRes = textBox.Document.FindPrev("\n", 0, start);
+            var endRes = textBox.Document.FindNext("\n", end, textBox.TextLength);
+            var beginPos = beginRes != null ? beginRes.End : 0;
+            var endPos = endRes != null ? endRes.End : textBox.TextLength;
+            textBox.Document.Replace("", beginPos, endPos);
+        }
+
     }
 }
