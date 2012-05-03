@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Threading;
 using OpenCvSharp;
+using Sgry.Azuki;
 using Sgry.Azuki.Highlighter;
 
 namespace SukuSuku
@@ -15,6 +17,8 @@ namespace SukuSuku
     public partial class MainForm : Form
     {
         Microsoft.Scripting.Hosting.ScriptEngine engine;
+        Microsoft.Scripting.Hosting.ScriptScope scope;
+        System.Threading.Thread thread;
         UI ui;
 
         public MainForm()
@@ -27,44 +31,47 @@ namespace SukuSuku
             this.Close();
         }
 
+
         private void MainForm_Load(object sender, EventArgs e)
         {
             textBox.Highlighter = Highlighters.Ruby;
             engine = IronRuby.Ruby.CreateEngine();
             ui = new UI(this);
+            scope = engine.CreateScope();
+            scope.SetVariable("ui", ui);
         }
 
-        private void 実行RToolStripMenuItem1_Click(object sender, EventArgs e)
+        //----------------------------------------------------------------------
+        // ファイル
+        //----------------------------------------------------------------------
+
+        private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var scope = engine.CreateScope();
-                scope.SetVariable("ui", ui);
-                engine.Execute(textBox.Text, scope);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            if (CheckSave()) NewFile();
+            SetTitle();
         }
 
-        private void commandView_SelectedIndexChanged(object sender, EventArgs e)
+        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (CheckSave()) OpenFile();
+            SetTitle();
         }
 
-        BlackForm blackForm = null;
-
-        private void screenshotButton_Click(object sender, EventArgs e)
+        private void 保存SToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            blackForm = new BlackForm();
-            blackForm.Show(this);
+            Save();
+            SetTitle();
         }
 
-        public void SetCursor(int x, int y)
+        private void 名前をつけて保存AToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Cursor.Position = new Point(x, y);
+            Save(false);
+            SetTitle();
         }
+
+        //----------------------------------------------------------------------
+        // 編集
+        //----------------------------------------------------------------------
 
         private void もとに戻すUToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -107,29 +114,87 @@ namespace SukuSuku
             textBox.Document.Replace("", beginPos, endPos);
         }
 
-        private void 保存SToolStripMenuItem_Click(object sender, EventArgs e)
+        BlackForm blackForm = null;
+
+        private void screenshotButton_Click(object sender, EventArgs e)
         {
-            Save();
-            SetTitle();
+            blackForm = new BlackForm();
+            blackForm.Show(this);
+        }
+        //----------------------------------------------------------------------
+        // 実行
+        //----------------------------------------------------------------------
+
+        private void 実行RToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 実行中のスレッドは殺す
+                if (thread != null && thread.IsAlive) thread.Abort();
+
+                // スレッドを新しく作る
+                thread = new System.Threading.Thread(() =>
+                {
+                    Invoke((Action)(() =>
+                    {
+                        実行RToolStripMenuItem1.Enabled = false;
+                        停止SToolStripMenuItem.Enabled = true;
+                        toolStripStatusLabel.Text = "実行開始";
+                    }));
+                    engine.Execute(textBox.Text, scope);
+                    Invoke((Action)(() =>
+                    {
+                        実行RToolStripMenuItem1.Enabled = true;
+                        停止SToolStripMenuItem.Enabled = false;
+                        toolStripStatusLabel.Text = "正常終了";
+                    }));
+                });
+
+                // スレッド開始
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
-        private void 名前をつけて保存AToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 停止SToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Save(false);
-            SetTitle();
+            // 実行中のスレッドを殺す
+            if (thread != null && thread.IsAlive) thread.Abort();
+            toolStripStatusLabel.Text = "強制終了";
         }
 
-        private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
+        //----------------------------------------------------------------------
+        // 表示
+        //----------------------------------------------------------------------
+
+        private void フォントの設定FToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CheckSave()) NewFile();
-            SetTitle();
+            try
+            {
+                fontDialog.Font = fontEditor;
+                if (fontDialog.ShowDialog(this) == DialogResult.OK)
+                {
+                    SetFontEditor(fontDialog.Font);
+                    デフォルトのフォントToolStripMenuItem.Checked = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.ToString());
+            }
         }
 
-        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e)
+        private void デフォルトのフォントToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CheckSave()) OpenFile();
-            SetTitle();
+            SetFontEditor(デフォルトのフォントToolStripMenuItem.Checked ? defaultFontEditor : fontDialog.Font);
         }
 
+        private void すくすくについてAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new AboutForm().Show();
+        }
     }
 }

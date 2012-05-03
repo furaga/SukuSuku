@@ -16,7 +16,16 @@ namespace SukuSuku
 {
     public partial class MainForm : Form
     {
-        // 
+        /// <summary>
+        /// 変数宣言
+        /// </summary>
+        string dirName = null;
+        string orgText = ""; // 編集を始めた時点でのテキストボックスの内容
+        Dictionary<string, IplImage> templates = new Dictionary<string, IplImage>();
+        int templateCnt = 0;
+        Font defaultFontEditor = new Font("ＭＳ ゴシック", 12, System.Drawing.FontStyle.Regular); // デフォルトのエディタ用のフォント
+        Font fontEditor = new Font("ＭＳ ゴシック", 12, System.Drawing.FontStyle.Regular); // 現在のエディタのフォント
+
         /// <summary>
         /// 上書き可能なビットマップデータを返す
         /// 普通にnew Bitmap(path)で得られたデータを使うと上書き保存できなくなる
@@ -36,14 +45,22 @@ namespace SukuSuku
             }
         }
 
+        string GetImageName(int index) { return "image" + index; }
+
+        /// <summary>
+        /// 適当な画像名を返す
+        /// </summary>
+        /// <returns></returns>
+        string GetImageName()
+        {
+            int i = 0;
+            while (templates.Keys.Contains(GetImageName(i))) i++;
+            return GetImageName(i);
+        }
+
         //----------------------------------------------------------------------
         // ファイル
         //----------------------------------------------------------------------
-
-        string dirName = null;
-        string orgText = ""; // 編集を始めた時点でのテキストボックスの内容
-        Dictionary<string, IplImage> templates = new Dictionary<string, IplImage>();
-        int templateCnt = 0;
 
         /// <summary>
         /// メインウインドウのタイトルを設定
@@ -89,8 +106,12 @@ namespace SukuSuku
                 // 保存先を決める
                 if (useDirName) dirName = dirName ?? GetSaveDirName();
                 else dirName = GetSaveDirName();
-                
-                if (dirName == null) return false;
+
+                if (dirName == null)
+                {
+                    toolStripStatusLabel.Text = "保存に失敗しました";
+                    return false;
+                }
 
                 // ディレクトリを作成
                 Directory.CreateDirectory(dirName);
@@ -114,9 +135,11 @@ namespace SukuSuku
             catch (Exception e)
             {
                 MessageBox.Show(e.ToString());
+                toolStripStatusLabel.Text = "保存に失敗しました";
                 return false;
             }
 
+            toolStripStatusLabel.Text = "保存しました";
             return true;
         }
 
@@ -227,15 +250,6 @@ namespace SukuSuku
             return bmp;
         }
 
-        string GetImageName(int index) { return "image" + index; }
-
-        string GetImageName()
-        {
-            int i = 0;
-            while (templates.Keys.Contains(GetImageName(i))) i++;
-            return GetImageName(i);
-        }
-
         /// <summary>
         ///  rectの領域内のスクリーンショットを撮って保存
         /// </summary>
@@ -312,6 +326,15 @@ namespace SukuSuku
             }
 
             return new Rectangle(max_loc.X, max_loc.Y, tmpl.Size.Width, tmpl.Size.Height);
+        }
+
+        /// <summary>
+        /// エディタのフォントを変更する
+        /// </summary>
+        /// <param name="font"></param>
+        private void SetFontEditor(Font font)
+        {
+            textBox.Font = fontEditor = font;
         }
     }
 }

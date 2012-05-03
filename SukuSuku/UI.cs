@@ -114,31 +114,33 @@ namespace SukuSuku
 /*
         // 指定された画像が存在するか
         public bool exist(int imageNameIndex) { return owner.findTemplate(imageNameIndex) != null; }
-
+*/
         // 画像が見つかるまで待機（ポーリング）
-        public void wait(int imageNameIndex, int timeout)
+        public void wait(string imageName, int timeout)
         {
             var sw = new Stopwatch();
             while (sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
-                if (owner.findTemplate(imageNameIndex) != null) return;
+                // 見つかったら脱出
+                if (owner.findTemplate(imageName) != Rectangle.Empty) return;
                 sw.Stop();
             }
         }
 
         // 画像がスクリーンから消えるまで待機（ポーリング）
-        public void waitVanish(int imageNameIndex, int timeout)
+        public void waitVanish(string imageName, int timeout)
         {
             var sw = new Stopwatch();
             while (sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
-                if (owner.findTemplate(imageNameIndex) == null) return;
+                // 見つからなかったら脱出
+                if (owner.findTemplate(imageName) == Rectangle.Empty) return;
                 sw.Stop();
             }
         }
-*/
+
         // (x1, y1)にあるものをから(x2, y2)へドラッグアンドドロップ
         public void dragAndDrop(int x1, int y1, int x2, int y2)
         {
