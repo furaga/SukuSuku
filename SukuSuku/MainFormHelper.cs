@@ -291,7 +291,6 @@ namespace SukuSuku
             // 比較する2つの画像を用意
             var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
             var target = BitmapConverter.ToIplImage(bmp);
-            /// TODO
             var tmpl = templates[imageName];
 
             // 画像マッチング
