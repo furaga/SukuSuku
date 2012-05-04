@@ -127,13 +127,13 @@ namespace SukuSuku
 
         private void 実行RToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // 実行中のスレッドは殺す
-                if (thread != null && thread.IsAlive) thread.Abort();
+            // 実行中のスレッドは殺す
+            if (thread != null && thread.IsAlive) thread.Abort();
 
-                // スレッドを新しく作る
-                thread = new System.Threading.Thread(() =>
+            // スレッドを新しく作る
+            thread = new System.Threading.Thread(() =>
+            {
+                try
                 {
                     Invoke((Action)(() =>
                     {
@@ -148,21 +148,23 @@ namespace SukuSuku
                         停止SToolStripMenuItem.Enabled = false;
                         toolStripStatusLabel.Text = "正常終了";
                     }));
-                });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
 
-                // スレッド開始
-                thread.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            // スレッド開始
+            thread.Start();
         }
 
         private void 停止SToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 実行中のスレッドを殺す
             if (thread != null && thread.IsAlive) thread.Abort();
+            実行RToolStripMenuItem1.Enabled = true;
+            停止SToolStripMenuItem.Enabled = false;
             toolStripStatusLabel.Text = "強制終了";
         }
 
@@ -195,6 +197,16 @@ namespace SukuSuku
         private void すくすくについてAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutForm().Show();
+        }
+
+        private void cmdButton_Click(object sender, EventArgs e)
+        {
+            textBox.Document.Replace(((Button)sender).Text + "\n");
+        }
+
+        private void thumbNailView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBox.Document.Replace('"' + thumbNailView.SelectedItems[0].Text + '"');
         }
     }
 }

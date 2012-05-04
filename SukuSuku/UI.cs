@@ -116,27 +116,29 @@ namespace SukuSuku
         public bool exist(int imageNameIndex) { return owner.findTemplate(imageNameIndex) != null; }
 */
         // 画像が見つかるまで待機（ポーリング）
-        public void wait(string imageName, int timeout)
+        public void wait(string imageName, int timeout = 100, double threshold = -1)
         {
+            timeout *= 1000;
             var sw = new Stopwatch();
             while (sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
                 // 見つかったら脱出
-                if (owner.findTemplate(imageName) != Rectangle.Empty) return;
+                if (owner.findTemplate(imageName, threshold, false) != Rectangle.Empty) return;
                 sw.Stop();
             }
         }
 
         // 画像がスクリーンから消えるまで待機（ポーリング）
-        public void waitVanish(string imageName, int timeout)
+        public void waitVanish(string imageName, int timeout = 100, double threshold = -1)
         {
+            timeout *= 1000;
             var sw = new Stopwatch();
             while (sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
                 // 見つからなかったら脱出
-                if (owner.findTemplate(imageName) == Rectangle.Empty) return;
+                if (owner.findTemplate(imageName, threshold, false) == Rectangle.Empty) return;
                 sw.Stop();
             }
         }

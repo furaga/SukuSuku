@@ -49,8 +49,12 @@ namespace SukuSuku
         {
             if (start != null && end != null)
             {
-                this.Opacity = 0;
-                ((MainForm)Owner).takeScreenshot(GetRectangle(start.Value, end.Value));
+                var rect = GetRectangle(start.Value, end.Value);
+                if (rect.Width != 0 && rect.Height != 0)
+                {
+                    this.Opacity = 0;
+                    ((MainForm)Owner).takeScreenshot(rect);
+                }
             }
             Hide();
         }

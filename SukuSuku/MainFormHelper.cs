@@ -270,7 +270,7 @@ namespace SukuSuku
         /// <param name="imageName"></param>
         /// <param name="threshold"></param>
         /// <returns></returns>
-        public Rectangle findTemplate(string imageName, double threshold = -1)
+        public Rectangle findTemplate(string imageName, double threshold = -1, bool showNotFoundDialog = true)
         {
             if (templates.Keys.Contains(imageName) == false)
             {
@@ -306,7 +306,7 @@ namespace SukuSuku
 
             // 時間計測終了
             stopwatch.Stop();
-
+            /*
 #if DEBUG
             Console.WriteLine("Ellapsed Time = " + stopwatch.ElapsedMilliseconds + " ms");
             Console.WriteLine("min_val = " + min_val);
@@ -314,13 +314,14 @@ namespace SukuSuku
             Console.WriteLine("max_val = " + max_val);
             Console.WriteLine("max_loc = " + max_loc);
 #endif
+             */
             var x = max_loc.X + tmpl.Size.Width / 2;
             var y = max_loc.Y + tmpl.Size.Height / 2;
 
             // max_valがthresholdを超えなければマッチしなかったと判断する
             if (threshold > max_val)
             {
-                MessageBox.Show("画像 " + imageName + " はスクリーン内で見つかりませんでした。");
+                if (showNotFoundDialog) MessageBox.Show("画像 " + imageName + " はスクリーン内で見つかりませんでした。");
                 return Rectangle.Empty;
             }
 
