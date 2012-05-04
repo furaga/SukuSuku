@@ -138,6 +138,7 @@ namespace SukuSuku
                     Invoke((Action)(() =>
                     {
                         実行RToolStripMenuItem1.Enabled = false;
+                        runButton.Enabled = false;
                         停止SToolStripMenuItem.Enabled = true;
                         toolStripStatusLabel.Text = "実行開始";
                     }));
@@ -145,12 +146,16 @@ namespace SukuSuku
                     Invoke((Action)(() =>
                     {
                         実行RToolStripMenuItem1.Enabled = true;
+                        runButton.Enabled = true;
                         停止SToolStripMenuItem.Enabled = false;
                         toolStripStatusLabel.Text = "正常終了";
                     }));
                 }
                 catch (Exception ex)
                 {
+                    実行RToolStripMenuItem1.Enabled = true;
+                    runButton.Enabled = true;
+                    停止SToolStripMenuItem.Enabled = false;
                     MessageBox.Show(ex.ToString());
                 }
             });
@@ -164,6 +169,7 @@ namespace SukuSuku
             // 実行中のスレッドを殺す
             if (thread != null && thread.IsAlive) thread.Abort();
             実行RToolStripMenuItem1.Enabled = true;
+            runButton.Enabled = true;
             停止SToolStripMenuItem.Enabled = false;
             toolStripStatusLabel.Text = "強制終了";
         }
