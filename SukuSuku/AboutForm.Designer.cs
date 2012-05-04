@@ -43,7 +43,6 @@
             this.label1.Size = new System.Drawing.Size(246, 34);
             this.label1.TabIndex = 0;
             this.label1.Text = "すくすく\r\n    Copyright (C) 2012, furaga\r\n";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label3
             // 
@@ -62,8 +61,8 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(436, 45);
             this.label4.TabIndex = 3;
-            this.label4.Text = "OpenCV2.3.1\r\n    Copyright (C) 2000-2008, Intel Corporation, all rights reserved." +
-                "\r\n    Copyright (C) 2008-2011, Willow Garage Inc., all rights reserved.";
+            this.label4.Text = "OpenCV 2.3.1\r\n    Copyright (C) 2000-2008, Intel Corporation, all rights reserved" +
+                ".\r\n    Copyright (C) 2008-2011, Willow Garage Inc., all rights reserved.";
             // 
             // label5
             // 
@@ -72,7 +71,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(259, 30);
             this.label5.TabIndex = 4;
-            this.label5.Text = "OpenCVShap2.3.1\r\n    Copyright (C) 2008-2011 by Schima";
+            this.label5.Text = "OpenCVShap 2.3.1\r\n    Copyright (C) 2008-2011 by Schima";
             // 
             // AboutForm
             // 
