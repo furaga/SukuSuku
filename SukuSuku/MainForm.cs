@@ -153,10 +153,13 @@ namespace SukuSuku
                 }
                 catch (Exception ex)
                 {
-                    実行RToolStripMenuItem1.Enabled = true;
-                    runButton.Enabled = true;
-                    停止SToolStripMenuItem.Enabled = false;
-                    MessageBox.Show(ex.ToString());
+                    Invoke((Action)(() =>
+                    {
+                        実行RToolStripMenuItem1.Enabled = true;
+                        runButton.Enabled = true;
+                        停止SToolStripMenuItem.Enabled = false;
+                        MessageBox.Show(ex.ToString());
+                    }));
                 }
             });
 

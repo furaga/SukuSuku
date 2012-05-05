@@ -71,7 +71,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -101,6 +100,9 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).BeginInit();
@@ -117,6 +119,8 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -436,11 +440,10 @@
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button4);
             this.flowLayoutPanel1.Controls.Add(this.button11);
-            this.flowLayoutPanel1.Controls.Add(this.button12);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(287, 173);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(287, 148);
             this.flowLayoutPanel1.TabIndex = 15;
             // 
             // leftClick1
@@ -529,22 +532,6 @@
             this.toolTip.SetToolTip(this.button11, "image1からimage2へドラッグアンドドロップ");
             this.button11.UseVisualStyleBackColor = false;
             this.button11.Click += new System.EventHandler(this.cmdButton_Click);
-            // 
-            // button12
-            // 
-            this.button12.BackColor = System.Drawing.Color.Transparent;
-            this.button12.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button12.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button12.Location = new System.Drawing.Point(2, 147);
-            this.button12.Margin = new System.Windows.Forms.Padding(2);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(285, 25);
-            this.button12.TabIndex = 14;
-            this.button12.Text = "ui.leftClick(image)";
-            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button12.UseVisualStyleBackColor = false;
-            this.button12.Click += new System.EventHandler(this.cmdButton_Click);
             // 
             // button5
             // 
@@ -657,6 +644,7 @@
             this.thresholdUpDown.Name = "thresholdUpDown";
             this.thresholdUpDown.Size = new System.Drawing.Size(290, 31);
             this.thresholdUpDown.TabIndex = 1;
+            this.thresholdUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.thresholdUpDown.Value = new decimal(new int[] {
             85,
             0,
@@ -732,7 +720,7 @@
             this.groupBox1.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(293, 203);
+            this.groupBox1.Size = new System.Drawing.Size(293, 178);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "マウスの操作";
@@ -741,7 +729,7 @@
             // 
             this.groupBox2.Controls.Add(this.thresholdUpDown);
             this.groupBox2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 464);
+            this.groupBox2.Location = new System.Drawing.Point(3, 506);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(296, 69);
             this.groupBox2.TabIndex = 18;
@@ -791,6 +779,7 @@
             this.flowLayoutPanel4.Controls.Add(this.groupBox1);
             this.flowLayoutPanel4.Controls.Add(this.groupBox4);
             this.flowLayoutPanel4.Controls.Add(this.groupBox5);
+            this.flowLayoutPanel4.Controls.Add(this.groupBox6);
             this.flowLayoutPanel4.Controls.Add(this.groupBox2);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
@@ -802,7 +791,7 @@
             // 
             this.groupBox4.Controls.Add(this.flowLayoutPanel2);
             this.groupBox4.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox4.Location = new System.Drawing.Point(3, 212);
+            this.groupBox4.Location = new System.Drawing.Point(3, 187);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(298, 149);
             this.groupBox4.TabIndex = 19;
@@ -826,7 +815,7 @@
             // 
             this.groupBox5.Controls.Add(this.flowLayoutPanel3);
             this.groupBox5.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox5.Location = new System.Drawing.Point(3, 367);
+            this.groupBox5.Location = new System.Drawing.Point(3, 342);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(295, 91);
             this.groupBox5.TabIndex = 20;
@@ -864,6 +853,44 @@
             this.panel3.Size = new System.Drawing.Size(779, 603);
             this.panel3.TabIndex = 20;
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.flowLayoutPanel5);
+            this.groupBox6.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox6.Location = new System.Drawing.Point(3, 439);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(298, 61);
+            this.groupBox6.TabIndex = 21;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "検索";
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel5.Controls.Add(this.button1);
+            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 27);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(292, 31);
+            this.flowLayoutPanel5.TabIndex = 20;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(285, 25);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "ui.exist(image)";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.button1, "画像がスクリーン上に存在するか");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.cmdButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -900,6 +927,8 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.flowLayoutPanel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -952,7 +981,6 @@
         private System.Windows.Forms.ToolStripMenuItem スクリーンショットを撮るSToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripMenuItem すくすくについてAToolStripMenuItem;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button9;
@@ -978,6 +1006,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.Button button1;
     }
 }
 

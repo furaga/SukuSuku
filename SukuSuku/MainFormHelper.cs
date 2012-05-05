@@ -265,7 +265,7 @@ namespace SukuSuku
         }
 
         /// <summary>
-        ///  スクリーン画像とimageNameで指定した画像とのマッチング
+        /// スクリーン画像とimageNameで指定した画像とのマッチング。Cv.MatchingTemplate()を利用
         /// </summary>
         /// <param name="imageName"></param>
         /// <param name="threshold"></param>
@@ -294,29 +294,56 @@ namespace SukuSuku
             var tmpl = templates[imageName];
 
             // 画像マッチング
-            double min_val, max_val;
-            CvPoint min_loc, max_loc;
+            double min_val = 0, max_val = 0;
+            CvPoint min_loc = CvPoint.Empty, max_loc = CvPoint.Empty;
 
-            var size = new CvSize(target.Width - tmpl.Width + 1, target.Height - tmpl.Height + 1);
-            using (var dst = Cv.CreateImage(size, BitDepth.F32, 1))
+            // 異なる解像度の画像を用意し小さい方から順に試していく
+            // 期待値的に高速になるはず
+            var invratio = 1.0;
+            foreach (var ratio in new[] { 0.25, 0.5/*, 0.75*/, 1.0 })
             {
-                Cv.MatchTemplate(target, tmpl, dst, MatchTemplateMethod.CCoeffNormed);
-                Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
+#if DEBUG
+                Console.Write("[ratio = " + ratio + "] "); 
+                var stopwatch2 = new System.Diagnostics.Stopwatch();
+                stopwatch2.Start();
+#endif
+                // 縮小した画像を用意する
+                var small_target = new IplImage((int)(target.Size.Width * ratio), (int)(target.Size.Height * ratio), target.Depth, target.NChannels);
+                var small_tmpl = new IplImage((int)(tmpl.Size.Width * ratio), (int)(tmpl.Size.Height * ratio), tmpl.Depth, tmpl.NChannels);
+
+                // 小さすぎたらマッチングは行わない
+                if (small_tmpl.Width <= 0 || small_tmpl.Height <= 0) continue;
+
+                target.Resize(small_target);
+                tmpl.Resize(small_tmpl);
+
+                // マッチング
+                var dstSize = new CvSize(small_target.Width - small_tmpl.Width + 1, small_target.Height - small_tmpl.Height + 1);
+                using (var dst = Cv.CreateImage(dstSize, BitDepth.F32, 1))
+                {
+                    Cv.MatchTemplate(small_target, small_tmpl, dst, MatchTemplateMethod.CCoeffNormed);
+                    Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
+                }
+#if DEBUG
+                stopwatch2.Stop(); 
+                Console.WriteLine("max_val = " + max_val + "(" + stopwatch2.Elapsed.TotalSeconds + " s)");
+#endif
+                invratio = 1 / ratio;
+
+                // 閾値以上のマッチ率が得られたら打ち切る
+                if (threshold <= max_val) break;
             }
 
             // 時間計測終了
             stopwatch.Stop();
-            /*
 #if DEBUG
-            Console.WriteLine("Ellapsed Time = " + stopwatch.ElapsedMilliseconds + " ms");
-            Console.WriteLine("min_val = " + min_val);
-            Console.WriteLine("min_loc = " + min_loc);
+            Console.WriteLine("Ellapsed Time = " + stopwatch.Elapsed.TotalSeconds + " s");
+            //Console.WriteLine("min_val = " + min_val);
+            //Console.WriteLine("min_loc = " + min_loc);
             Console.WriteLine("max_val = " + max_val);
-            Console.WriteLine("max_loc = " + max_loc);
+            //Console.WriteLine("max_loc = " + max_loc);
+            Console.WriteLine("");
 #endif
-             */
-            var x = max_loc.X + tmpl.Size.Width / 2;
-            var y = max_loc.Y + tmpl.Size.Height / 2;
 
             // max_valがthresholdを超えなければマッチしなかったと判断する
             if (threshold > max_val)
@@ -325,8 +352,12 @@ namespace SukuSuku
                 return Rectangle.Empty;
             }
 
-            return new Rectangle(max_loc.X, max_loc.Y, tmpl.Size.Width, tmpl.Size.Height);
+            return new Rectangle((int)(max_loc.X * invratio), (int)(max_loc.Y * invratio), tmpl.Size.Width, tmpl.Size.Height);
         }
+
+        //----------------------------------------------------------------------
+        // 表示
+        //----------------------------------------------------------------------
 
         /// <summary>
         /// エディタのフォントを変更する
