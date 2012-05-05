@@ -218,6 +218,7 @@ namespace SukuSuku
                 foreach (System.Text.RegularExpressions.Match m in res)
                 {
                     var imageName = new BlackForm().takeScreenshot(this);
+                    if (imageName == "") return;
                     text = text.Replace(m.Value, String.Format("\"{0}\"", imageName));
                 }
             }
