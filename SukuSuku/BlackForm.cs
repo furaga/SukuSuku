@@ -53,7 +53,7 @@ namespace SukuSuku
                 if (rect.Width != 0 && rect.Height != 0)
                 {
                     this.Opacity = 0;
-                    ((MainForm)Owner).takeScreenshot(rect);
+                    __imageName = ((MainForm)Owner).takeScreenshot(rect);
                 }
             }
             Hide();
@@ -79,6 +79,13 @@ namespace SukuSuku
                 pt2 = new Point(pt1.X, rect.Bottom);
                 g.DrawLine(pen, pt1, pt2);
             }
+        }
+
+        private string __imageName = "";
+        public string takeScreenshot(MainForm owner)
+        {
+            ShowDialog(owner);
+            return __imageName; 
         }
     }
 }

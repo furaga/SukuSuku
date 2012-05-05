@@ -62,7 +62,6 @@
             this.デフォルトのフォントToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ヘルプHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.すくすくについてAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox = new Sgry.Azuki.Windows.AzukiControl();
             this.thumbNailList = new System.Windows.Forms.ImageList(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -77,7 +76,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.thresholdUpDown = new System.Windows.Forms.NumericUpDown();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.screenshotButton = new System.Windows.Forms.ToolStripButton();
             this.runButton = new System.Windows.Forms.ToolStripButton();
@@ -88,44 +86,45 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.thumbNailView = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.thumbNailView = new System.Windows.Forms.ListView();
+            this.textBox = new Sgry.Azuki.Windows.AzukiControl();
+            this.thresholdUpDown = new System.Windows.Forms.NumericUpDown();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.autoChapCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
             // 
-            this.menuStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.menuStrip.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ファイルFToolStripMenuItem,
             this.編集EToolStripMenuItem,
@@ -135,7 +134,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1091, 32);
+            this.menuStrip.Size = new System.Drawing.Size(1098, 32);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -396,27 +395,6 @@
             this.すくすくについてAToolStripMenuItem.Text = "すくすくについて(&A)";
             this.すくすくについてAToolStripMenuItem.Click += new System.EventHandler(this.すくすくについてAToolStripMenuItem_Click);
             // 
-            // textBox
-            // 
-            this.textBox.BackColor = System.Drawing.Color.White;
-            this.textBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox.DrawingOption = ((Sgry.Azuki.DrawingOption)(((((Sgry.Azuki.DrawingOption.DrawsFullWidthSpace | Sgry.Azuki.DrawingOption.DrawsTab)
-                        | Sgry.Azuki.DrawingOption.DrawsEol)
-                        | Sgry.Azuki.DrawingOption.ShowsLineNumber)
-                        | Sgry.Azuki.DrawingOption.ShowsDirtBar)));
-            this.textBox.FirstVisibleLine = 0;
-            this.textBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.textBox.ForeColor = System.Drawing.Color.Black;
-            this.textBox.HighlightsCurrentLine = false;
-            this.textBox.Location = new System.Drawing.Point(0, 0);
-            this.textBox.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(565, 603);
-            this.textBox.TabIndex = 1;
-            this.textBox.TabWidth = 4;
-            this.textBox.ViewWidth = 4153;
-            // 
             // thumbNailList
             // 
             this.thumbNailList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -428,7 +406,7 @@
             this.splitter1.Location = new System.Drawing.Point(0, 86);
             this.splitter1.Margin = new System.Windows.Forms.Padding(2);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 603);
+            this.splitter1.Size = new System.Drawing.Size(2, 656);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
@@ -635,32 +613,16 @@
             this.button10.UseVisualStyleBackColor = false;
             this.button10.Click += new System.EventHandler(this.cmdButton_Click);
             // 
-            // thresholdUpDown
-            // 
-            this.thresholdUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.thresholdUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.thresholdUpDown.Location = new System.Drawing.Point(3, 27);
-            this.thresholdUpDown.Margin = new System.Windows.Forms.Padding(2);
-            this.thresholdUpDown.Name = "thresholdUpDown";
-            this.thresholdUpDown.Size = new System.Drawing.Size(290, 31);
-            this.thresholdUpDown.TabIndex = 1;
-            this.thresholdUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.thresholdUpDown.Value = new decimal(new int[] {
-            85,
-            0,
-            0,
-            0});
-            // 
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
-            this.toolStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.screenshotButton,
             this.runButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 32);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1091, 54);
+            this.toolStrip1.Size = new System.Drawing.Size(1098, 54);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -693,10 +655,10 @@
             this.statusStrip.BackColor = System.Drawing.Color.Transparent;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 689);
+            this.statusStrip.Location = new System.Drawing.Point(0, 742);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1091, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1098, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -714,6 +676,23 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button1.Location = new System.Drawing.Point(2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(285, 25);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "ui.exist(image)";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.button1, "画像がスクリーン上に存在するか");
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.cmdButton_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
@@ -725,52 +704,13 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "マウスの操作";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.thresholdUpDown);
-            this.groupBox2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 506);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(296, 69);
-            this.groupBox2.TabIndex = 18;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "画像マッチ判定の閾値（0 ~ 100）";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Turquoise;
-            this.groupBox3.Controls.Add(this.thumbNailView);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(214, 603);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "スクリーンショット";
-            // 
-            // thumbNailView
-            // 
-            this.thumbNailView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.thumbNailView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.thumbNailView.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.thumbNailView.ForeColor = System.Drawing.SystemColors.InfoText;
-            this.thumbNailView.LargeImageList = this.thumbNailList;
-            this.thumbNailView.Location = new System.Drawing.Point(3, 27);
-            this.thumbNailView.Margin = new System.Windows.Forms.Padding(2);
-            this.thumbNailView.Name = "thumbNailView";
-            this.thumbNailView.Size = new System.Drawing.Size(208, 573);
-            this.thumbNailView.TabIndex = 2;
-            this.thumbNailView.UseCompatibleStateImageBehavior = false;
-            this.thumbNailView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.thumbNailView_MouseDoubleClick);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.flowLayoutPanel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(2, 86);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(310, 603);
+            this.panel1.Size = new System.Drawing.Size(310, 656);
             this.panel1.TabIndex = 18;
             // 
             // flowLayoutPanel4
@@ -781,10 +721,11 @@
             this.flowLayoutPanel4.Controls.Add(this.groupBox5);
             this.flowLayoutPanel4.Controls.Add(this.groupBox6);
             this.flowLayoutPanel4.Controls.Add(this.groupBox2);
+            this.flowLayoutPanel4.Controls.Add(this.autoChapCheckBox);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(310, 603);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(310, 656);
             this.flowLayoutPanel4.TabIndex = 21;
             // 
             // groupBox4
@@ -833,26 +774,6 @@
             this.flowLayoutPanel3.Size = new System.Drawing.Size(289, 61);
             this.flowLayoutPanel3.TabIndex = 0;
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel2.Controls.Add(this.groupBox3);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(565, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(214, 603);
-            this.panel2.TabIndex = 19;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.textBox);
-            this.panel3.Controls.Add(this.panel2);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(312, 86);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(779, 603);
-            this.panel3.TabIndex = 20;
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.flowLayoutPanel5);
@@ -874,30 +795,113 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(292, 31);
             this.flowLayoutPanel5.TabIndex = 20;
             // 
-            // button1
+            // panel2
             // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(2, 2);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(285, 25);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "ui.exist(image)";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.button1, "画像がスクリーン上に存在するか");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.cmdButton_Click);
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel2.Controls.Add(this.groupBox3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel2.Location = new System.Drawing.Point(884, 86);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(214, 656);
+            this.panel2.TabIndex = 19;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Turquoise;
+            this.groupBox3.Controls.Add(this.thumbNailView);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(214, 656);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "スクリーンショット";
+            // 
+            // thumbNailView
+            // 
+            this.thumbNailView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.thumbNailView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.thumbNailView.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.thumbNailView.ForeColor = System.Drawing.SystemColors.InfoText;
+            this.thumbNailView.LargeImageList = this.thumbNailList;
+            this.thumbNailView.Location = new System.Drawing.Point(3, 27);
+            this.thumbNailView.Margin = new System.Windows.Forms.Padding(2);
+            this.thumbNailView.Name = "thumbNailView";
+            this.thumbNailView.Size = new System.Drawing.Size(208, 626);
+            this.thumbNailView.TabIndex = 2;
+            this.thumbNailView.UseCompatibleStateImageBehavior = false;
+            this.thumbNailView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.thumbNailView_MouseDoubleClick);
+            // 
+            // textBox
+            // 
+            this.textBox.BackColor = System.Drawing.Color.White;
+            this.textBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.textBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox.DrawingOption = ((Sgry.Azuki.DrawingOption)(((((Sgry.Azuki.DrawingOption.DrawsFullWidthSpace | Sgry.Azuki.DrawingOption.DrawsTab)
+                        | Sgry.Azuki.DrawingOption.DrawsEol)
+                        | Sgry.Azuki.DrawingOption.ShowsLineNumber)
+                        | Sgry.Azuki.DrawingOption.ShowsDirtBar)));
+            this.textBox.FirstVisibleLine = 0;
+            this.textBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.textBox.ForeColor = System.Drawing.Color.Black;
+            this.textBox.HighlightsCurrentLine = false;
+            this.textBox.Location = new System.Drawing.Point(312, 86);
+            this.textBox.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(572, 656);
+            this.textBox.TabIndex = 1;
+            this.textBox.TabWidth = 4;
+            this.textBox.ViewWidth = 4153;
+            // 
+            // thresholdUpDown
+            // 
+            this.thresholdUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.thresholdUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.thresholdUpDown.Location = new System.Drawing.Point(3, 27);
+            this.thresholdUpDown.Margin = new System.Windows.Forms.Padding(2);
+            this.thresholdUpDown.Name = "thresholdUpDown";
+            this.thresholdUpDown.Size = new System.Drawing.Size(290, 31);
+            this.thresholdUpDown.TabIndex = 1;
+            this.thresholdUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.thresholdUpDown.Value = new decimal(new int[] {
+            85,
+            0,
+            0,
+            0});
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.thresholdUpDown);
+            this.groupBox2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.groupBox2.Location = new System.Drawing.Point(3, 506);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(296, 69);
+            this.groupBox2.TabIndex = 18;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "画像マッチ判定の閾値（0 ~ 100）";
+            // 
+            // autoChapCheckBox
+            // 
+            this.autoChapCheckBox.AutoSize = true;
+            this.autoChapCheckBox.Checked = true;
+            this.autoChapCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.autoChapCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
+            this.autoChapCheckBox.Location = new System.Drawing.Point(3, 581);
+            this.autoChapCheckBox.Name = "autoChapCheckBox";
+            this.autoChapCheckBox.Size = new System.Drawing.Size(253, 28);
+            this.autoChapCheckBox.TabIndex = 23;
+            this.autoChapCheckBox.Text = "自動でキャプチャモードへ移行";
+            this.autoChapCheckBox.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(1091, 711);
-            this.Controls.Add(this.panel3);
+            this.ClientSize = new System.Drawing.Size(1098, 764);
+            this.Controls.Add(this.textBox);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.toolStrip1);
@@ -911,24 +915,24 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.flowLayoutPanel3.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).EndInit();
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -943,7 +947,6 @@
         private System.Windows.Forms.ToolStripMenuItem 実行RToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 表示VToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ヘルプHToolStripMenuItem;
-        private Sgry.Azuki.Windows.AzukiControl textBox;
         private System.Windows.Forms.ImageList thumbNailList;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.ToolStripMenuItem 実行RToolStripMenuItem1;
@@ -951,7 +954,6 @@
         private System.Windows.Forms.ToolStripButton screenshotButton;
         private System.Windows.Forms.ToolStripButton runButton;
         private System.Windows.Forms.StatusStrip statusStrip;
-        private System.Windows.Forms.NumericUpDown thresholdUpDown;
         private System.Windows.Forms.ToolStripMenuItem 新規作成NToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 開くOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 保存SToolStripMenuItem;
@@ -994,13 +996,8 @@
         private System.Windows.Forms.Button leftClick1;
         private System.Windows.Forms.ToolTip toolTip;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ListView thumbNailView;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
@@ -1009,6 +1006,13 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.ListView thumbNailView;
+        private Sgry.Azuki.Windows.AzukiControl textBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.NumericUpDown thresholdUpDown;
+        private System.Windows.Forms.CheckBox autoChapCheckBox;
     }
 }
 

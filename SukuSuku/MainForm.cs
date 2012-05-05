@@ -210,7 +210,19 @@ namespace SukuSuku
 
         private void cmdButton_Click(object sender, EventArgs e)
         {
-            textBox.Document.Replace(((Button)sender).Text + "\n");
+            var text = ((Button)sender).Text;
+
+            if (autoChapCheckBox.Checked)
+            {
+                var res = new System.Text.RegularExpressions.Regex(@"(image\d*)").Matches(text);
+                foreach (System.Text.RegularExpressions.Match m in res)
+                {
+                    var imageName = new BlackForm().takeScreenshot(this);
+                    text = text.Replace(m.Value, String.Format("\"{0}\"", imageName));
+                }
+            }
+
+            textBox.Document.Replace(text + "\n");
         }
 
         private void thumbNailView_MouseDoubleClick(object sender, MouseEventArgs e)

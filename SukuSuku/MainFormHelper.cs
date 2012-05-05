@@ -58,6 +58,33 @@ namespace SukuSuku
             return GetImageName(i);
         }
 
+        /// <summary>
+        /// サムネイル画像を作成
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
+        Image createThumbnail(Image image)
+        {
+            var w = thumbNailList.ImageSize.Width;
+            var h = thumbNailList.ImageSize.Height;
+            var canvas = new Bitmap(w, h);
+
+            var g = Graphics.FromImage(canvas);
+//            g.FillRectangle(new SolidBrush(Color.LightGray), 0, 0, w, h);
+
+            var fw = (float)w / (float)image.Width;
+            var fh = (float)h / (float)image.Height;
+
+            var scale = Math.Min(fw, fh);
+            fw = image.Width * scale;
+            fh = image.Height * scale;
+
+            g.DrawImage(image, (w - fw) / 2, (h - fh) / 2, fw, fh);
+            g.Dispose();
+
+            return canvas;
+        }
+
         //----------------------------------------------------------------------
         // ファイル
         //----------------------------------------------------------------------
@@ -218,7 +245,7 @@ namespace SukuSuku
             foreach (var file in Directory.GetFiles(dirName, "*.png"))
             {
                 var bmp = GetBitmapFromFile(file);
-                thumbNailList.Images.Add(bmp);
+                thumbNailList.Images.Add(createThumbnail(bmp));
                 var imageName = Path.GetFileNameWithoutExtension(file);
                 thumbNailView.Items.Add(imageName, thumbNailList.Images.Count - 1);
                 templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
@@ -254,14 +281,15 @@ namespace SukuSuku
         ///  rectの領域内のスクリーンショットを撮って保存
         /// </summary>
         /// <param name="rect"></param>
-        public void takeScreenshot(Rectangle rect)
+        public string takeScreenshot(Rectangle rect)
         {
             var bmp = GetScreenshotBmp(rect);
             var index = thumbNailList.Images.Count;
             var imageName = GetImageName();
-            thumbNailList.Images.Add(bmp);
+            thumbNailList.Images.Add(createThumbnail(bmp));
             thumbNailView.Items.Add(imageName, index);
             templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
+            return imageName;
         }
 
         /// <summary>
