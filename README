@@ -1,19 +1,20 @@
-開発環境
+--開発環境
 
 ・Visual Studio 2010(.NET Framework 4)
 
-外部ライブラリ
+--外部ライブラリ
 
-・IronRuby-1.0
-	
-	http://www.ironruby.net
+・IronRuby-1.0 http://www.ironruby.net
+・OpenCVSharp-2.3.1 http://code.google.com/p/opencvsharp
+・OpenCV-2.3.1 http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
+・Azuki1.5.8 http://azuki.sourceforge.jp/
+  プログラム中ではエディタ画面に画像を表示できるように改造したものを使用しています。
+  改造版のAzuki.dllは近日中に公開予定のすくすくバイナリに同梱するつもりです。
 
-・OpenCVSharp-2.3.1
-	
-	http://code.google.com/p/opencvsharp
+--コンパイル・実行
 
-・OpenCV-2.3.1
-	
-	http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
+1. IronRuby-1.0, OpenCVShapr-2.3.1, Azuki1.5.8の各DLLファイルを参照に追加
+2. OpenCV-2.3.1の各DLLファイルをパスの通ったディレクトリに置く
 
-
+とすれば多分行けると思います。
+各DLLファイルは近日中公開予定のバイナリに同梱するつもりです。

@@ -127,17 +127,18 @@ namespace SukuSuku
 
         private void 実行RToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // 実行中のスレッドは殺す
-                if (thread != null && thread.IsAlive) thread.Abort();
+            // 実行中のスレッドは殺す
+            if (thread != null && thread.IsAlive) thread.Abort();
 
-                // スレッドを新しく作る
-                thread = new System.Threading.Thread(() =>
+            // スレッドを新しく作る
+            thread = new System.Threading.Thread(() =>
+            {
+                try
                 {
                     Invoke((Action)(() =>
                     {
                         実行RToolStripMenuItem1.Enabled = false;
+                        runButton.Enabled = false;
                         停止SToolStripMenuItem.Enabled = true;
                         toolStripStatusLabel.Text = "実行開始";
                     }));
@@ -145,24 +146,34 @@ namespace SukuSuku
                     Invoke((Action)(() =>
                     {
                         実行RToolStripMenuItem1.Enabled = true;
+                        runButton.Enabled = true;
                         停止SToolStripMenuItem.Enabled = false;
                         toolStripStatusLabel.Text = "正常終了";
                     }));
-                });
+                }
+                catch (Exception ex)
+                {
+                    Invoke((Action)(() =>
+                    {
+                        実行RToolStripMenuItem1.Enabled = true;
+                        runButton.Enabled = true;
+                        停止SToolStripMenuItem.Enabled = false;
+                        MessageBox.Show(ex.ToString());
+                    }));
+                }
+            });
 
-                // スレッド開始
-                thread.Start();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
+            // スレッド開始
+            thread.Start();
         }
 
         private void 停止SToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 実行中のスレッドを殺す
             if (thread != null && thread.IsAlive) thread.Abort();
+            実行RToolStripMenuItem1.Enabled = true;
+            runButton.Enabled = true;
+            停止SToolStripMenuItem.Enabled = false;
             toolStripStatusLabel.Text = "強制終了";
         }
 
@@ -195,6 +206,29 @@ namespace SukuSuku
         private void すくすくについてAToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new AboutForm().Show();
+        }
+
+        private void cmdButton_Click(object sender, EventArgs e)
+        {
+            var text = ((Button)sender).Text;
+
+            if (autoChapCheckBox.Checked)
+            {
+                var res = new System.Text.RegularExpressions.Regex(@"(image\d*)").Matches(text);
+                foreach (System.Text.RegularExpressions.Match m in res)
+                {
+                    var imageName = new BlackForm().takeScreenshot(this);
+                    if (imageName == "") return;
+                    text = text.Replace(m.Value, String.Format("\"{0}\"", imageName));
+                }
+            }
+
+            textBox.Document.Replace(text + "\n");
+        }
+
+        private void thumbNailView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBox.Document.Replace('"' + thumbNailView.SelectedItems[0].Text + '"');
         }
     }
 }

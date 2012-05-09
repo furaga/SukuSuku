@@ -49,8 +49,12 @@ namespace SukuSuku
         {
             if (start != null && end != null)
             {
-                this.Opacity = 0;
-                ((MainForm)Owner).takeScreenshot(GetRectangle(start.Value, end.Value));
+                var rect = GetRectangle(start.Value, end.Value);
+                if (rect.Width != 0 && rect.Height != 0)
+                {
+                    this.Opacity = 0;
+                    __imageName = ((MainForm)Owner).takeScreenshot(rect);
+                }
             }
             Hide();
         }
@@ -75,6 +79,13 @@ namespace SukuSuku
                 pt2 = new Point(pt1.X, rect.Bottom);
                 g.DrawLine(pen, pt1, pt2);
             }
+        }
+
+        private string __imageName = "";
+        public string takeScreenshot(MainForm owner)
+        {
+            ShowDialog(owner);
+            return __imageName; 
         }
     }
 }
