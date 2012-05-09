@@ -234,15 +234,7 @@ namespace SukuSuku
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if (showScreenshotCheckBox.Checked)
-            {
-                textBox.Image = templateBMPs;
-            }
-            else
-            {
-                textBox.Image = new Dictionary<string, Bitmap>();
-            }
-            textBox.Refresh();
+            setTextBoxImages();
         }
     }
 }

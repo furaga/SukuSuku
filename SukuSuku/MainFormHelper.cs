@@ -86,6 +86,38 @@ namespace SukuSuku
             return canvas;
         }
 
+        /// <summary>
+        /// エディタ画面に画像表示するしないの設定を反映させる
+        /// </summary>
+        void setTextBoxImages()
+        {
+            // 別スレッドから呼ばれることもあるのでInvokeにしておく
+            Invoke((Action)(() =>
+            {
+                if (showScreenshotCheckBox.Checked)
+                {
+                    textBox.Image = templateBMPs;
+                }
+                else
+                {
+                    textBox.Image = new Dictionary<string, Bitmap>();
+                }
+                textBox.Refresh();
+            }));
+        }
+
+        /// <summary>
+        /// エディタ画面の画像を消す
+        /// </summary>
+        void clearTextBoxImages()
+        {
+            // 別スレッドから呼ばれることもあるのでInvokeにしておく
+            Invoke((Action)(() =>
+            {
+                textBox.Image = new Dictionary<string, Bitmap>();
+                textBox.Refresh();
+            }));
+        }
         //----------------------------------------------------------------------
         // ファイル
         //----------------------------------------------------------------------
@@ -275,7 +307,9 @@ namespace SukuSuku
 
             using (var g = Graphics.FromImage(bmp))
             {
+                clearTextBoxImages();   // エディタ画面の画像を一旦消す（エディタ画面の画像を認識してしまうのを防ぐため。ちょっとちらつくけど仕方ない）
                 g.CopyFromScreen(rect.X, rect.Y, 0, 0, size, CopyPixelOperation.SourceCopy);
+                setTextBoxImages();
             }
             
             return bmp;
