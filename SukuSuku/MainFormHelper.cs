@@ -21,6 +21,7 @@ namespace SukuSuku
         /// </summary>
         string dirName = null;
         string orgText = ""; // 編集を始めた時点でのテキストボックスの内容
+        Dictionary<string, Bitmap> templateBMPs = new Dictionary<string, Bitmap>();
         Dictionary<string, IplImage> templates = new Dictionary<string, IplImage>();
         int templateCnt = 0;
         Font defaultFontEditor = new Font("ＭＳ ゴシック", 12, System.Drawing.FontStyle.Regular); // デフォルトのエディタ用のフォント
@@ -210,7 +211,7 @@ namespace SukuSuku
             thumbNailView.Clear();
             thumbNailList.Images.Clear();
             templates.Clear();
-            textBox.Image.Clear();
+            templateBMPs.Clear();
             templateCnt = 0;
             return true;
         }
@@ -242,7 +243,7 @@ namespace SukuSuku
             thumbNailView.Clear();
             thumbNailList.Images.Clear();
             templates.Clear();
-            textBox.Image.Clear();
+            templateBMPs.Clear();
             templateCnt = 0;
             foreach (var file in Directory.GetFiles(dirName, "*.png"))
             {
@@ -251,7 +252,7 @@ namespace SukuSuku
                 var imageName = Path.GetFileNameWithoutExtension(file);
                 thumbNailView.Items.Add(imageName, thumbNailList.Images.Count - 1);
                 templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
-                textBox.Image.Add(imageName, bmp);
+                templateBMPs.Add(imageName, bmp);
                 templateCnt++;
             }
             
@@ -292,7 +293,7 @@ namespace SukuSuku
             thumbNailList.Images.Add(createThumbnail(bmp));
             thumbNailView.Items.Add(imageName, index);
             templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
-            textBox.Image.Add(imageName, bmp);
+            templateBMPs.Add(imageName, bmp);
             return imageName;
         }
 

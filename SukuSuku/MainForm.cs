@@ -35,6 +35,7 @@ namespace SukuSuku
         private void MainForm_Load(object sender, EventArgs e)
         {
             textBox.Highlighter = Highlighters.Ruby;
+            textBox.Image = templateBMPs;
             engine = IronRuby.Ruby.CreateEngine();
             ui = new UI(this);
             scope = engine.CreateScope();
@@ -229,6 +230,19 @@ namespace SukuSuku
         private void thumbNailView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             textBox.Document.Replace('"' + thumbNailView.SelectedItems[0].Text + '"');
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (showScreenshotCheckBox.Checked)
+            {
+                textBox.Image = templateBMPs;
+            }
+            else
+            {
+                textBox.Image = new Dictionary<string, Bitmap>();
+            }
+            textBox.Refresh();
         }
     }
 }
