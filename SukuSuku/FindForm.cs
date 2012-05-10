@@ -13,10 +13,17 @@ namespace SukuSuku
 {
     public partial class FindForm : Form
     {
-        enum Mode { Find, Replace, ReplaceAll } 
-        AzukiControl textBox;
-        int findCount = 0;
-        string dialogTitle = "";
+        private enum Mode
+        {
+            Find,
+            Replace,
+            ReplaceAll
+        }
+
+        private AzukiControl textBox;
+        private int findCount = 0;
+        private string dialogTitle = "";
+
 
         public AzukiControl TargetTextBox
         {
@@ -44,7 +51,7 @@ namespace SukuSuku
             try
             {
                 var selectStart = 0;
-                var selectEnd = 0; 
+                var selectEnd = 0;
                 textBox.Document.GetSelection(out selectStart, out selectEnd);
                 var position =
                     radioButtonUp.Checked ?
@@ -120,6 +127,16 @@ namespace SukuSuku
             }
         }
 
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Hide();
+        }
+
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            Find(Mode.Find);
+        }
+
         private bool CheckEqualString()
         {
             try
@@ -127,7 +144,7 @@ namespace SukuSuku
                 StringComparison cmp = checkBoxCase.Checked ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
                 if (textBoxFind.Text.Equals(textBoxReplace.Text, cmp))
                 {
-                    MessageBox.Show(this, "同じ文字列で置換することはできません", dialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(this, "同じ文字列で置換すること阿できません", dialogTitle, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return true;
                 }
                 return false;
@@ -151,16 +168,6 @@ namespace SukuSuku
                 MessageBox.Show(exception.ToString(), "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Hide();
-        }
-
-        private void buttonFind_Click(object sender, EventArgs e)
-        {
-            Find(Mode.Find);
         }
 
         private void buttonReplace_Click(object sender, EventArgs e)
@@ -200,18 +207,18 @@ namespace SukuSuku
             }
         }
 
-        private void FindForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void textBoxFind_TextChanged(object sender, EventArgs e)
+        {
+            buttonFind.Enabled = buttonReplace.Enabled = buttonReplaceAll.Enabled = textBoxFind.Text != "";
+        }
+
+        private void FindDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 e.Cancel = true;
                 Hide();
             }
-        }
-
-        private void textBoxFind_TextChanged(object sender, EventArgs e)
-        {
-            buttonFind.Enabled = buttonReplace.Enabled = buttonReplaceAll.Enabled = textBoxFind.Text != "";
         }
 
         private void textBoxFind_KeyDown(object sender, KeyEventArgs e)

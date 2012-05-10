@@ -11,14 +11,13 @@ using System.Threading;
 using OpenCvSharp;
 using Sgry.Azuki;
 using Sgry.Azuki.Highlighter;
-using Microsoft.Scripting.Hosting;
 
 namespace SukuSuku
 {
     public partial class MainForm : Form
     {
-        ScriptEngine engine;
-        ScriptScope scope;
+        Microsoft.Scripting.Hosting.ScriptEngine engine;
+        Microsoft.Scripting.Hosting.ScriptScope scope;
         System.Threading.Thread thread;
         UI ui;
 
@@ -27,10 +26,11 @@ namespace SukuSuku
             InitializeComponent();
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (CheckSave() == false) e.Cancel = true;
+            this.Close();
         }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -68,11 +68,6 @@ namespace SukuSuku
         {
             Save(false);
             SetTitle();
-        }
-
-        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         //----------------------------------------------------------------------
@@ -261,14 +256,13 @@ namespace SukuSuku
             textBox.Refresh();
         }
 
-        FindForm findForm = new FindForm();
-
+        FindForm findDialog = new FindForm();
         private void 検索FToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            findForm.TargetTextBox = textBox;
-            findForm.FindString = textBox.GetSelectedText();
-            findForm.Hide();
-            findForm.Show(this);
+            findDialog.TargetTextBox = textBox;
+            findDialog.FindString = textBox.GetSelectedText();
+            findDialog.Hide();
+            findDialog.Show(this);
         }
     }
 }

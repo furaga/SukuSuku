@@ -78,7 +78,6 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.screenshotButton = new System.Windows.Forms.ToolStripButton();
             this.runButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -322,7 +321,7 @@
             this.検索FToolStripMenuItem.Name = "検索FToolStripMenuItem";
             this.検索FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.検索FToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
-            this.検索FToolStripMenuItem.Text = "検索・置換(&F)";
+            this.検索FToolStripMenuItem.Text = "検索/置換(&F)";
             this.検索FToolStripMenuItem.Click += new System.EventHandler(this.検索FToolStripMenuItem_Click);
             // 
             // 実行RToolStripMenuItem
@@ -621,8 +620,7 @@
             this.toolStrip.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.screenshotButton,
-            this.runButton,
-            this.toolStripSeparator7});
+            this.runButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 38);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.Size = new System.Drawing.Size(1371, 68);
@@ -652,11 +650,6 @@
             this.runButton.Size = new System.Drawing.Size(50, 50);
             this.runButton.Text = "実行";
             this.runButton.Click += new System.EventHandler(this.実行RToolStripMenuItem1_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 68);
             // 
             // statusStrip
             // 
@@ -908,7 +901,7 @@
             this.toolStripSeparator9,
             this.削除DToolStripMenuItem});
             this.thumbNailContextMenuStrip.Name = "thumbNailContextMenuStrip";
-            this.thumbNailContextMenuStrip.Size = new System.Drawing.Size(165, 66);
+            this.thumbNailContextMenuStrip.Size = new System.Drawing.Size(165, 88);
             // 
             // 撮り直しRToolStripMenuItem
             // 
@@ -995,11 +988,11 @@
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.statusStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "すくすく";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -1104,7 +1097,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.NumericUpDown thresholdUpDown;
         private System.Windows.Forms.CheckBox autoChapCheckBox;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.CheckBox showScreenshotCheckBox;
         private System.Windows.Forms.ContextMenuStrip thumbNailContextMenuStrip;
