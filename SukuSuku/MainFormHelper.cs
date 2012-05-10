@@ -259,8 +259,7 @@ namespace SukuSuku
                     MessageBoxDefaultButton.Button3))
                 {
                     case DialogResult.Yes:
-                        Save();
-                        return true;
+                        return Save();
                     case DialogResult.No:
                         return true;
                     default:

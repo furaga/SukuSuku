@@ -11,13 +11,14 @@ using System.Threading;
 using OpenCvSharp;
 using Sgry.Azuki;
 using Sgry.Azuki.Highlighter;
+using Microsoft.Scripting.Hosting;
 
 namespace SukuSuku
 {
     public partial class MainForm : Form
     {
-        Microsoft.Scripting.Hosting.ScriptEngine engine;
-        Microsoft.Scripting.Hosting.ScriptScope scope;
+        ScriptEngine engine;
+        ScriptScope scope;
         System.Threading.Thread thread;
         UI ui;
 
@@ -26,11 +27,10 @@ namespace SukuSuku
             InitializeComponent();
         }
 
-        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Close();
+            if (CheckSave() == false) e.Cancel = true;
         }
-
 
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -68,6 +68,11 @@ namespace SukuSuku
         {
             Save(false);
             SetTitle();
+        }
+
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         //----------------------------------------------------------------------
@@ -254,6 +259,16 @@ namespace SukuSuku
             var targetName = thumbNailView.SelectedItems[0].Text;
             DeleteScreenshot(targetName);
             textBox.Refresh();
+        }
+
+        FindForm findForm = new FindForm();
+
+        private void 検索FToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            findForm.TargetTextBox = textBox;
+            findForm.FindString = textBox.GetSelectedText();
+            findForm.Hide();
+            findForm.Show(this);
         }
     }
 }

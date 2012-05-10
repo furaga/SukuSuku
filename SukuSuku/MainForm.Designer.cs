@@ -53,7 +53,6 @@
             this.一行削除LToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.検索FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.置換ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.実行RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.実行RToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.停止SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,13 +102,13 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.thumbNailView = new System.Windows.Forms.ListView();
-            this.textBox = new Sgry.Azuki.Windows.AzukiControl();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.showScreenshotCheckBox = new System.Windows.Forms.CheckBox();
             this.thumbNailContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.撮り直しRToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.削除DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox = new Sgry.Azuki.Windows.AzukiControl();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.showScreenshotCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -127,8 +126,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.thumbNailContextMenuStrip.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -227,8 +226,7 @@
             this.toolStripSeparator3,
             this.一行削除LToolStripMenuItem,
             this.toolStripSeparator5,
-            this.検索FToolStripMenuItem,
-            this.置換ToolStripMenuItem});
+            this.検索FToolStripMenuItem});
             this.編集EToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.編集EToolStripMenuItem.Name = "編集EToolStripMenuItem";
             this.編集EToolStripMenuItem.Size = new System.Drawing.Size(95, 34);
@@ -324,14 +322,8 @@
             this.検索FToolStripMenuItem.Name = "検索FToolStripMenuItem";
             this.検索FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.検索FToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
-            this.検索FToolStripMenuItem.Text = "検索(&F)";
-            // 
-            // 置換ToolStripMenuItem
-            // 
-            this.置換ToolStripMenuItem.Name = "置換ToolStripMenuItem";
-            this.置換ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.置換ToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
-            this.置換ToolStripMenuItem.Text = "置換";
+            this.検索FToolStripMenuItem.Text = "検索・置換(&F)";
+            this.検索FToolStripMenuItem.Click += new System.EventHandler(this.検索FToolStripMenuItem_Click);
             // 
             // 実行RToolStripMenuItem
             // 
@@ -429,7 +421,7 @@
             this.flowLayoutPanel1.Controls.Add(this.button11);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(383, 184);
             this.flowLayoutPanel1.TabIndex = 15;
@@ -714,9 +706,9 @@
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox1.Location = new System.Drawing.Point(4, 4);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(391, 222);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
@@ -727,7 +719,7 @@
             this.panel1.Controls.Add(this.flowLayoutPanel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(3, 106);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(413, 816);
             this.panel1.TabIndex = 18;
@@ -743,7 +735,7 @@
             this.flowLayoutPanel4.Controls.Add(this.autoChapCheckBox);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(413, 816);
             this.flowLayoutPanel4.TabIndex = 21;
@@ -753,9 +745,9 @@
             this.groupBox4.Controls.Add(this.flowLayoutPanel2);
             this.groupBox4.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox4.Location = new System.Drawing.Point(4, 234);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(397, 186);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
@@ -770,7 +762,7 @@
             this.flowLayoutPanel2.Controls.Add(this.button8);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(389, 148);
             this.flowLayoutPanel2.TabIndex = 0;
@@ -780,9 +772,9 @@
             this.groupBox5.Controls.Add(this.flowLayoutPanel3);
             this.groupBox5.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox5.Location = new System.Drawing.Point(4, 428);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox5.Size = new System.Drawing.Size(393, 114);
             this.groupBox5.TabIndex = 20;
             this.groupBox5.TabStop = false;
@@ -795,7 +787,7 @@
             this.flowLayoutPanel3.Controls.Add(this.button10);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(385, 76);
             this.flowLayoutPanel3.TabIndex = 0;
@@ -805,9 +797,9 @@
             this.groupBox6.Controls.Add(this.flowLayoutPanel5);
             this.groupBox6.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
             this.groupBox6.Location = new System.Drawing.Point(4, 550);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox6.Size = new System.Drawing.Size(397, 76);
             this.groupBox6.TabIndex = 21;
             this.groupBox6.TabStop = false;
@@ -819,7 +811,7 @@
             this.flowLayoutPanel5.Controls.Add(this.button1);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
             this.flowLayoutPanel5.Size = new System.Drawing.Size(389, 38);
             this.flowLayoutPanel5.TabIndex = 20;
@@ -829,9 +821,9 @@
             this.groupBox2.Controls.Add(this.thresholdUpDown);
             this.groupBox2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.groupBox2.Location = new System.Drawing.Point(4, 634);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(395, 86);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
@@ -860,7 +852,7 @@
             this.autoChapCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoChapCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
             this.autoChapCheckBox.Location = new System.Drawing.Point(4, 728);
-            this.autoChapCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.autoChapCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.autoChapCheckBox.Name = "autoChapCheckBox";
             this.autoChapCheckBox.Size = new System.Drawing.Size(315, 34);
             this.autoChapCheckBox.TabIndex = 23;
@@ -873,7 +865,7 @@
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel2.Location = new System.Drawing.Point(1086, 106);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(285, 816);
             this.panel2.TabIndex = 19;
@@ -885,9 +877,9 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(285, 816);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
@@ -908,6 +900,34 @@
             this.thumbNailView.TabIndex = 2;
             this.thumbNailView.UseCompatibleStateImageBehavior = false;
             this.thumbNailView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.thumbNailView_MouseDoubleClick);
+            // 
+            // thumbNailContextMenuStrip
+            // 
+            this.thumbNailContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.撮り直しRToolStripMenuItem,
+            this.toolStripSeparator9,
+            this.削除DToolStripMenuItem});
+            this.thumbNailContextMenuStrip.Name = "thumbNailContextMenuStrip";
+            this.thumbNailContextMenuStrip.Size = new System.Drawing.Size(165, 66);
+            // 
+            // 撮り直しRToolStripMenuItem
+            // 
+            this.撮り直しRToolStripMenuItem.Name = "撮り直しRToolStripMenuItem";
+            this.撮り直しRToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.撮り直しRToolStripMenuItem.Text = "撮り直し(&R)";
+            this.撮り直しRToolStripMenuItem.Click += new System.EventHandler(this.撮り直しRToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(161, 6);
+            // 
+            // 削除DToolStripMenuItem
+            // 
+            this.削除DToolStripMenuItem.Name = "削除DToolStripMenuItem";
+            this.削除DToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.削除DToolStripMenuItem.Text = "削除(&D)";
+            this.削除DToolStripMenuItem.Click += new System.EventHandler(this.削除DToolStripMenuItem_Click);
             // 
             // textBox
             // 
@@ -938,7 +958,7 @@
             this.panel3.Controls.Add(this.showScreenshotCheckBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(416, 106);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(670, 816);
             this.panel3.TabIndex = 20;
@@ -953,7 +973,7 @@
             this.showScreenshotCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.showScreenshotCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
             this.showScreenshotCheckBox.Location = new System.Drawing.Point(0, 0);
-            this.showScreenshotCheckBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.showScreenshotCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.showScreenshotCheckBox.Name = "showScreenshotCheckBox";
             this.showScreenshotCheckBox.Size = new System.Drawing.Size(670, 34);
             this.showScreenshotCheckBox.TabIndex = 2;
@@ -961,34 +981,6 @@
             this.showScreenshotCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.showScreenshotCheckBox.UseVisualStyleBackColor = false;
             this.showScreenshotCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // thumbNailContextMenuStrip
-            // 
-            this.thumbNailContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.撮り直しRToolStripMenuItem,
-            this.toolStripSeparator9,
-            this.削除DToolStripMenuItem});
-            this.thumbNailContextMenuStrip.Name = "thumbNailContextMenuStrip";
-            this.thumbNailContextMenuStrip.Size = new System.Drawing.Size(165, 88);
-            // 
-            // 撮り直しRToolStripMenuItem
-            // 
-            this.撮り直しRToolStripMenuItem.Name = "撮り直しRToolStripMenuItem";
-            this.撮り直しRToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
-            this.撮り直しRToolStripMenuItem.Text = "撮り直し(&R)";
-            this.撮り直しRToolStripMenuItem.Click += new System.EventHandler(this.撮り直しRToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(161, 6);
-            // 
-            // 削除DToolStripMenuItem
-            // 
-            this.削除DToolStripMenuItem.Name = "削除DToolStripMenuItem";
-            this.削除DToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
-            this.削除DToolStripMenuItem.Text = "削除(&D)";
-            this.削除DToolStripMenuItem.Click += new System.EventHandler(this.削除DToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1007,6 +999,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "すくすく";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -1029,9 +1022,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).EndInit();
             this.panel2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.thumbNailContextMenuStrip.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            this.thumbNailContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1069,7 +1062,6 @@
         private System.Windows.Forms.ToolStripMenuItem すべて選択AToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem 検索FToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 置換ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 一行削除LToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
