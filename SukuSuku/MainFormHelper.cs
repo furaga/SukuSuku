@@ -86,6 +86,45 @@ namespace SukuSuku
             return canvas;
         }
 
+        void AddScreenshot(string imageKey, Bitmap bmp)
+        {
+            var index = thumbNailList.Images.Count;
+            thumbNailList.Images.Add(imageKey, createThumbnail(bmp));
+            if (thumbNailView.Items.ContainsKey(imageKey))
+            {
+                thumbNailView.Items[imageKey].ImageIndex = index;
+            }
+            else
+            {
+                thumbNailView.Items.Add(imageKey, imageKey, index);
+                templateCnt++;
+            }
+            templates[imageKey] = BitmapConverter.ToIplImage(bmp);
+            templateBMPs[imageKey] = bmp;
+        }
+
+        Bitmap DeleteScreenshot(string imageKey)
+        {
+            if (thumbNailView.Items.ContainsKey(imageKey) == false) return null;
+            var x = thumbNailView.Items[0];
+            var bmp = templateBMPs[imageKey];
+            thumbNailView.Items.RemoveByKey(imageKey);
+            thumbNailList.Images.RemoveByKey(imageKey);
+            templates.Remove(imageKey);
+            templateBMPs.Remove(imageKey);
+            templateCnt--;
+            return bmp;
+        }
+
+        void ClearScreenshots()
+        {
+            thumbNailView.Clear();
+            thumbNailList.Images.Clear();
+            templates.Clear();
+            templateBMPs.Clear();
+            templateCnt = 0;
+        }
+
         /// <summary>
         /// エディタ画面に画像表示するしないの設定を反映させる
         /// </summary>
@@ -240,11 +279,7 @@ namespace SukuSuku
             // テキストボックス・サムネイルの内容をクリア
             dirName = null;
             textBox.Text = orgText = "";
-            thumbNailView.Clear();
-            thumbNailList.Images.Clear();
-            templates.Clear();
-            templateBMPs.Clear();
-            templateCnt = 0;
+            ClearScreenshots();
             return true;
         }
 
@@ -272,20 +307,12 @@ namespace SukuSuku
             }
 
             // 画像を開く
-            thumbNailView.Clear();
-            thumbNailList.Images.Clear();
-            templates.Clear();
-            templateBMPs.Clear();
-            templateCnt = 0;
+            ClearScreenshots();
             foreach (var file in Directory.GetFiles(dirName, "*.png"))
             {
                 var bmp = GetBitmapFromFile(file);
-                thumbNailList.Images.Add(createThumbnail(bmp));
                 var imageName = Path.GetFileNameWithoutExtension(file);
-                thumbNailView.Items.Add(imageName, thumbNailList.Images.Count - 1);
-                templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
-                templateBMPs.Add(imageName, bmp);
-                templateCnt++;
+                AddScreenshot(imageName, bmp);
             }
             
             return true;
@@ -322,12 +349,8 @@ namespace SukuSuku
         public string takeScreenshot(Rectangle rect)
         {
             var bmp = GetScreenshotBmp(rect);
-            var index = thumbNailList.Images.Count;
             var imageName = GetImageName();
-            thumbNailList.Images.Add(createThumbnail(bmp));
-            thumbNailView.Items.Add(imageName, index);
-            templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
-            templateBMPs.Add(imageName, bmp);
+            AddScreenshot(imageName, bmp);
             return imageName;
         }
 

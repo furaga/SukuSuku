@@ -236,5 +236,24 @@ namespace SukuSuku
         {
             setTextBoxImages();
         }
+
+        private void 撮り直しRToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (thumbNailView.SelectedItems.Count <= 0) return;
+            var targetName = thumbNailView.SelectedItems[0].Text;
+            var imageName = new BlackForm().takeScreenshot(this);
+            var bmp = DeleteScreenshot(imageName);
+            if (bmp == null) return;
+            AddScreenshot(targetName, bmp);
+            textBox.Refresh();
+        }
+
+        private void 削除DToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (thumbNailView.SelectedItems.Count <= 0) return;
+            var targetName = thumbNailView.SelectedItems[0].Text;
+            DeleteScreenshot(targetName);
+            textBox.Refresh();
+        }
     }
 }
