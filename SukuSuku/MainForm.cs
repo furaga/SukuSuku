@@ -128,53 +128,24 @@ namespace SukuSuku
 
         private void 実行RToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            // 実行中のスレッドは殺す
-            if (thread != null && thread.IsAlive) thread.Abort();
+            // 通常実行
+            ui.slowPlayFlag = false;
+            Run();
+        }
 
-            // スレッドを新しく作る
-            thread = new System.Threading.Thread(() =>
-            {
-                try
-                {
-                    Invoke((Action)(() =>
-                    {
-                        実行RToolStripMenuItem1.Enabled = false;
-                        runButton.Enabled = false;
-                        停止SToolStripMenuItem.Enabled = true;
-                        toolStripStatusLabel.Text = "実行開始";
-                    }));
-                    engine.Execute(textBox.Text, scope);
-                    Invoke((Action)(() =>
-                    {
-                        実行RToolStripMenuItem1.Enabled = true;
-                        runButton.Enabled = true;
-                        停止SToolStripMenuItem.Enabled = false;
-                        toolStripStatusLabel.Text = "正常終了";
-                    }));
-                }
-                catch (Exception ex)
-                {
-                    Invoke((Action)(() =>
-                    {
-                        実行RToolStripMenuItem1.Enabled = true;
-                        runButton.Enabled = true;
-                        停止SToolStripMenuItem.Enabled = false;
-                        MessageBox.Show(ex.ToString());
-                    }));
-                }
-            });
 
-            // スレッド開始
-            thread.Start();
+        private void スローモーションで実行RToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // スローモーション実行
+            ui.slowPlayFlag = true;
+            Run();
         }
 
         private void 停止SToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // 実行中のスレッドを殺す
             if (thread != null && thread.IsAlive) thread.Abort();
-            実行RToolStripMenuItem1.Enabled = true;
-            runButton.Enabled = true;
-            停止SToolStripMenuItem.Enabled = false;
+            SetPlayButtons(false);
             toolStripStatusLabel.Text = "強制終了";
         }
 

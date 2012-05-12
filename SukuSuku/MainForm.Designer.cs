@@ -108,6 +108,9 @@
             this.textBox = new Sgry.Azuki.Windows.AzukiControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.showScreenshotCheckBox = new System.Windows.Forms.CheckBox();
+            this.スローモーションで実行RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runSlowlyButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -140,8 +143,8 @@
             this.ヘルプHToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1371, 38);
+            this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip.Size = new System.Drawing.Size(1028, 32);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -157,27 +160,27 @@
             this.終了XToolStripMenuItem});
             this.ファイルFToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ファイルFToolStripMenuItem.Name = "ファイルFToolStripMenuItem";
-            this.ファイルFToolStripMenuItem.Size = new System.Drawing.Size(134, 34);
+            this.ファイルFToolStripMenuItem.Size = new System.Drawing.Size(109, 28);
             this.ファイルFToolStripMenuItem.Text = "ファイル(&F)";
             // 
             // 新規作成NToolStripMenuItem
             // 
             this.新規作成NToolStripMenuItem.Name = "新規作成NToolStripMenuItem";
             this.新規作成NToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.新規作成NToolStripMenuItem.Size = new System.Drawing.Size(415, 34);
+            this.新規作成NToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
             this.新規作成NToolStripMenuItem.Text = "新規作成(&N)";
             this.新規作成NToolStripMenuItem.Click += new System.EventHandler(this.新規作成NToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(412, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(339, 6);
             // 
             // 開くOToolStripMenuItem
             // 
             this.開くOToolStripMenuItem.Name = "開くOToolStripMenuItem";
             this.開くOToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.開くOToolStripMenuItem.Size = new System.Drawing.Size(415, 34);
+            this.開くOToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
             this.開くOToolStripMenuItem.Text = "開く(&O)";
             this.開くOToolStripMenuItem.Click += new System.EventHandler(this.開くOToolStripMenuItem_Click);
             // 
@@ -185,7 +188,7 @@
             // 
             this.保存SToolStripMenuItem.Name = "保存SToolStripMenuItem";
             this.保存SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.保存SToolStripMenuItem.Size = new System.Drawing.Size(415, 34);
+            this.保存SToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
             this.保存SToolStripMenuItem.Text = "保存(&S)";
             this.保存SToolStripMenuItem.Click += new System.EventHandler(this.保存SToolStripMenuItem_Click);
             // 
@@ -194,19 +197,19 @@
             this.名前をつけて保存AToolStripMenuItem.Name = "名前をつけて保存AToolStripMenuItem";
             this.名前をつけて保存AToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
                         | System.Windows.Forms.Keys.S)));
-            this.名前をつけて保存AToolStripMenuItem.Size = new System.Drawing.Size(415, 34);
+            this.名前をつけて保存AToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
             this.名前をつけて保存AToolStripMenuItem.Text = "名前をつけて保存(&A)";
             this.名前をつけて保存AToolStripMenuItem.Click += new System.EventHandler(this.名前をつけて保存AToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(412, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(339, 6);
             // 
             // 終了XToolStripMenuItem
             // 
             this.終了XToolStripMenuItem.Name = "終了XToolStripMenuItem";
-            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(415, 34);
+            this.終了XToolStripMenuItem.Size = new System.Drawing.Size(342, 28);
             this.終了XToolStripMenuItem.Text = "終了(&X)";
             this.終了XToolStripMenuItem.Click += new System.EventHandler(this.終了XToolStripMenuItem_Click);
             // 
@@ -228,7 +231,7 @@
             this.検索FToolStripMenuItem});
             this.編集EToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.編集EToolStripMenuItem.Name = "編集EToolStripMenuItem";
-            this.編集EToolStripMenuItem.Size = new System.Drawing.Size(95, 34);
+            this.編集EToolStripMenuItem.Size = new System.Drawing.Size(78, 28);
             this.編集EToolStripMenuItem.Text = "編集(&E)";
             // 
             // スクリーンショットを撮るSToolStripMenuItem
@@ -236,20 +239,20 @@
             this.スクリーンショットを撮るSToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("スクリーンショットを撮るSToolStripMenuItem.Image")));
             this.スクリーンショットを撮るSToolStripMenuItem.Name = "スクリーンショットを撮るSToolStripMenuItem";
             this.スクリーンショットを撮るSToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.T)));
-            this.スクリーンショットを撮るSToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.スクリーンショットを撮るSToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.スクリーンショットを撮るSToolStripMenuItem.Text = "スクリーンショットを撮る(&S)";
             this.スクリーンショットを撮るSToolStripMenuItem.Click += new System.EventHandler(this.screenshotButton_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(430, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(354, 6);
             // 
             // もとに戻すUToolStripMenuItem
             // 
             this.もとに戻すUToolStripMenuItem.Name = "もとに戻すUToolStripMenuItem";
             this.もとに戻すUToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.もとに戻すUToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.もとに戻すUToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.もとに戻すUToolStripMenuItem.Text = "もとに戻す(&U)";
             this.もとに戻すUToolStripMenuItem.Click += new System.EventHandler(this.もとに戻すUToolStripMenuItem_Click);
             // 
@@ -257,20 +260,20 @@
             // 
             this.やり直しRToolStripMenuItem.Name = "やり直しRToolStripMenuItem";
             this.やり直しRToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.やり直しRToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.やり直しRToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.やり直しRToolStripMenuItem.Text = "やり直し(&R)";
             this.やり直しRToolStripMenuItem.Click += new System.EventHandler(this.やり直しRToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(430, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(354, 6);
             // 
             // 切り取りTToolStripMenuItem
             // 
             this.切り取りTToolStripMenuItem.Name = "切り取りTToolStripMenuItem";
             this.切り取りTToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.切り取りTToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.切り取りTToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.切り取りTToolStripMenuItem.Text = "切り取り(&T)";
             this.切り取りTToolStripMenuItem.Click += new System.EventHandler(this.切り取りTToolStripMenuItem_Click);
             // 
@@ -278,7 +281,7 @@
             // 
             this.コピーCToolStripMenuItem.Name = "コピーCToolStripMenuItem";
             this.コピーCToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.コピーCToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.コピーCToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.コピーCToolStripMenuItem.Text = "コピー(&C)";
             this.コピーCToolStripMenuItem.Click += new System.EventHandler(this.コピーCToolStripMenuItem_Click);
             // 
@@ -286,7 +289,7 @@
             // 
             this.貼り付けPToolStripMenuItem.Name = "貼り付けPToolStripMenuItem";
             this.貼り付けPToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.貼り付けPToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.貼り付けPToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.貼り付けPToolStripMenuItem.Text = "貼り付け(&P)";
             this.貼り付けPToolStripMenuItem.Click += new System.EventHandler(this.貼り付けPToolStripMenuItem_Click);
             // 
@@ -294,33 +297,33 @@
             // 
             this.すべて選択AToolStripMenuItem.Name = "すべて選択AToolStripMenuItem";
             this.すべて選択AToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.すべて選択AToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.すべて選択AToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.すべて選択AToolStripMenuItem.Text = "すべて選択(&A)";
             this.すべて選択AToolStripMenuItem.Click += new System.EventHandler(this.すべて選択AToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(430, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(354, 6);
             // 
             // 一行削除LToolStripMenuItem
             // 
             this.一行削除LToolStripMenuItem.Name = "一行削除LToolStripMenuItem";
             this.一行削除LToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.一行削除LToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.一行削除LToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.一行削除LToolStripMenuItem.Text = "一行削除(&L)";
             this.一行削除LToolStripMenuItem.Click += new System.EventHandler(this.一行削除LToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(430, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(354, 6);
             // 
             // 検索FToolStripMenuItem
             // 
             this.検索FToolStripMenuItem.Name = "検索FToolStripMenuItem";
             this.検索FToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.検索FToolStripMenuItem.Size = new System.Drawing.Size(433, 34);
+            this.検索FToolStripMenuItem.Size = new System.Drawing.Size(357, 28);
             this.検索FToolStripMenuItem.Text = "検索/置換(&F)";
             this.検索FToolStripMenuItem.Click += new System.EventHandler(this.検索FToolStripMenuItem_Click);
             // 
@@ -328,18 +331,19 @@
             // 
             this.実行RToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.実行RToolStripMenuItem1,
+            this.スローモーションで実行RToolStripMenuItem,
             this.停止SToolStripMenuItem});
             this.実行RToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.実行RToolStripMenuItem.Name = "実行RToolStripMenuItem";
-            this.実行RToolStripMenuItem.Size = new System.Drawing.Size(97, 34);
+            this.実行RToolStripMenuItem.Size = new System.Drawing.Size(79, 28);
             this.実行RToolStripMenuItem.Text = "実行(&R)";
             // 
             // 実行RToolStripMenuItem1
             // 
-            this.実行RToolStripMenuItem1.Image = global::SukuSuku.Properties.Resources.Play;
+            this.実行RToolStripMenuItem1.Image = global::SukuSuku.Properties.Resources.Play1;
             this.実行RToolStripMenuItem1.Name = "実行RToolStripMenuItem1";
             this.実行RToolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.実行RToolStripMenuItem1.Size = new System.Drawing.Size(254, 34);
+            this.実行RToolStripMenuItem1.Size = new System.Drawing.Size(285, 28);
             this.実行RToolStripMenuItem1.Text = "実行(&R)";
             this.実行RToolStripMenuItem1.Click += new System.EventHandler(this.実行RToolStripMenuItem1_Click);
             // 
@@ -348,7 +352,7 @@
             this.停止SToolStripMenuItem.Enabled = false;
             this.停止SToolStripMenuItem.Name = "停止SToolStripMenuItem";
             this.停止SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
-            this.停止SToolStripMenuItem.Size = new System.Drawing.Size(254, 34);
+            this.停止SToolStripMenuItem.Size = new System.Drawing.Size(285, 28);
             this.停止SToolStripMenuItem.Text = "停止(&S)";
             this.停止SToolStripMenuItem.Click += new System.EventHandler(this.停止SToolStripMenuItem_Click);
             // 
@@ -359,13 +363,13 @@
             this.デフォルトのフォントToolStripMenuItem});
             this.表示VToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.表示VToolStripMenuItem.Name = "表示VToolStripMenuItem";
-            this.表示VToolStripMenuItem.Size = new System.Drawing.Size(97, 34);
+            this.表示VToolStripMenuItem.Size = new System.Drawing.Size(79, 28);
             this.表示VToolStripMenuItem.Text = "表示(&V)";
             // 
             // フォントの設定FToolStripMenuItem
             // 
             this.フォントの設定FToolStripMenuItem.Name = "フォントの設定FToolStripMenuItem";
-            this.フォントの設定FToolStripMenuItem.Size = new System.Drawing.Size(286, 34);
+            this.フォントの設定FToolStripMenuItem.Size = new System.Drawing.Size(240, 28);
             this.フォントの設定FToolStripMenuItem.Text = "フォントの設定(&F)";
             this.フォントの設定FToolStripMenuItem.Click += new System.EventHandler(this.フォントの設定FToolStripMenuItem_Click);
             // 
@@ -375,7 +379,7 @@
             this.デフォルトのフォントToolStripMenuItem.CheckOnClick = true;
             this.デフォルトのフォントToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.デフォルトのフォントToolStripMenuItem.Name = "デフォルトのフォントToolStripMenuItem";
-            this.デフォルトのフォントToolStripMenuItem.Size = new System.Drawing.Size(286, 34);
+            this.デフォルトのフォントToolStripMenuItem.Size = new System.Drawing.Size(240, 28);
             this.デフォルトのフォントToolStripMenuItem.Text = "デフォルトのフォント";
             this.デフォルトのフォントToolStripMenuItem.Click += new System.EventHandler(this.デフォルトのフォントToolStripMenuItem_Click);
             // 
@@ -385,13 +389,13 @@
             this.すくすくについてAToolStripMenuItem});
             this.ヘルプHToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.ヘルプHToolStripMenuItem.Name = "ヘルプHToolStripMenuItem";
-            this.ヘルプHToolStripMenuItem.Size = new System.Drawing.Size(118, 34);
+            this.ヘルプHToolStripMenuItem.Size = new System.Drawing.Size(96, 28);
             this.ヘルプHToolStripMenuItem.Text = "ヘルプ(&H)";
             // 
             // すくすくについてAToolStripMenuItem
             // 
             this.すくすくについてAToolStripMenuItem.Name = "すくすくについてAToolStripMenuItem";
-            this.すくすくについてAToolStripMenuItem.Size = new System.Drawing.Size(278, 34);
+            this.すくすくについてAToolStripMenuItem.Size = new System.Drawing.Size(233, 28);
             this.すくすくについてAToolStripMenuItem.Text = "すくすくについて(&A)";
             this.すくすくについてAToolStripMenuItem.Click += new System.EventHandler(this.すくすくについてAToolStripMenuItem_Click);
             // 
@@ -403,10 +407,10 @@
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 106);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitter1.Location = new System.Drawing.Point(0, 86);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 816);
+            this.splitter1.Size = new System.Drawing.Size(2, 647);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
@@ -419,10 +423,9 @@
             this.flowLayoutPanel1.Controls.Add(this.button4);
             this.flowLayoutPanel1.Controls.Add(this.button11);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(383, 184);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(287, 148);
             this.flowLayoutPanel1.TabIndex = 15;
             // 
             // leftClick1
@@ -433,10 +436,10 @@
             this.leftClick1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.leftClick1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.leftClick1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.leftClick1.Location = new System.Drawing.Point(3, 2);
-            this.leftClick1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.leftClick1.Location = new System.Drawing.Point(2, 2);
+            this.leftClick1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.leftClick1.Name = "leftClick1";
-            this.leftClick1.Size = new System.Drawing.Size(380, 31);
+            this.leftClick1.Size = new System.Drawing.Size(285, 25);
             this.leftClick1.TabIndex = 3;
             this.leftClick1.Text = "ui.leftClick(image)";
             this.leftClick1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -450,10 +453,10 @@
             this.button3.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button3.Location = new System.Drawing.Point(3, 37);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button3.Location = new System.Drawing.Point(2, 31);
+            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(380, 31);
+            this.button3.Size = new System.Drawing.Size(285, 25);
             this.button3.TabIndex = 5;
             this.button3.Text = "ui.rightClick(image)";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -467,10 +470,10 @@
             this.button2.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button2.Location = new System.Drawing.Point(3, 72);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Location = new System.Drawing.Point(2, 60);
+            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(380, 31);
+            this.button2.Size = new System.Drawing.Size(285, 25);
             this.button2.TabIndex = 4;
             this.button2.Text = "ui.doubleClick(image)";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -484,10 +487,10 @@
             this.button4.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button4.Location = new System.Drawing.Point(3, 107);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button4.Location = new System.Drawing.Point(2, 89);
+            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(380, 31);
+            this.button4.Size = new System.Drawing.Size(285, 25);
             this.button4.TabIndex = 6;
             this.button4.Text = "ui.mouseMove(image)";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -501,10 +504,10 @@
             this.button11.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button11.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button11.Location = new System.Drawing.Point(3, 142);
-            this.button11.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button11.Location = new System.Drawing.Point(2, 118);
+            this.button11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(380, 31);
+            this.button11.Size = new System.Drawing.Size(285, 25);
             this.button11.TabIndex = 13;
             this.button11.Text = "ui.dragAndDrop(image1, image2)";
             this.button11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -518,10 +521,10 @@
             this.button5.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button5.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button5.Location = new System.Drawing.Point(3, 2);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button5.Location = new System.Drawing.Point(2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(380, 31);
+            this.button5.Size = new System.Drawing.Size(285, 25);
             this.button5.TabIndex = 7;
             this.button5.Text = "ui.type(text)";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -535,10 +538,10 @@
             this.button6.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button6.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button6.Location = new System.Drawing.Point(3, 37);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button6.Location = new System.Drawing.Point(2, 31);
+            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(380, 31);
+            this.button6.Size = new System.Drawing.Size(285, 25);
             this.button6.TabIndex = 8;
             this.button6.Text = "ui.type(image, text)";
             this.button6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -552,10 +555,10 @@
             this.button7.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button7.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button7.Location = new System.Drawing.Point(3, 72);
-            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button7.Location = new System.Drawing.Point(2, 60);
+            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(380, 31);
+            this.button7.Size = new System.Drawing.Size(285, 25);
             this.button7.TabIndex = 9;
             this.button7.Text = "ui.paste(text)";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -569,10 +572,10 @@
             this.button8.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button8.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button8.Location = new System.Drawing.Point(3, 107);
-            this.button8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button8.Location = new System.Drawing.Point(2, 89);
+            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(380, 31);
+            this.button8.Size = new System.Drawing.Size(285, 25);
             this.button8.TabIndex = 10;
             this.button8.Text = "ui.paste(image, text)";
             this.button8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -586,10 +589,10 @@
             this.button9.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button9.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button9.Location = new System.Drawing.Point(3, 2);
-            this.button9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button9.Location = new System.Drawing.Point(2, 2);
+            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(380, 31);
+            this.button9.Size = new System.Drawing.Size(285, 25);
             this.button9.TabIndex = 11;
             this.button9.Text = "ui.wait(image)";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -603,10 +606,10 @@
             this.button10.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button10.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button10.Location = new System.Drawing.Point(3, 37);
-            this.button10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button10.Location = new System.Drawing.Point(2, 31);
+            this.button10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(380, 31);
+            this.button10.Size = new System.Drawing.Size(285, 25);
             this.button10.TabIndex = 12;
             this.button10.Text = "ui.waitVanish(image)";
             this.button10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -620,10 +623,12 @@
             this.toolStrip.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.screenshotButton,
-            this.runButton});
-            this.toolStrip.Location = new System.Drawing.Point(0, 38);
+            this.toolStripSeparator7,
+            this.runButton,
+            this.runSlowlyButton});
+            this.toolStrip.Location = new System.Drawing.Point(0, 32);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1371, 68);
+            this.toolStrip.Size = new System.Drawing.Size(1028, 54);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -643,7 +648,7 @@
             // 
             this.runButton.AutoSize = false;
             this.runButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+            this.runButton.Image = global::SukuSuku.Properties.Resources.Play1;
             this.runButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.runButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.runButton.Name = "runButton";
@@ -656,10 +661,10 @@
             this.statusStrip.BackColor = System.Drawing.Color.Transparent;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 922);
+            this.statusStrip.Location = new System.Drawing.Point(0, 733);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 13, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1371, 22);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1028, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -683,10 +688,10 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(3, 2);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Location = new System.Drawing.Point(2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(380, 31);
+            this.button1.Size = new System.Drawing.Size(285, 25);
             this.button1.TabIndex = 11;
             this.button1.Text = "ui.exist(image)";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -698,11 +703,9 @@
             // 
             this.groupBox1.Controls.Add(this.flowLayoutPanel1);
             this.groupBox1.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox1.Location = new System.Drawing.Point(4, 4);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(391, 222);
+            this.groupBox1.Size = new System.Drawing.Size(293, 178);
             this.groupBox1.TabIndex = 17;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "マウスの操作";
@@ -711,10 +714,9 @@
             // 
             this.panel1.Controls.Add(this.flowLayoutPanel4);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(3, 106);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Location = new System.Drawing.Point(2, 86);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(413, 816);
+            this.panel1.Size = new System.Drawing.Size(310, 647);
             this.panel1.TabIndex = 18;
             // 
             // flowLayoutPanel4
@@ -728,20 +730,17 @@
             this.flowLayoutPanel4.Controls.Add(this.autoChapCheckBox);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel4.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(413, 816);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(310, 647);
             this.flowLayoutPanel4.TabIndex = 21;
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.flowLayoutPanel2);
             this.groupBox4.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox4.Location = new System.Drawing.Point(4, 234);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Location = new System.Drawing.Point(3, 187);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox4.Size = new System.Drawing.Size(397, 186);
+            this.groupBox4.Size = new System.Drawing.Size(298, 149);
             this.groupBox4.TabIndex = 19;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "キーボードの操作";
@@ -754,21 +753,18 @@
             this.flowLayoutPanel2.Controls.Add(this.button7);
             this.flowLayoutPanel2.Controls.Add(this.button8);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(389, 148);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(292, 119);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.flowLayoutPanel3);
             this.groupBox5.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox5.Location = new System.Drawing.Point(4, 428);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox5.Location = new System.Drawing.Point(3, 342);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox5.Size = new System.Drawing.Size(393, 114);
+            this.groupBox5.Size = new System.Drawing.Size(295, 91);
             this.groupBox5.TabIndex = 20;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "待機";
@@ -779,21 +775,18 @@
             this.flowLayoutPanel3.Controls.Add(this.button9);
             this.flowLayoutPanel3.Controls.Add(this.button10);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel3.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(385, 76);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(289, 61);
             this.flowLayoutPanel3.TabIndex = 0;
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.flowLayoutPanel5);
             this.groupBox6.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
-            this.groupBox6.Location = new System.Drawing.Point(4, 550);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox6.Location = new System.Drawing.Point(3, 439);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox6.Size = new System.Drawing.Size(397, 76);
+            this.groupBox6.Size = new System.Drawing.Size(298, 61);
             this.groupBox6.TabIndex = 21;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "検索";
@@ -803,21 +796,18 @@
             this.flowLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.flowLayoutPanel5.Controls.Add(this.button1);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(4, 34);
-            this.flowLayoutPanel5.Margin = new System.Windows.Forms.Padding(4);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(389, 38);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(292, 31);
             this.flowLayoutPanel5.TabIndex = 20;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.thresholdUpDown);
             this.groupBox2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox2.Location = new System.Drawing.Point(4, 634);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBox2.Location = new System.Drawing.Point(3, 506);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(395, 86);
+            this.groupBox2.Size = new System.Drawing.Size(296, 69);
             this.groupBox2.TabIndex = 18;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "画像マッチ判定の閾値（0 ~ 100）";
@@ -826,10 +816,10 @@
             // 
             this.thresholdUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.thresholdUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.thresholdUpDown.Location = new System.Drawing.Point(4, 34);
-            this.thresholdUpDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.thresholdUpDown.Location = new System.Drawing.Point(3, 27);
+            this.thresholdUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.thresholdUpDown.Name = "thresholdUpDown";
-            this.thresholdUpDown.Size = new System.Drawing.Size(387, 37);
+            this.thresholdUpDown.Size = new System.Drawing.Size(290, 31);
             this.thresholdUpDown.TabIndex = 1;
             this.thresholdUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.thresholdUpDown.Value = new decimal(new int[] {
@@ -844,10 +834,9 @@
             this.autoChapCheckBox.Checked = true;
             this.autoChapCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoChapCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
-            this.autoChapCheckBox.Location = new System.Drawing.Point(4, 728);
-            this.autoChapCheckBox.Margin = new System.Windows.Forms.Padding(4);
+            this.autoChapCheckBox.Location = new System.Drawing.Point(3, 581);
             this.autoChapCheckBox.Name = "autoChapCheckBox";
-            this.autoChapCheckBox.Size = new System.Drawing.Size(315, 34);
+            this.autoChapCheckBox.Size = new System.Drawing.Size(253, 28);
             this.autoChapCheckBox.TabIndex = 23;
             this.autoChapCheckBox.Text = "自動でキャプチャモードへ移行";
             this.autoChapCheckBox.UseVisualStyleBackColor = true;
@@ -857,10 +846,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(1086, 106);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(814, 86);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(285, 816);
+            this.panel2.Size = new System.Drawing.Size(214, 647);
             this.panel2.TabIndex = 19;
             // 
             // groupBox3
@@ -870,10 +858,8 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(285, 816);
+            this.groupBox3.Size = new System.Drawing.Size(214, 647);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "スクリーンショット";
@@ -886,10 +872,10 @@
             this.thumbNailView.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.thumbNailView.ForeColor = System.Drawing.SystemColors.InfoText;
             this.thumbNailView.LargeImageList = this.thumbNailList;
-            this.thumbNailView.Location = new System.Drawing.Point(4, 34);
-            this.thumbNailView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.thumbNailView.Location = new System.Drawing.Point(3, 27);
+            this.thumbNailView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.thumbNailView.Name = "thumbNailView";
-            this.thumbNailView.Size = new System.Drawing.Size(277, 778);
+            this.thumbNailView.Size = new System.Drawing.Size(208, 617);
             this.thumbNailView.TabIndex = 2;
             this.thumbNailView.UseCompatibleStateImageBehavior = false;
             this.thumbNailView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.thumbNailView_MouseDoubleClick);
@@ -901,24 +887,24 @@
             this.toolStripSeparator9,
             this.削除DToolStripMenuItem});
             this.thumbNailContextMenuStrip.Name = "thumbNailContextMenuStrip";
-            this.thumbNailContextMenuStrip.Size = new System.Drawing.Size(165, 88);
+            this.thumbNailContextMenuStrip.Size = new System.Drawing.Size(143, 54);
             // 
             // 撮り直しRToolStripMenuItem
             // 
             this.撮り直しRToolStripMenuItem.Name = "撮り直しRToolStripMenuItem";
-            this.撮り直しRToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.撮り直しRToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.撮り直しRToolStripMenuItem.Text = "撮り直し(&R)";
             this.撮り直しRToolStripMenuItem.Click += new System.EventHandler(this.撮り直しRToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(139, 6);
             // 
             // 削除DToolStripMenuItem
             // 
             this.削除DToolStripMenuItem.Name = "削除DToolStripMenuItem";
-            this.削除DToolStripMenuItem.Size = new System.Drawing.Size(164, 28);
+            this.削除DToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.削除DToolStripMenuItem.Text = "削除(&D)";
             this.削除DToolStripMenuItem.Click += new System.EventHandler(this.削除DToolStripMenuItem_Click);
             // 
@@ -937,10 +923,10 @@
             this.textBox.HighlightsCurrentLine = false;
             this.textBox.Image = ((System.Collections.Generic.Dictionary<string, System.Drawing.Bitmap>)(resources.GetObject("textBox.Image")));
             this.textBox.LinePadding = 30;
-            this.textBox.Location = new System.Drawing.Point(0, 34);
-            this.textBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox.Location = new System.Drawing.Point(0, 28);
+            this.textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(670, 782);
+            this.textBox.Size = new System.Drawing.Size(502, 619);
             this.textBox.TabIndex = 1;
             this.textBox.TabWidth = 4;
             this.textBox.ViewWidth = 4153;
@@ -950,10 +936,9 @@
             this.panel3.Controls.Add(this.textBox);
             this.panel3.Controls.Add(this.showScreenshotCheckBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(416, 106);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Location = new System.Drawing.Point(312, 86);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(670, 816);
+            this.panel3.Size = new System.Drawing.Size(502, 647);
             this.panel3.TabIndex = 20;
             // 
             // showScreenshotCheckBox
@@ -966,21 +951,47 @@
             this.showScreenshotCheckBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.showScreenshotCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
             this.showScreenshotCheckBox.Location = new System.Drawing.Point(0, 0);
-            this.showScreenshotCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.showScreenshotCheckBox.Name = "showScreenshotCheckBox";
-            this.showScreenshotCheckBox.Size = new System.Drawing.Size(670, 34);
+            this.showScreenshotCheckBox.Size = new System.Drawing.Size(502, 28);
             this.showScreenshotCheckBox.TabIndex = 2;
             this.showScreenshotCheckBox.Text = "画像を表示";
             this.showScreenshotCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.showScreenshotCheckBox.UseVisualStyleBackColor = false;
             this.showScreenshotCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // スローモーションで実行RToolStripMenuItem
+            // 
+            this.スローモーションで実行RToolStripMenuItem.Image = global::SukuSuku.Properties.Resources.PlaySlowly;
+            this.スローモーションで実行RToolStripMenuItem.Name = "スローモーションで実行RToolStripMenuItem";
+            this.スローモーションで実行RToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.スローモーションで実行RToolStripMenuItem.Size = new System.Drawing.Size(285, 28);
+            this.スローモーションで実行RToolStripMenuItem.Text = "スローモーションで実行";
+            this.スローモーションで実行RToolStripMenuItem.Click += new System.EventHandler(this.スローモーションで実行RToolStripMenuItem_Click);
+            // 
+            // runSlowlyButton
+            // 
+            this.runSlowlyButton.AutoSize = false;
+            this.runSlowlyButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.runSlowlyButton.Image = global::SukuSuku.Properties.Resources.PlaySlowly;
+            this.runSlowlyButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.runSlowlyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runSlowlyButton.Name = "runSlowlyButton";
+            this.runSlowlyButton.Size = new System.Drawing.Size(50, 50);
+            this.runSlowlyButton.Text = "スローモーションで実行";
+            this.runSlowlyButton.ToolTipText = "スローモーションで実行";
+            this.runSlowlyButton.Click += new System.EventHandler(this.スローモーションで実行RToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 54);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(1371, 944);
+            this.ClientSize = new System.Drawing.Size(1028, 755);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -990,7 +1001,7 @@
             this.Controls.Add(this.statusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MainForm";
             this.Text = "すくすく";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -1103,6 +1114,9 @@
         private System.Windows.Forms.ToolStripMenuItem 撮り直しRToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem 削除DToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem スローモーションで実行RToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton runSlowlyButton;
     }
 }
 

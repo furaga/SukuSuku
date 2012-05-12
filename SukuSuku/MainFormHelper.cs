@@ -16,9 +16,7 @@ namespace SukuSuku
 {
     public partial class MainForm : Form
     {
-        /// <summary>
-        /// 変数宣言
-        /// </summary>
+        // 変数宣言
         string dirName = null;
         string orgText = ""; // 編集を始めた時点でのテキストボックスの内容
         Dictionary<string, Bitmap> templateBMPs = new Dictionary<string, Bitmap>();
@@ -321,6 +319,64 @@ namespace SukuSuku
         //----------------------------------------------------------------------
         // 実行
         //----------------------------------------------------------------------
+
+        void SetPlayButtons(bool startPlaying)
+        {
+            if (startPlaying)
+            {
+                実行RToolStripMenuItem1.Enabled = false;
+                スローモーションで実行RToolStripMenuItem.Enabled = false;
+                停止SToolStripMenuItem.Enabled = true; 
+                runButton.Enabled = false;
+            }
+            else
+            {
+                実行RToolStripMenuItem1.Enabled = true;
+                スローモーションで実行RToolStripMenuItem.Enabled = true;
+                停止SToolStripMenuItem.Enabled = false;
+                runButton.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// スクリプトを実行する
+        /// </summary>
+        void Run()
+        {
+            // 実行中のスレッドは殺す
+            if (thread != null && thread.IsAlive) thread.Abort();
+
+            // スレッドを新しく作る
+            thread = new System.Threading.Thread(() =>
+            {
+                try
+                {
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(true);
+                        toolStripStatusLabel.Text = "実行開始";
+                    }));
+                    engine.Execute(textBox.Text, scope);
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(false);
+                        toolStripStatusLabel.Text = "正常終了";
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(false);
+                        MessageBox.Show(ex.ToString());
+                        toolStripStatusLabel.Text = "異常終了";
+                    }));
+                }
+            });
+
+            // スレッド開始
+            thread.Start();
+        }
 
         /// <summary>
         /// rectの領域内のスクリーンショットを撮ってbitmapデータを返す
