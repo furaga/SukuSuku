@@ -463,28 +463,25 @@ namespace SukuSuku
                 var stopwatch2 = new System.Diagnostics.Stopwatch();
                 stopwatch2.Start();
 #endif
-                var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
-                var target = BitmapConverter.ToIplImage(bmp);
+                // ビットマップ・IplImageは明示的に開放しないとメモリリークする
+                using (var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds))
+                using (var target = BitmapConverter.ToIplImage(bmp))
                 // 縮小した画像を用意する
                 using (var small_target = new IplImage((int)(target.Size.Width * ratio), (int)(target.Size.Height * ratio), target.Depth, target.NChannels))
+                using (var small_tmpl = new IplImage((int)(tmpl.Size.Width * ratio), (int)(tmpl.Size.Height * ratio), tmpl.Depth, tmpl.NChannels))
                 {
-                    using (var small_tmpl = new IplImage((int)(tmpl.Size.Width * ratio), (int)(tmpl.Size.Height * ratio), tmpl.Depth, tmpl.NChannels))
+                    // 小さすぎたらマッチングは行わない
+                    if (small_tmpl.Width <= 0 || small_tmpl.Height <= 0) continue;
+
+                    target.Resize(small_target);
+                    tmpl.Resize(small_tmpl);
+
+                    // マッチング
+                    var dstSize = new CvSize(small_target.Width - small_tmpl.Width + 1, small_target.Height - small_tmpl.Height + 1);
+                    using (var dst = Cv.CreateImage(dstSize, BitDepth.F32, 1))
                     {
-
-                        // 小さすぎたらマッチングは行わない
-                        if (small_tmpl.Width <= 0 || small_tmpl.Height <= 0) continue;
-
-                        target.Resize(small_target);
-                        tmpl.Resize(small_tmpl);
-
-                        // マッチング
-                        var dstSize = new CvSize(small_target.Width - small_tmpl.Width + 1, small_target.Height - small_tmpl.Height + 1);
-                        using (var dst = Cv.CreateImage(dstSize, BitDepth.F32, 1))
-                        {
-
-                            Cv.MatchTemplate(small_target, small_tmpl, dst, MatchTemplateMethod.CCoeffNormed);
-                            Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
-                        }
+                        Cv.MatchTemplate(small_target, small_tmpl, dst, MatchTemplateMethod.CCoeffNormed);
+                        Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
                     }
                 }
 #if DEBUG
