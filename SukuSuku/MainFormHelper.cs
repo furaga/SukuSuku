@@ -86,9 +86,8 @@ namespace SukuSuku
 
         void AddScreenshot(string imageKey, Bitmap bmp)
         {
-            if (thumbNailList.Images.ContainsKey(imageKey)) thumbNailList.Images.RemoveByKey(imageKey);
+            var index = thumbNailList.Images.Count;
             thumbNailList.Images.Add(imageKey, createThumbnail(bmp));
-            var index = thumbNailList.Images.Count - 1; 
             if (thumbNailView.Items.ContainsKey(imageKey))
             {
                 thumbNailView.Items[imageKey].ImageIndex = index;
@@ -364,16 +363,15 @@ namespace SukuSuku
                     Invoke((Action)(() =>
                     {
                         SetPlayButtons(false);
-                        // 強制終了のときはメッセージボックスは表示しない
-                        toolStripStatusLabel.Text = "強制終了されました";
+                        toolStripStatusLabel.Text = "異常終了";
                     }));
                 }
                 catch (Exception ex)
                 {
+                    MessageBox.Show(ex.ToString());
                     Invoke((Action)(() =>
                     {
                         SetPlayButtons(false);
-                        MessageBox.Show(ex.ToString());
                         toolStripStatusLabel.Text = "異常終了";
                     }));
                 }
@@ -443,9 +441,7 @@ namespace SukuSuku
             var stopwatch = new System.Diagnostics.Stopwatch();
             stopwatch.Start();
 
-            // 比較する2つの画像を用意
-            //var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
-            //var target = BitmapConverter.ToIplImage(bmp);
+            // テンプレート画像を用意
             var tmpl = templates[imageName];
 
             // 画像マッチング
@@ -456,13 +452,13 @@ namespace SukuSuku
             // 期待値的に高速になるはず
             var invratio = 1.0;
 
-            foreach (var ratio in new[] { 0.25, 0.5/*, 0.75*/, 1.0 })
+            foreach (var ratio in new[] { 0.5/*, 0.5, 0.75*/, 1.0 })
             {
-#if DEBUG
+//#if DEBUG
                 Console.Write("[ratio = " + ratio + "] "); 
                 var stopwatch2 = new System.Diagnostics.Stopwatch();
                 stopwatch2.Start();
-#endif
+//#endif
                 // ビットマップ・IplImageは明示的に開放しないとメモリリークする
                 using (var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds))
                 using (var target = BitmapConverter.ToIplImage(bmp))
@@ -484,10 +480,10 @@ namespace SukuSuku
                         Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
                     }
                 }
-#if DEBUG
+//#if DEBUG
                 stopwatch2.Stop(); 
                 Console.WriteLine("max_val = " + max_val + "(" + stopwatch2.Elapsed.TotalSeconds + " s)");
-#endif
+//#endif
                 invratio = 1 / ratio;
 
                 // 閾値以上のマッチ率が得られたら打ち切る
@@ -496,14 +492,14 @@ namespace SukuSuku
 
             // 時間計測終了
             stopwatch.Stop();
-#if DEBUG
+//#if DEBUG
             Console.WriteLine("Ellapsed Time = " + stopwatch.Elapsed.TotalSeconds + " s");
             //Console.WriteLine("min_val = " + min_val);
             //Console.WriteLine("min_loc = " + min_loc);
             Console.WriteLine("max_val = " + max_val);
             //Console.WriteLine("max_loc = " + max_loc);
             Console.WriteLine("");
-#endif
+//#endif
 
             // max_valがthresholdを超えなければマッチしなかったと判断する
             if (threshold > max_val)

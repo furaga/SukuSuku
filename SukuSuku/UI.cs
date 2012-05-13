@@ -49,7 +49,7 @@ namespace SukuSuku
             //var rect = owner.findTemplate(imageName, threshold);
 
             // 見つかるまで待つ
-            var rect = wait(imageName, 100, threshold);
+            var rect = wait(imageName, -1, threshold);
             if (rect == Rectangle.Empty) return null;
 
             var x = (rect.Left + rect.Right) / 2;
@@ -63,30 +63,6 @@ namespace SukuSuku
         {
             SendKeys.SendWait("^");
             System.Threading.Thread.Sleep(800);
-            /*
-            //using (var form = new Form())
-            {
-                form.Opacity = 0;
-                form.FormBorderStyle = FormBorderStyle.None;
-                form.BackColor = Color.Black;
-                
-                if (form.WindowState == FormWindowState.Maximized)
-                {
-                    form.WindowState = FormWindowState.Normal;
-                }
-                form.WindowState = FormWindowState.Maximized;
-
-
-                form.Show(); 
-                using (var g = form.CreateGraphics())
-                {
-//                    g.Clear(Color.Black);
-                    g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(0, 0, 100, 100));
-                }
-
-  //              form.Refresh();
-            }
-            */
         }
 
         // クリック系のテンプレート関数
@@ -220,7 +196,7 @@ namespace SukuSuku
         public void type(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); type(text); }
 
         // 貼り付け
-        public void paste(string text) { Clipboard.SetText(text); type("^v"); }
+        public void paste(string text) { owner.Invoke((Action)(() => Clipboard.SetText(text))); type("^v"); }
         public void paste(int x, int y, string text) { leftClick(x, y); paste(text); }
         public void paste(Rectangle rect, string text) { paste(rect.X + rect.Width / 2, rect.Y + rect.Height / 2, text); }
         public void paste(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); paste(text); }
@@ -228,19 +204,20 @@ namespace SukuSuku
         //-----------------------------------------------------------------------------------------
 
         // 画像が見つかるまで待機（ポーリング）
+        // timeoutが負数だったらタイムアウトしない
         public Rectangle wait(string imageName, int timeout = 100, double threshold = -1)
         {
             timeout *= 1000;
             var sw = new Stopwatch();
             var rect = Rectangle.Empty;
-            while (sw.ElapsedMilliseconds < timeout)
+            while (timeout < 0 || sw.ElapsedMilliseconds < timeout)
             {
                 sw.Start();
                 // 見つかったら脱出
                 if ((rect = owner.findTemplate(imageName, threshold, false)) != Rectangle.Empty) break;
                 sw.Stop();
             }
-            if (rect == Rectangle.Empty) MessageBox.Show(owner, "画像 " + imageName + " はスクリーン内で見つかりませんでした。");
+            if (rect == Rectangle.Empty) MessageBox.Show("画像 " + imageName + " はスクリーン内で見つかりませんでした。");
             return rect;
         }
 
@@ -256,7 +233,7 @@ namespace SukuSuku
                 if (owner.findTemplate(imageName, threshold, false) == Rectangle.Empty) return;
                 sw.Stop();
             }
-            MessageBox.Show(owner, "画像 " + imageName + " はスクリーンから消えませんでした");
+            MessageBox.Show("画像 " + imageName + " はスクリーンから消えませんでした");
         }
 
         //-----------------------------------------------------------------------------------------
@@ -271,5 +248,7 @@ namespace SukuSuku
         // imageNameで撮影した画像名を指定できる。既存の画像を上書きしたいときに使う
         public string capture(Rectangle rect, string imageName = null) { return owner.takeScreenshot(rect, imageName); }
         public string capture(int x, int y, int w, int h, string imageName = null) { return capture(new Rectangle(x, y, w ,h), imageName); }
+
+        public void messageBox(string text) { MessageBox.Show(text); }
     }
 }

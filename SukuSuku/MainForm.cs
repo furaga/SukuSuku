@@ -21,6 +21,27 @@ namespace SukuSuku
         System.Threading.Thread thread;
         UI ui;
 
+        // ホットキー登録用
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int UnregisterHotKey(IntPtr hWnd, int id);
+
+        public const int WM_HOTKEY = 0x312;
+
+        public const uint MOD_ALT = 0x1;
+        public const uint MOD_CONTROL = 0x2;
+        public const uint MOD_SHIFT = 0x4;
+        public const uint MOD_WIN = 0x8;
+        // Windows 7 以降
+        public const uint MOD_NOREPEAT = 0x4000;
+
+        private uint hotKeyModifiers;
+        private uint hotKeyKey;
+        private int hotKeyId;
+        private IntPtr hotKeyLParam;
+
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +62,53 @@ namespace SukuSuku
             scope = engine.CreateScope();
             scope.SetVariable("ui", ui);
 
+
+            // Ctrl + R で今表示されているスクリプトを実行
+            this.hotKeyModifiers = MOD_CONTROL;
+            this.hotKeyKey = Convert.ToUInt32(Keys.R);
+            this.hotKeyId = Convert.ToInt32((hotKeyModifiers * 0x100) | hotKeyKey);
+            this.hotKeyLParam = new IntPtr(hotKeyModifiers | ((int)Keys.R * 0x10000));
+            RegisterHotKey(this.Handle, hotKeyId, hotKeyModifiers, hotKeyKey);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (thread != null && thread.IsAlive)
+            {
+                e.Cancel = true;
+                MessageBox.Show("実行を停止してからウインドウを閉じてください");
+            }
+
+            if (notifyIcon.Visible)
+            {
+                //e.Cancel = true;
+                //Hide();
+            }
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            Show();
+            Activate();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            notifyIcon.Visible = false;
+            UnregisterHotKey(this.Handle, hotKeyId);
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_HOTKEY)
+            {
+                if (m.LParam == this.hotKeyLParam)
+                {
+                    ui.slowPlayFlag = true;
+                    Run();
+                }
+            }
+            base.WndProc(ref m);
         }
 
         //----------------------------------------------------------------------
@@ -235,32 +303,6 @@ namespace SukuSuku
             findDialog.FindString = textBox.GetSelectedText();
             findDialog.Hide();
             findDialog.Show(this);
-        }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (thread != null && thread.IsAlive)
-            {
-                e.Cancel = true;
-                MessageBox.Show("実行を停止してからウインドウを閉じてください");
-            }
-
-            if (notifyIcon.Visible)
-            {
-                //e.Cancel = true;
-                //Hide();
-            }
-        }
-
-        private void notifyIcon_Click(object sender, EventArgs e)
-        {
-            Show();
-            Activate();
-        }
-
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            notifyIcon.Visible = false;
         }
     }
 }
