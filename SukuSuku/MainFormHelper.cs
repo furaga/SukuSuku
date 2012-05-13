@@ -86,8 +86,9 @@ namespace SukuSuku
 
         void AddScreenshot(string imageKey, Bitmap bmp)
         {
-            var index = thumbNailList.Images.Count;
+            if (thumbNailList.Images.ContainsKey(imageKey)) thumbNailList.Images.RemoveByKey(imageKey);
             thumbNailList.Images.Add(imageKey, createThumbnail(bmp));
+            var index = thumbNailList.Images.Count - 1; 
             if (thumbNailView.Items.ContainsKey(imageKey))
             {
                 thumbNailView.Items[imageKey].ImageIndex = index;
@@ -322,20 +323,13 @@ namespace SukuSuku
 
         void SetPlayButtons(bool startPlaying)
         {
-            if (startPlaying)
-            {
-                実行RToolStripMenuItem1.Enabled = false;
-                スローモーションで実行RToolStripMenuItem.Enabled = false;
-                停止SToolStripMenuItem.Enabled = true; 
-                runButton.Enabled = false;
-            }
-            else
-            {
-                実行RToolStripMenuItem1.Enabled = true;
-                スローモーションで実行RToolStripMenuItem.Enabled = true;
-                停止SToolStripMenuItem.Enabled = false;
-                runButton.Enabled = true;
-            }
+            実行RToolStripMenuItem1.Enabled =
+            スローモーションで実行RToolStripMenuItem.Enabled =
+            runButton.Enabled =
+            runSlowlyButton.Enabled = !startPlaying;
+
+            停止SToolStripMenuItem.Enabled =
+            stopButton.Enabled = startPlaying;
         }
 
         /// <summary>
@@ -356,11 +350,22 @@ namespace SukuSuku
                         SetPlayButtons(true);
                         toolStripStatusLabel.Text = "実行開始";
                     }));
+
                     engine.Execute(textBox.Text, scope);
+
                     Invoke((Action)(() =>
                     {
                         SetPlayButtons(false);
                         toolStripStatusLabel.Text = "正常終了";
+                    }));
+                }
+                catch (System.Threading.ThreadAbortException ex)
+                {
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(false);
+                        // 強制終了のときはメッセージボックスは表示しない
+                        toolStripStatusLabel.Text = "強制終了されました";
                     }));
                 }
                 catch (Exception ex)
@@ -402,11 +407,15 @@ namespace SukuSuku
         ///  rectの領域内のスクリーンショットを撮って保存
         /// </summary>
         /// <param name="rect"></param>
-        public string takeScreenshot(Rectangle rect)
+        public string takeScreenshot(Rectangle rect, string defaultImageName = null)
         {
             var bmp = GetScreenshotBmp(rect);
-            var imageName = GetImageName();
-            AddScreenshot(imageName, bmp);
+            var imageName = defaultImageName ?? GetImageName();
+            Invoke((Action)(() =>
+            {
+                AddScreenshot(imageName, bmp);
+                textBox.Refresh();
+            }));
             return imageName;
         }
 
@@ -435,8 +444,8 @@ namespace SukuSuku
             stopwatch.Start();
 
             // 比較する2つの画像を用意
-            var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
-            var target = BitmapConverter.ToIplImage(bmp);
+            //var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
+            //var target = BitmapConverter.ToIplImage(bmp);
             var tmpl = templates[imageName];
 
             // 画像マッチング
@@ -446,6 +455,7 @@ namespace SukuSuku
             // 異なる解像度の画像を用意し小さい方から順に試していく
             // 期待値的に高速になるはず
             var invratio = 1.0;
+
             foreach (var ratio in new[] { 0.25, 0.5/*, 0.75*/, 1.0 })
             {
 #if DEBUG
@@ -453,22 +463,29 @@ namespace SukuSuku
                 var stopwatch2 = new System.Diagnostics.Stopwatch();
                 stopwatch2.Start();
 #endif
+                var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds);
+                var target = BitmapConverter.ToIplImage(bmp);
                 // 縮小した画像を用意する
-                var small_target = new IplImage((int)(target.Size.Width * ratio), (int)(target.Size.Height * ratio), target.Depth, target.NChannels);
-                var small_tmpl = new IplImage((int)(tmpl.Size.Width * ratio), (int)(tmpl.Size.Height * ratio), tmpl.Depth, tmpl.NChannels);
-
-                // 小さすぎたらマッチングは行わない
-                if (small_tmpl.Width <= 0 || small_tmpl.Height <= 0) continue;
-
-                target.Resize(small_target);
-                tmpl.Resize(small_tmpl);
-
-                // マッチング
-                var dstSize = new CvSize(small_target.Width - small_tmpl.Width + 1, small_target.Height - small_tmpl.Height + 1);
-                using (var dst = Cv.CreateImage(dstSize, BitDepth.F32, 1))
+                using (var small_target = new IplImage((int)(target.Size.Width * ratio), (int)(target.Size.Height * ratio), target.Depth, target.NChannels))
                 {
-                    Cv.MatchTemplate(small_target, small_tmpl, dst, MatchTemplateMethod.CCoeffNormed);
-                    Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
+                    using (var small_tmpl = new IplImage((int)(tmpl.Size.Width * ratio), (int)(tmpl.Size.Height * ratio), tmpl.Depth, tmpl.NChannels))
+                    {
+
+                        // 小さすぎたらマッチングは行わない
+                        if (small_tmpl.Width <= 0 || small_tmpl.Height <= 0) continue;
+
+                        target.Resize(small_target);
+                        tmpl.Resize(small_tmpl);
+
+                        // マッチング
+                        var dstSize = new CvSize(small_target.Width - small_tmpl.Width + 1, small_target.Height - small_tmpl.Height + 1);
+                        using (var dst = Cv.CreateImage(dstSize, BitDepth.F32, 1))
+                        {
+
+                            Cv.MatchTemplate(small_target, small_tmpl, dst, MatchTemplateMethod.CCoeffNormed);
+                            Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
+                        }
+                    }
                 }
 #if DEBUG
                 stopwatch2.Stop(); 

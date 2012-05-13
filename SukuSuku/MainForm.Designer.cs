@@ -55,6 +55,7 @@
             this.検索FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.実行RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.実行RToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.スローモーションで実行RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.停止SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.表示VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.フォントの設定FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +78,10 @@
             this.button10 = new System.Windows.Forms.Button();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.screenshotButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.runButton = new System.Windows.Forms.ToolStripButton();
+            this.runSlowlyButton = new System.Windows.Forms.ToolStripButton();
+            this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -86,6 +90,9 @@
             this.fontDialog = new System.Windows.Forms.FontDialog();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
@@ -95,6 +102,8 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.thresholdUpDown = new System.Windows.Forms.NumericUpDown();
             this.autoChapCheckBox = new System.Windows.Forms.CheckBox();
@@ -108,9 +117,7 @@
             this.textBox = new Sgry.Azuki.Windows.AzukiControl();
             this.panel3 = new System.Windows.Forms.Panel();
             this.showScreenshotCheckBox = new System.Windows.Forms.CheckBox();
-            this.スローモーションで実行RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.runSlowlyButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -124,6 +131,8 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.flowLayoutPanel5.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).BeginInit();
             this.panel2.SuspendLayout();
@@ -144,7 +153,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1028, 32);
+            this.menuStrip.Size = new System.Drawing.Size(1091, 32);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -347,9 +356,19 @@
             this.実行RToolStripMenuItem1.Text = "実行(&R)";
             this.実行RToolStripMenuItem1.Click += new System.EventHandler(this.実行RToolStripMenuItem1_Click);
             // 
+            // スローモーションで実行RToolStripMenuItem
+            // 
+            this.スローモーションで実行RToolStripMenuItem.Image = global::SukuSuku.Properties.Resources.PlaySlowly;
+            this.スローモーションで実行RToolStripMenuItem.Name = "スローモーションで実行RToolStripMenuItem";
+            this.スローモーションで実行RToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
+            this.スローモーションで実行RToolStripMenuItem.Size = new System.Drawing.Size(285, 28);
+            this.スローモーションで実行RToolStripMenuItem.Text = "スローモーションで実行";
+            this.スローモーションで実行RToolStripMenuItem.Click += new System.EventHandler(this.スローモーションで実行RToolStripMenuItem_Click);
+            // 
             // 停止SToolStripMenuItem
             // 
             this.停止SToolStripMenuItem.Enabled = false;
+            this.停止SToolStripMenuItem.Image = global::SukuSuku.Properties.Resources.Stop;
             this.停止SToolStripMenuItem.Name = "停止SToolStripMenuItem";
             this.停止SToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F5)));
             this.停止SToolStripMenuItem.Size = new System.Drawing.Size(285, 28);
@@ -408,15 +427,15 @@
             // splitter1
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 86);
-            this.splitter1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splitter1.Margin = new System.Windows.Forms.Padding(2);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(2, 647);
+            this.splitter1.Size = new System.Drawing.Size(2, 773);
             this.splitter1.TabIndex = 4;
             this.splitter1.TabStop = false;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.flowLayoutPanel1.Controls.Add(this.leftClick1);
             this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Controls.Add(this.button2);
@@ -437,7 +456,7 @@
             this.leftClick1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.leftClick1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.leftClick1.Location = new System.Drawing.Point(2, 2);
-            this.leftClick1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.leftClick1.Margin = new System.Windows.Forms.Padding(2);
             this.leftClick1.Name = "leftClick1";
             this.leftClick1.Size = new System.Drawing.Size(285, 25);
             this.leftClick1.TabIndex = 3;
@@ -454,7 +473,7 @@
             this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button3.Location = new System.Drawing.Point(2, 31);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(285, 25);
             this.button3.TabIndex = 5;
@@ -471,7 +490,7 @@
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button2.Location = new System.Drawing.Point(2, 60);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(285, 25);
             this.button2.TabIndex = 4;
@@ -488,7 +507,7 @@
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button4.Location = new System.Drawing.Point(2, 89);
-            this.button4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button4.Margin = new System.Windows.Forms.Padding(2);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(285, 25);
             this.button4.TabIndex = 6;
@@ -505,7 +524,7 @@
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button11.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button11.Location = new System.Drawing.Point(2, 118);
-            this.button11.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button11.Margin = new System.Windows.Forms.Padding(2);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(285, 25);
             this.button11.TabIndex = 13;
@@ -522,7 +541,7 @@
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button5.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button5.Location = new System.Drawing.Point(2, 2);
-            this.button5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(285, 25);
             this.button5.TabIndex = 7;
@@ -539,7 +558,7 @@
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button6.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button6.Location = new System.Drawing.Point(2, 31);
-            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(285, 25);
             this.button6.TabIndex = 8;
@@ -556,7 +575,7 @@
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button7.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button7.Location = new System.Drawing.Point(2, 60);
-            this.button7.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(285, 25);
             this.button7.TabIndex = 9;
@@ -573,7 +592,7 @@
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button8.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button8.Location = new System.Drawing.Point(2, 89);
-            this.button8.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button8.Margin = new System.Windows.Forms.Padding(2);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(285, 25);
             this.button8.TabIndex = 10;
@@ -590,7 +609,7 @@
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button9.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button9.Location = new System.Drawing.Point(2, 2);
-            this.button9.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button9.Margin = new System.Windows.Forms.Padding(2);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(285, 25);
             this.button9.TabIndex = 11;
@@ -607,7 +626,7 @@
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button10.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button10.Location = new System.Drawing.Point(2, 31);
-            this.button10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button10.Margin = new System.Windows.Forms.Padding(2);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(285, 25);
             this.button10.TabIndex = 12;
@@ -625,10 +644,11 @@
             this.screenshotButton,
             this.toolStripSeparator7,
             this.runButton,
-            this.runSlowlyButton});
+            this.runSlowlyButton,
+            this.stopButton});
             this.toolStrip.Location = new System.Drawing.Point(0, 32);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(1028, 54);
+            this.toolStrip.Size = new System.Drawing.Size(1091, 54);
             this.toolStrip.TabIndex = 6;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -644,6 +664,11 @@
             this.screenshotButton.Text = "スクリーンショットを撮る";
             this.screenshotButton.Click += new System.EventHandler(this.screenshotButton_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 54);
+            // 
             // runButton
             // 
             this.runButton.AutoSize = false;
@@ -656,15 +681,41 @@
             this.runButton.Text = "実行";
             this.runButton.Click += new System.EventHandler(this.実行RToolStripMenuItem1_Click);
             // 
+            // runSlowlyButton
+            // 
+            this.runSlowlyButton.AutoSize = false;
+            this.runSlowlyButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.runSlowlyButton.Image = global::SukuSuku.Properties.Resources.PlaySlowly;
+            this.runSlowlyButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.runSlowlyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runSlowlyButton.Name = "runSlowlyButton";
+            this.runSlowlyButton.Size = new System.Drawing.Size(50, 50);
+            this.runSlowlyButton.Text = "スローモーションで実行";
+            this.runSlowlyButton.ToolTipText = "スローモーションで実行";
+            this.runSlowlyButton.Click += new System.EventHandler(this.スローモーションで実行RToolStripMenuItem_Click);
+            // 
+            // stopButton
+            // 
+            this.stopButton.AutoSize = false;
+            this.stopButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.stopButton.Enabled = false;
+            this.stopButton.Image = global::SukuSuku.Properties.Resources.Stop;
+            this.stopButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.stopButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(50, 50);
+            this.stopButton.Text = "停止";
+            this.stopButton.Click += new System.EventHandler(this.停止SToolStripMenuItem_Click);
+            // 
             // statusStrip
             // 
             this.statusStrip.BackColor = System.Drawing.Color.Transparent;
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel});
-            this.statusStrip.Location = new System.Drawing.Point(0, 733);
+            this.statusStrip.Location = new System.Drawing.Point(0, 859);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1028, 22);
+            this.statusStrip.Size = new System.Drawing.Size(1091, 22);
             this.statusStrip.TabIndex = 7;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -689,7 +740,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.button1.Location = new System.Drawing.Point(2, 2);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(285, 25);
             this.button1.TabIndex = 11;
@@ -698,6 +749,57 @@
             this.toolTip.SetToolTip(this.button1, "画像がスクリーン上に存在するか");
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.cmdButton_Click);
+            // 
+            // button12
+            // 
+            this.button12.BackColor = System.Drawing.Color.Transparent;
+            this.button12.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button12.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button12.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button12.Location = new System.Drawing.Point(2, 31);
+            this.button12.Margin = new System.Windows.Forms.Padding(2);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(285, 25);
+            this.button12.TabIndex = 12;
+            this.button12.Text = "ui.find(image)";
+            this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.button12, "スクリーン上から画像を探す。返り値は画像とマッチしたスクリーン領域（Rectangle）");
+            this.button12.UseVisualStyleBackColor = false;
+            this.button12.Click += new System.EventHandler(this.cmdButton_Click);
+            // 
+            // button13
+            // 
+            this.button13.BackColor = System.Drawing.Color.Transparent;
+            this.button13.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button13.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button13.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button13.Location = new System.Drawing.Point(2, 2);
+            this.button13.Margin = new System.Windows.Forms.Padding(2);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(285, 25);
+            this.button13.TabIndex = 11;
+            this.button13.Text = "ui.capture(x, y, w, h)";
+            this.button13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.button13, "指定領域のスクリーンショットを取る。返り値は撮影した画像名");
+            this.button13.UseVisualStyleBackColor = false;
+            this.button13.Click += new System.EventHandler(this.cmdButton_Click);
+            // 
+            // button14
+            // 
+            this.button14.BackColor = System.Drawing.Color.Transparent;
+            this.button14.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
+            this.button14.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button14.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.button14.Location = new System.Drawing.Point(2, 31);
+            this.button14.Margin = new System.Windows.Forms.Padding(2);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(285, 25);
+            this.button14.TabIndex = 12;
+            this.button14.Text = "ui.capture(x, y, w, h, image)";
+            this.button14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.button14, "画像を指定領域のスクリーンショットで置き換える。返り値は置き換えた画像名");
+            this.button14.UseVisualStyleBackColor = false;
+            this.button14.Click += new System.EventHandler(this.cmdButton_Click);
             // 
             // groupBox1
             // 
@@ -716,22 +818,24 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(2, 86);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(310, 647);
+            this.panel1.Size = new System.Drawing.Size(329, 773);
             this.panel1.TabIndex = 18;
             // 
             // flowLayoutPanel4
             // 
-            this.flowLayoutPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(230)))), ((int)(((byte)(128)))));
+            this.flowLayoutPanel4.AutoScroll = true;
+            this.flowLayoutPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.flowLayoutPanel4.Controls.Add(this.groupBox1);
             this.flowLayoutPanel4.Controls.Add(this.groupBox4);
             this.flowLayoutPanel4.Controls.Add(this.groupBox5);
             this.flowLayoutPanel4.Controls.Add(this.groupBox6);
+            this.flowLayoutPanel4.Controls.Add(this.groupBox7);
             this.flowLayoutPanel4.Controls.Add(this.groupBox2);
             this.flowLayoutPanel4.Controls.Add(this.autoChapCheckBox);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(310, 647);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(329, 773);
             this.flowLayoutPanel4.TabIndex = 21;
             // 
             // groupBox4
@@ -747,7 +851,7 @@
             // 
             // flowLayoutPanel2
             // 
-            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.flowLayoutPanel2.Controls.Add(this.button5);
             this.flowLayoutPanel2.Controls.Add(this.button6);
             this.flowLayoutPanel2.Controls.Add(this.button7);
@@ -771,7 +875,7 @@
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.flowLayoutPanel3.Controls.Add(this.button9);
             this.flowLayoutPanel3.Controls.Add(this.button10);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -786,26 +890,49 @@
             this.groupBox6.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
             this.groupBox6.Location = new System.Drawing.Point(3, 439);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(298, 61);
+            this.groupBox6.Size = new System.Drawing.Size(293, 89);
             this.groupBox6.TabIndex = 21;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "検索";
             // 
             // flowLayoutPanel5
             // 
-            this.flowLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.flowLayoutPanel5.Controls.Add(this.button1);
+            this.flowLayoutPanel5.Controls.Add(this.button12);
             this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 27);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(292, 31);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(287, 59);
             this.flowLayoutPanel5.TabIndex = 20;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.flowLayoutPanel6);
+            this.groupBox7.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBox7.Location = new System.Drawing.Point(3, 534);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(296, 90);
+            this.groupBox7.TabIndex = 22;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "撮影";
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.flowLayoutPanel6.Controls.Add(this.button13);
+            this.flowLayoutPanel6.Controls.Add(this.button14);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 27);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(290, 60);
+            this.flowLayoutPanel6.TabIndex = 20;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.thresholdUpDown);
             this.groupBox2.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.groupBox2.Location = new System.Drawing.Point(3, 506);
+            this.groupBox2.Location = new System.Drawing.Point(3, 630);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(296, 69);
             this.groupBox2.TabIndex = 18;
@@ -814,10 +941,10 @@
             // 
             // thresholdUpDown
             // 
-            this.thresholdUpDown.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.thresholdUpDown.BackColor = System.Drawing.Color.White;
             this.thresholdUpDown.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thresholdUpDown.Location = new System.Drawing.Point(3, 27);
-            this.thresholdUpDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.thresholdUpDown.Margin = new System.Windows.Forms.Padding(2);
             this.thresholdUpDown.Name = "thresholdUpDown";
             this.thresholdUpDown.Size = new System.Drawing.Size(290, 31);
             this.thresholdUpDown.TabIndex = 1;
@@ -834,7 +961,7 @@
             this.autoChapCheckBox.Checked = true;
             this.autoChapCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.autoChapCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
-            this.autoChapCheckBox.Location = new System.Drawing.Point(3, 581);
+            this.autoChapCheckBox.Location = new System.Drawing.Point(3, 705);
             this.autoChapCheckBox.Name = "autoChapCheckBox";
             this.autoChapCheckBox.Size = new System.Drawing.Size(253, 28);
             this.autoChapCheckBox.TabIndex = 23;
@@ -846,36 +973,36 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel2.Location = new System.Drawing.Point(814, 86);
+            this.panel2.Location = new System.Drawing.Point(810, 86);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(214, 647);
+            this.panel2.Size = new System.Drawing.Size(281, 773);
             this.panel2.TabIndex = 19;
             // 
             // groupBox3
             // 
-            this.groupBox3.BackColor = System.Drawing.Color.Turquoise;
+            this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.groupBox3.Controls.Add(this.thumbNailView);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Font = new System.Drawing.Font("メイリオ", 12F, System.Drawing.FontStyle.Bold);
             this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(214, 647);
+            this.groupBox3.Size = new System.Drawing.Size(281, 773);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "スクリーンショット";
             // 
             // thumbNailView
             // 
-            this.thumbNailView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.thumbNailView.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.thumbNailView.ContextMenuStrip = this.thumbNailContextMenuStrip;
             this.thumbNailView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.thumbNailView.Font = new System.Drawing.Font("ＭＳ ゴシック", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.thumbNailView.ForeColor = System.Drawing.SystemColors.InfoText;
             this.thumbNailView.LargeImageList = this.thumbNailList;
             this.thumbNailView.Location = new System.Drawing.Point(3, 27);
-            this.thumbNailView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.thumbNailView.Margin = new System.Windows.Forms.Padding(2);
             this.thumbNailView.Name = "thumbNailView";
-            this.thumbNailView.Size = new System.Drawing.Size(208, 617);
+            this.thumbNailView.Size = new System.Drawing.Size(275, 743);
             this.thumbNailView.TabIndex = 2;
             this.thumbNailView.UseCompatibleStateImageBehavior = false;
             this.thumbNailView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.thumbNailView_MouseDoubleClick);
@@ -924,9 +1051,9 @@
             this.textBox.Image = ((System.Collections.Generic.Dictionary<string, System.Drawing.Bitmap>)(resources.GetObject("textBox.Image")));
             this.textBox.LinePadding = 30;
             this.textBox.Location = new System.Drawing.Point(0, 28);
-            this.textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox.Margin = new System.Windows.Forms.Padding(2);
             this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(502, 619);
+            this.textBox.Size = new System.Drawing.Size(479, 745);
             this.textBox.TabIndex = 1;
             this.textBox.TabWidth = 4;
             this.textBox.ViewWidth = 4153;
@@ -936,9 +1063,9 @@
             this.panel3.Controls.Add(this.textBox);
             this.panel3.Controls.Add(this.showScreenshotCheckBox);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(312, 86);
+            this.panel3.Location = new System.Drawing.Point(331, 86);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(502, 647);
+            this.panel3.Size = new System.Drawing.Size(479, 773);
             this.panel3.TabIndex = 20;
             // 
             // showScreenshotCheckBox
@@ -952,46 +1079,26 @@
             this.showScreenshotCheckBox.Font = new System.Drawing.Font("メイリオ", 12F);
             this.showScreenshotCheckBox.Location = new System.Drawing.Point(0, 0);
             this.showScreenshotCheckBox.Name = "showScreenshotCheckBox";
-            this.showScreenshotCheckBox.Size = new System.Drawing.Size(502, 28);
+            this.showScreenshotCheckBox.Size = new System.Drawing.Size(479, 28);
             this.showScreenshotCheckBox.TabIndex = 2;
             this.showScreenshotCheckBox.Text = "画像を表示";
             this.showScreenshotCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.showScreenshotCheckBox.UseVisualStyleBackColor = false;
             this.showScreenshotCheckBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // スローモーションで実行RToolStripMenuItem
+            // notifyIcon
             // 
-            this.スローモーションで実行RToolStripMenuItem.Image = global::SukuSuku.Properties.Resources.PlaySlowly;
-            this.スローモーションで実行RToolStripMenuItem.Name = "スローモーションで実行RToolStripMenuItem";
-            this.スローモーションで実行RToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F7;
-            this.スローモーションで実行RToolStripMenuItem.Size = new System.Drawing.Size(285, 28);
-            this.スローモーションで実行RToolStripMenuItem.Text = "スローモーションで実行";
-            this.スローモーションで実行RToolStripMenuItem.Click += new System.EventHandler(this.スローモーションで実行RToolStripMenuItem_Click);
-            // 
-            // runSlowlyButton
-            // 
-            this.runSlowlyButton.AutoSize = false;
-            this.runSlowlyButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.runSlowlyButton.Image = global::SukuSuku.Properties.Resources.PlaySlowly;
-            this.runSlowlyButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.runSlowlyButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.runSlowlyButton.Name = "runSlowlyButton";
-            this.runSlowlyButton.Size = new System.Drawing.Size(50, 50);
-            this.runSlowlyButton.Text = "スローモーションで実行";
-            this.runSlowlyButton.ToolTipText = "スローモーションで実行";
-            this.runSlowlyButton.Click += new System.EventHandler(this.スローモーションで実行RToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 54);
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "すくすく";
+            this.notifyIcon.Visible = true;
+            this.notifyIcon.Click += new System.EventHandler(this.notifyIcon_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.ClientSize = new System.Drawing.Size(1028, 755);
+            this.ClientSize = new System.Drawing.Size(1091, 881);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -1001,9 +1108,11 @@
             this.Controls.Add(this.statusStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "すくすく";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -1022,6 +1131,8 @@
             this.flowLayoutPanel3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.flowLayoutPanel5.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.flowLayoutPanel6.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.thresholdUpDown)).EndInit();
             this.panel2.ResumeLayout(false);
@@ -1117,6 +1228,13 @@
         private System.Windows.Forms.ToolStripMenuItem スローモーションで実行RToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripButton runSlowlyButton;
+        private System.Windows.Forms.ToolStripButton stopButton;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
+        private System.Windows.Forms.NotifyIcon notifyIcon;
     }
 }
 

@@ -58,7 +58,7 @@ namespace SukuSuku
             return new Point(x, y);
         }
 
-//        Form form = new Form();
+        //        Form form = new Form();
         void HighlightPoint(int x, int y)
         {
             SendKeys.SendWait("^");
@@ -128,6 +128,8 @@ namespace SukuSuku
         //
         //-----------------------------------------------------------------------------------------
 
+        //-----------------------------------------------------------------------------------------
+        
         // 左クリック
         public void leftClick(int x, int y) { click(x, y, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 1); }
         public void leftClick(Rectangle rect) { leftClick(rect.X + rect.Width / 2, rect.Y + rect.Height / 2); }
@@ -143,9 +145,7 @@ namespace SukuSuku
         public void doubleClick(Rectangle rect) { doubleClick(rect.X + rect.Width / 2, rect.Y + rect.Height / 2); }
         public void doubleClick(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 2, threshold); }
 
-        /// <summary>
         /// マウスカーソルを移動させる
-        /// </summary>
         public void mouseMove(int x, int y)
         {
             double v = 1000;
@@ -179,6 +179,40 @@ namespace SukuSuku
             mouseMove(pos.Value.X, pos.Value.Y);
         }
 
+        // ドラッグアンドドロップ
+        public void dragAndDrop(int x1, int y1, int x2, int y2)
+        {
+            // マウスカーソルを(x1, y1)にセット
+            mouseMove(x1, y1);
+            System.Threading.Thread.Sleep(30);
+
+            // 左ボタンを押す
+            mouse_event((UInt32)MouseEventFlags.LEFTDOWN, 0, 0, 0, IntPtr.Zero);
+            System.Threading.Thread.Sleep(30);
+
+            // マウスカーソルを(x2, y2)の移動
+            mouseMove(x2, y2);
+            System.Threading.Thread.Sleep(30);
+
+            // 左ボタンを離す
+            mouse_event((UInt32)MouseEventFlags.LEFTUP, 0, 0, 0, IntPtr.Zero);
+            System.Threading.Thread.Sleep(30);
+        }
+
+        public void dragAndDrop(Rectangle rect1, Rectangle rect2)
+        {
+            dragAndDrop(rect1.X + rect1.Width / 2, rect1.Y + rect1.Height / 2, rect2.X + rect2.Width / 2, rect2.Y + rect2.Height / 2);
+        }
+
+        public void dragAndDrop(string imageName1, string imageName2, double threshold1 = -1, double threshold2 = -1)
+        {
+            var pos1 = findTemplatePoint(imageName1, threshold1); if (pos1 == null) return;
+            var pos2 = findTemplatePoint(imageName2, threshold2); if (pos2 == null) return;
+            dragAndDrop(pos1.Value.X, pos1.Value.Y, pos2.Value.X, pos2.Value.Y);
+        }
+
+        //-----------------------------------------------------------------------------------------
+
         // キー入力
         public void type(string text) { SendKeys.SendWait(text); }
         public void type(int x, int y, string text) { leftClick(x, y); type(text); }
@@ -191,8 +225,7 @@ namespace SukuSuku
         public void paste(Rectangle rect, string text) { paste(rect.X + rect.Width / 2, rect.Y + rect.Height / 2, text); }
         public void paste(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); paste(text); }
 
-        // 指定された画像が存在するか
-        public bool exist(string imageName, double threshold = -1) { return owner.findTemplate(imageName, threshold, false) != Rectangle.Empty; }
+        //-----------------------------------------------------------------------------------------
 
         // 画像が見つかるまで待機（ポーリング）
         public Rectangle wait(string imageName, int timeout = 100, double threshold = -1)
@@ -226,36 +259,17 @@ namespace SukuSuku
             MessageBox.Show(owner, "画像 " + imageName + " はスクリーンから消えませんでした");
         }
 
-        // ドラッグアンドドロップ
-        public void dragAndDrop(int x1, int y1, int x2, int y2)
-        {
-            // マウスカーソルを(x1, y1)にセット
-            mouseMove(x1, y1);
-            System.Threading.Thread.Sleep(30);
+        //-----------------------------------------------------------------------------------------
+        
+        // 指定された画像が存在するか
+        public bool exist(string imageName, double threshold = -1) { return owner.findTemplate(imageName, threshold, false) != Rectangle.Empty; }
+        public Rectangle find(string imageName, double threshold = -1) { return owner.findTemplate(imageName, threshold, false); }
 
-            // 左ボタンを押す
-            mouse_event((UInt32)MouseEventFlags.LEFTDOWN, 0, 0, 0, IntPtr.Zero);
-            System.Threading.Thread.Sleep(30);
+        //-----------------------------------------------------------------------------------------
 
-            // マウスカーソルを(x2, y2)の移動
-            mouseMove(x2, y2);
-            System.Threading.Thread.Sleep(30);
-            
-            // 左ボタンを離す
-            mouse_event((UInt32)MouseEventFlags.LEFTUP, 0, 0, 0, IntPtr.Zero);
-            System.Threading.Thread.Sleep(30);
-        }
-
-        public void dragAndDrop(Rectangle rect1, Rectangle rect2)
-        {
-            dragAndDrop(rect1.X + rect1.Width / 2, rect1.Y + rect1.Height / 2, rect2.X + rect2.Width / 2, rect2.Y + rect2.Height / 2);
-        }
-
-        public void dragAndDrop(string imageName1, string imageName2, double threshold1 = -1, double threshold2 = -1)
-        {
-            var pos1 = findTemplatePoint(imageName1, threshold1); if (pos1 == null) return;
-            var pos2 = findTemplatePoint(imageName2, threshold2); if (pos2 == null) return;
-            dragAndDrop(pos1.Value.X, pos1.Value.Y, pos2.Value.X, pos2.Value.Y);
-        }
+        // スクリーン上の指定された領域のスクリーンショットを取り、その画像名を返す
+        // imageNameで撮影した画像名を指定できる。既存の画像を上書きしたいときに使う
+        public string capture(Rectangle rect, string imageName = null) { return owner.takeScreenshot(rect, imageName); }
+        public string capture(int x, int y, int w, int h, string imageName = null) { return capture(new Rectangle(x, y, w ,h), imageName); }
     }
 }

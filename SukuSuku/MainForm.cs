@@ -40,6 +40,7 @@ namespace SukuSuku
             ui = new UI(this);
             scope = engine.CreateScope();
             scope.SetVariable("ui", ui);
+
         }
 
         //----------------------------------------------------------------------
@@ -234,6 +235,32 @@ namespace SukuSuku
             findDialog.FindString = textBox.GetSelectedText();
             findDialog.Hide();
             findDialog.Show(this);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (thread != null && thread.IsAlive)
+            {
+                e.Cancel = true;
+                MessageBox.Show("実行を停止してからウインドウを閉じてください");
+            }
+
+            if (notifyIcon.Visible)
+            {
+                //e.Cancel = true;
+                //Hide();
+            }
+        }
+
+        private void notifyIcon_Click(object sender, EventArgs e)
+        {
+            Show();
+            Activate();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            notifyIcon.Visible = false;
         }
     }
 }
