@@ -246,7 +246,7 @@ namespace SukuSuku
 
         // スクリーン上の指定された領域のスクリーンショットを取り、その画像名を返す
         // imageNameで撮影した画像名を指定できる。既存の画像を上書きしたいときに使う
-        public string capture(Rectangle rect, string imageName = null) { return owner.takeScreenshot(rect, imageName); }
+        public string capture(Rectangle rect, string imageName = null) { return owner.TakeAndAddScreenshot(rect, imageName); }
         public string capture(int x, int y, int w, int h, string imageName = null) { return capture(new Rectangle(x, y, w ,h), imageName); }
 
         public void messageBox(string text) { MessageBox.Show(text); }

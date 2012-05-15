@@ -53,7 +53,7 @@ namespace SukuSuku
                 if (rect.Width != 0 && rect.Height != 0)
                 {
                     this.Opacity = 0;
-                    __imageName = ((MainForm)Owner).takeScreenshot(rect);
+                    __imageName = ((MainForm)Owner).TakeAndAddScreenshot(rect);
                 }
             }
             Hide();
@@ -82,9 +82,28 @@ namespace SukuSuku
         }
 
         private string __imageName = "";
+        private Bitmap __screenshot = null;
         public string takeScreenshot(MainForm owner)
         {
-            ShowDialog(owner);
+            var visible = owner.Visible;
+            __screenshot = owner.TakeScreenshot(Screen.PrimaryScreen.Bounds);
+            using (var form = new Form())
+            {
+                if (form.WindowState == FormWindowState.Maximized)
+                {
+                    form.WindowState = FormWindowState.Normal;
+                }
+                form.FormBorderStyle = FormBorderStyle.None;
+                form.WindowState = FormWindowState.Maximized;
+                form.Paint += (sender, e) => e.Graphics.DrawImage(__screenshot, Point.Empty);
+                form.Show();
+                form.Activate();
+
+                owner.Hide();
+                ShowDialog(owner);
+            }
+            if (visible) owner.Show();
+
             return __imageName; 
         }
     }

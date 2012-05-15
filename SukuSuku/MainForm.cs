@@ -11,6 +11,7 @@ using System.Threading;
 using OpenCvSharp;
 using Sgry.Azuki;
 using Sgry.Azuki.Highlighter;
+using System.Collections.Generic;
 
 namespace SukuSuku
 {
@@ -37,10 +38,7 @@ namespace SukuSuku
         // Windows 7 以降
         public const uint MOD_NOREPEAT = 0x4000;
 
-        private uint hotKeyModifiers;
-        private uint hotKeyKey;
-        private int hotKeyId;
-        private IntPtr hotKeyLParam;
+        Dictionary<IntPtr, Action> hotKeyActions = new Dictionary<IntPtr,Action>();
 
         public MainForm()
         {
@@ -64,11 +62,26 @@ namespace SukuSuku
 
 
             // Ctrl + R で今表示されているスクリプトを実行
-            this.hotKeyModifiers = MOD_CONTROL;
-            this.hotKeyKey = Convert.ToUInt32(Keys.R);
-            this.hotKeyId = Convert.ToInt32((hotKeyModifiers * 0x100) | hotKeyKey);
-            this.hotKeyLParam = new IntPtr(hotKeyModifiers | ((int)Keys.R * 0x10000));
-            RegisterHotKey(this.Handle, hotKeyId, hotKeyModifiers, hotKeyKey);
+            var modifiers = MOD_CONTROL;
+            var key = Keys.S;
+            var lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
+            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
+            hotKeyActions[lparam] = () =>
+            {
+                ui.slowPlayFlag = true;
+                Run();
+            };
+
+            // PrintScreen で今表示されているスクリプトを実行
+            modifiers = 0;
+            key = Keys.PrintScreen;
+            lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
+            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
+            hotKeyActions[lparam] = () =>
+            {
+                var blackForm = new BlackForm();
+                blackForm.takeScreenshot(this);
+            };
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -95,19 +108,24 @@ namespace SukuSuku
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             notifyIcon.Visible = false;
-            UnregisterHotKey(this.Handle, hotKeyId);
+
+            foreach (var id in hotKeyActions.Keys)
+            {
+                UnregisterHotKey(this.Handle, (Int32)id);
+            }
         }
 
         protected override void WndProc(ref Message m)
         {
             if (m.Msg == WM_HOTKEY)
             {
-                if (m.LParam == this.hotKeyLParam)
+                hotKeyActions[m.LParam]();
+/*                if (m.LParam == this.hotKeyLParam)
                 {
                     ui.slowPlayFlag = true;
                     Run();
                 }
-            }
+*/            }
             base.WndProc(ref m);
         }
 
@@ -189,7 +207,7 @@ namespace SukuSuku
         private void screenshotButton_Click(object sender, EventArgs e)
         {
             blackForm = new BlackForm();
-            blackForm.Show(this);
+            blackForm.takeScreenshot(this);
         }
         //----------------------------------------------------------------------
         // 実行

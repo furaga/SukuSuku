@@ -50,7 +50,7 @@ namespace SukuSuku
         /// 適当な画像名を返す
         /// </summary>
         /// <returns></returns>
-        string GetImageName()
+        public string GetImageName()
         {
             int i = 0;
             while (templates.Keys.Contains(GetImageName(i))) i++;
@@ -386,7 +386,7 @@ namespace SukuSuku
         /// </summary>
         /// <param name="rect"></param>
         /// <returns></returns>
-        private Bitmap GetScreenshotBmp(Rectangle rect)
+        public Bitmap TakeScreenshot(Rectangle rect)
         {
             var size = new Size(rect.Width, rect.Height);
             var bmp = new Bitmap(size.Width, size.Height);
@@ -405,9 +405,9 @@ namespace SukuSuku
         ///  rectの領域内のスクリーンショットを撮って保存
         /// </summary>
         /// <param name="rect"></param>
-        public string takeScreenshot(Rectangle rect, string defaultImageName = null)
+        public string TakeAndAddScreenshot(Rectangle rect, string defaultImageName = null)
         {
-            var bmp = GetScreenshotBmp(rect);
+            var bmp = TakeScreenshot(rect);
             var imageName = defaultImageName ?? GetImageName();
             Invoke((Action)(() =>
             {
@@ -460,7 +460,7 @@ namespace SukuSuku
                 stopwatch2.Start();
 //#endif
                 // ビットマップ・IplImageは明示的に開放しないとメモリリークする
-                using (var bmp = GetScreenshotBmp(Screen.PrimaryScreen.Bounds))
+                using (var bmp = TakeScreenshot(Screen.PrimaryScreen.Bounds))
                 using (var target = BitmapConverter.ToIplImage(bmp))
                 // 縮小した画像を用意する
                 using (var small_target = new IplImage((int)(target.Size.Width * ratio), (int)(target.Size.Height * ratio), target.Depth, target.NChannels))
