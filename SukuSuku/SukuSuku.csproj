@@ -124,7 +124,6 @@
     <Compile Include="ShortcutForm.Designer.cs">
       <DependentUpon>ShortcutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TemplateMatching.cs" />
     <Compile Include="UI.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShortcutForm));
             this.CtrlCheckBox = new System.Windows.Forms.CheckBox();
             this.AltCheckBox = new System.Windows.Forms.CheckBox();
             this.WinCheckBox = new System.Windows.Forms.CheckBox();
@@ -39,7 +40,6 @@
             this.shortcutsDataGridView = new System.Windows.Forms.DataGridView();
             this.Command = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Scripts = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DeleteButtons = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.shortcutsDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -123,12 +123,11 @@
             this.shortcutsDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.shortcutsDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Command,
-            this.Scripts,
-            this.DeleteButtons});
-            this.shortcutsDataGridView.Location = new System.Drawing.Point(11, 136);
+            this.Scripts});
+            this.shortcutsDataGridView.Location = new System.Drawing.Point(26, 138);
             this.shortcutsDataGridView.Name = "shortcutsDataGridView";
             this.shortcutsDataGridView.RowTemplate.Height = 24;
-            this.shortcutsDataGridView.Size = new System.Drawing.Size(946, 398);
+            this.shortcutsDataGridView.Size = new System.Drawing.Size(844, 398);
             this.shortcutsDataGridView.TabIndex = 8;
             // 
             // Command
@@ -145,16 +144,11 @@
             this.Scripts.ReadOnly = true;
             this.Scripts.Width = 600;
             // 
-            // DeleteButtons
-            // 
-            this.DeleteButtons.HeaderText = "";
-            this.DeleteButtons.Name = "DeleteButtons";
-            // 
             // ShortcutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(978, 541);
+            this.ClientSize = new System.Drawing.Size(900, 565);
             this.Controls.Add(this.shortcutsDataGridView);
             this.Controls.Add(this.assignButton);
             this.Controls.Add(this.scriptPathButton);
@@ -165,6 +159,7 @@
             this.Controls.Add(this.AltCheckBox);
             this.Controls.Add(this.CtrlCheckBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ShortcutForm";
             this.Text = "ShortcutForm";
             this.Load += new System.EventHandler(this.ShortcutForm_Load);
@@ -187,6 +182,5 @@
         private System.Windows.Forms.DataGridView shortcutsDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Command;
         private System.Windows.Forms.DataGridViewTextBoxColumn Scripts;
-        private System.Windows.Forms.DataGridViewButtonColumn DeleteButtons;
     }
 }
