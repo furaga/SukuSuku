@@ -60,6 +60,8 @@
             this.表示VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.フォントの設定FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.デフォルトのフォントToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.syToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.スクリプトの登録ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ヘルプHToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.すくすくについてAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thumbNailList = new System.Windows.Forms.ImageList(this.components);
@@ -149,6 +151,7 @@
             this.編集EToolStripMenuItem,
             this.実行RToolStripMenuItem,
             this.表示VToolStripMenuItem,
+            this.syToolStripMenuItem,
             this.ヘルプHToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -401,6 +404,22 @@
             this.デフォルトのフォントToolStripMenuItem.Size = new System.Drawing.Size(286, 34);
             this.デフォルトのフォントToolStripMenuItem.Text = "デフォルトのフォント";
             this.デフォルトのフォントToolStripMenuItem.Click += new System.EventHandler(this.デフォルトのフォントToolStripMenuItem_Click);
+            // 
+            // syToolStripMenuItem
+            // 
+            this.syToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.スクリプトの登録ToolStripMenuItem});
+            this.syToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F);
+            this.syToolStripMenuItem.Name = "syToolStripMenuItem";
+            this.syToolStripMenuItem.Size = new System.Drawing.Size(205, 34);
+            this.syToolStripMenuItem.Text = "ショートカット実行";
+            // 
+            // スクリプトの登録ToolStripMenuItem
+            // 
+            this.スクリプトの登録ToolStripMenuItem.Name = "スクリプトの登録ToolStripMenuItem";
+            this.スクリプトの登録ToolStripMenuItem.Size = new System.Drawing.Size(246, 34);
+            this.スクリプトの登録ToolStripMenuItem.Text = "スクリプトの登録";
+            this.スクリプトの登録ToolStripMenuItem.Click += new System.EventHandler(this.スクリプトの登録ToolStripMenuItem_Click);
             // 
             // ヘルプHToolStripMenuItem
             // 
@@ -1262,6 +1281,8 @@
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.NotifyIcon notifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem syToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem スクリプトの登録ToolStripMenuItem;
     }
 }
 

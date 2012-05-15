@@ -11,7 +11,6 @@ using System.Threading;
 using OpenCvSharp;
 using Sgry.Azuki;
 using Sgry.Azuki.Highlighter;
-using System.Collections.Generic;
 
 namespace SukuSuku
 {
@@ -25,20 +24,17 @@ namespace SukuSuku
         // ホットキー登録用
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
-
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int UnregisterHotKey(IntPtr hWnd, int id);
-
-        public const int WM_HOTKEY = 0x312;
-
+        private const int WM_HOTKEY = 0x312;
         public const uint MOD_ALT = 0x1;
         public const uint MOD_CONTROL = 0x2;
         public const uint MOD_SHIFT = 0x4;
         public const uint MOD_WIN = 0x8;
-        // Windows 7 以降
-        public const uint MOD_NOREPEAT = 0x4000;
+        public const uint MOD_NOREPEAT = 0x4000; // Windows 7 以降
 
-        Dictionary<IntPtr, Action> hotKeyActions = new Dictionary<IntPtr,Action>();
+        Dictionary<IntPtr, Tuple<string, Action>> hotKeyActions = new Dictionary<IntPtr, Tuple<string, Action>>();
+        public Dictionary<IntPtr, Tuple<string, Action>> HotKeyActions { get { return hotKeyActions; } }
 
         public MainForm()
         {
@@ -50,7 +46,6 @@ namespace SukuSuku
             this.Close();
         }
 
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             textBox.Highlighter = Highlighters.Ruby;
@@ -60,28 +55,12 @@ namespace SukuSuku
             scope = engine.CreateScope();
             scope.SetVariable("ui", ui);
 
-
             // Ctrl + R で今表示されているスクリプトを実行
-            var modifiers = MOD_CONTROL;
-            var key = Keys.S;
-            var lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
-            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
-            hotKeyActions[lparam] = () =>
-            {
-                ui.slowPlayFlag = true;
-                Run();
-            };
-
-            // PrintScreen で今表示されているスクリプトを実行
-            modifiers = 0;
-            key = Keys.PrintScreen;
-            lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
-            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
-            hotKeyActions[lparam] = () =>
-            {
-                var blackForm = new BlackForm();
-                blackForm.takeScreenshot(this);
-            };
+            AddHotKeyAction(MOD_WIN, Keys.S, "スローモーションで実行", () => { ui.slowPlayFlag = true; Run(textBox.Text); });
+            // Ctrl + Esc で実行終了
+            AddHotKeyAction(MOD_WIN, Keys.Q, "実行停止", () => 停止SToolStripMenuItem_Click(null, null));
+            // Ctrl + RPrintScreen でスクリーンショットを撮る
+            AddHotKeyAction(MOD_CONTROL, Keys.PrintScreen, "スクリーンショットを撮る", () => new BlackForm().takeScreenshot(this));
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -119,7 +98,7 @@ namespace SukuSuku
         {
             if (m.Msg == WM_HOTKEY)
             {
-                hotKeyActions[m.LParam]();
+                hotKeyActions[m.LParam].Item2();
 /*                if (m.LParam == this.hotKeyLParam)
                 {
                     ui.slowPlayFlag = true;
@@ -217,7 +196,7 @@ namespace SukuSuku
         {
             // 通常実行
             ui.slowPlayFlag = false;
-            Run();
+            Run(textBox.Text);
         }
 
 
@@ -225,7 +204,7 @@ namespace SukuSuku
         {
             // スローモーション実行
             ui.slowPlayFlag = true;
-            Run();
+            Run(textBox.Text);
         }
 
         private void 停止SToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,6 +300,11 @@ namespace SukuSuku
             findDialog.FindString = textBox.GetSelectedText();
             findDialog.Hide();
             findDialog.Show(this);
+        }
+
+        private void スクリプトの登録ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new ShortcutForm(this).Show();
         }
     }
 }

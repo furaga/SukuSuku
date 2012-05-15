@@ -155,6 +155,18 @@ namespace SukuSuku
                 textBox.Refresh();
             }));
         }
+
+
+        void AddHotKeyAction(uint modifiers, Keys key, string text, Action action)
+        {
+            var lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
+            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
+            hotKeyActions[lparam] = new Tuple<string, Action>(text, action);
+        }
+
+        public void AddHotKeyActionByScript(uint modifiers, Keys key, string scriptName) { AddHotKeyAction(modifiers, key, scriptName, () => RunByScriptPath(scriptName)); }
+
+
         //----------------------------------------------------------------------
         // ファイル
         //----------------------------------------------------------------------
@@ -320,12 +332,20 @@ namespace SukuSuku
         // 実行
         //----------------------------------------------------------------------
 
+
         void SetPlayButtons(bool startPlaying)
         {
+            // 実行中に実行ボタンが押されたり、スクリーンショットリストの内容が変わらないようにする
             実行RToolStripMenuItem1.Enabled =
             スローモーションで実行RToolStripMenuItem.Enabled =
             runButton.Enabled =
-            runSlowlyButton.Enabled = !startPlaying;
+            runSlowlyButton.Enabled =
+            screenshotButton.Enabled =
+            スクリーンショットを撮るSToolStripMenuItem.Enabled =
+            autoChapCheckBox.Checked =
+            autoChapCheckBox.Enabled =
+            thumbNailContextMenuStrip.Enabled =
+            !startPlaying;
 
             停止SToolStripMenuItem.Enabled =
             stopButton.Enabled = startPlaying;
@@ -334,7 +354,7 @@ namespace SukuSuku
         /// <summary>
         /// スクリプトを実行する
         /// </summary>
-        void Run()
+        void Run(string sourceCode)
         {
             // 実行中のスレッドは殺す
             if (thread != null && thread.IsAlive) thread.Abort();
@@ -350,7 +370,7 @@ namespace SukuSuku
                         toolStripStatusLabel.Text = "実行開始";
                     }));
 
-                    engine.Execute(textBox.Text, scope);
+                    engine.Execute(sourceCode, scope);
 
                     Invoke((Action)(() =>
                     {
@@ -358,7 +378,7 @@ namespace SukuSuku
                         toolStripStatusLabel.Text = "正常終了";
                     }));
                 }
-                catch (System.Threading.ThreadAbortException ex)
+                catch (System.Threading.ThreadAbortException)
                 {
                     Invoke((Action)(() =>
                     {
@@ -374,6 +394,80 @@ namespace SukuSuku
                         SetPlayButtons(false);
                         toolStripStatusLabel.Text = "異常終了";
                     }));
+                }
+                finally
+                {
+                    MessageBox.Show("プロセスは終了しました");
+                }
+            });
+
+            // スレッド開始
+            thread.Start();
+        }
+
+        /// <summary>
+        /// スクリプトを実行する（スクリプトファイル指定版）
+        /// </summary>
+        /// <param name="scriptPath">実行するスクリプトのパス</param>
+        void RunByScriptPath(string scriptPath)
+        {
+            // Run()と大体同じだけど、スレッドの処理がところどころ違っていて統合しにくい
+
+            // 実行中のスレッドは殺す
+            if (thread != null && thread.IsAlive) thread.Abort();
+
+            // スレッドを新しく作る
+            thread = new System.Threading.Thread(() =>
+            {
+                var tmp = templates;
+                try
+                {
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(true);
+                        toolStripStatusLabel.Text = "実行開始";
+                    }));
+
+                    templates = new Dictionary<string, IplImage>();
+                    foreach (var fileName in Directory.GetFiles(Path.GetDirectoryName(scriptPath), "*.png"))
+                    {
+                        var bmp = GetBitmapFromFile(fileName);
+                        var imageName = Path.GetFileNameWithoutExtension(fileName);
+                        templates.Add(imageName, BitmapConverter.ToIplImage(bmp));
+                    }
+                    using (var sr = new StreamReader(scriptPath))
+                    {
+                        engine.Execute(sr.ReadToEnd(), scope);
+                    }
+
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(false);
+                        toolStripStatusLabel.Text = "正常終了";
+                    }));
+                }
+                catch (System.Threading.ThreadAbortException)
+                {
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(false);
+                        toolStripStatusLabel.Text = "異常終了";
+                    }));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                    Invoke((Action)(() =>
+                    {
+                        SetPlayButtons(false);
+                        toolStripStatusLabel.Text = "異常終了";
+                    }));
+                }
+                finally
+                {
+                    foreach (var img in templates.Values) img.Dispose();
+                    templates = tmp;
+                    MessageBox.Show(scriptPath + "は終了しました");
                 }
             });
 
