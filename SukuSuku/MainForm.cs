@@ -14,14 +14,25 @@ using Sgry.Azuki.Highlighter;
 
 namespace SukuSuku
 {
+    /// <summary>
+    /// メインフォーム
+    /// </summary>
     public partial class MainForm : Form
     {
+        //----------------------------------------------------------------------
+        // 変数宣言
+        //----------------------------------------------------------------------
+
+        // スクリプト実行
         Microsoft.Scripting.Hosting.ScriptEngine engine;
         Microsoft.Scripting.Hosting.ScriptScope scope;
         System.Threading.Thread thread;
         UI ui;
 
-        // ホットキー登録用
+        //----------------------------------------------------------------------
+
+        // ホットキー登録
+
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern int RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -36,31 +47,47 @@ namespace SukuSuku
         Dictionary<IntPtr, Tuple<string, Action>> hotKeyActions = new Dictionary<IntPtr, Tuple<string, Action>>();
         public Dictionary<IntPtr, Tuple<string, Action>> HotKeyActions { get { return hotKeyActions; } }
 
+        //----------------------------------------------------------------------
+        // 開始処理
+        //----------------------------------------------------------------------
+
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             textBox.Highlighter = Highlighters.Ruby;
-            textBox.Image = templateBMPs;
+            textBox.Images = templateBMPs;
             engine = IronRuby.Ruby.CreateEngine();
             ui = new UI(this);
             scope = engine.CreateScope();
             scope.SetVariable("ui", ui);
 
             // Ctrl + R で今表示されているスクリプトを実行
-            AddHotKeyAction(MOD_WIN, Keys.S, "スローモーションで実行", () => { ui.slowPlayFlag = true; Run(textBox.Text); });
             // Ctrl + Esc で実行終了
-            AddHotKeyAction(MOD_WIN, Keys.Q, "実行停止", () => 停止SToolStripMenuItem_Click(null, null));
             // Ctrl + RPrintScreen でスクリーンショットを撮る
+            AddHotKeyAction(MOD_WIN, Keys.S, "スローモーションで実行", () => { ui.slowPlayFlag = true; Run(textBox.Text); });
+            AddHotKeyAction(MOD_WIN, Keys.Q, "実行停止", () => 停止SToolStripMenuItem_Click(null, null));
             AddHotKeyAction(MOD_CONTROL, Keys.PrintScreen, "スクリーンショットを撮る", () => new BlackForm().takeScreenshot(this));
+        }
+
+        //----------------------------------------------------------------------
+        // 終了処理
+        //----------------------------------------------------------------------
+
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        bool closeForce = false;
+        private void 閉じるToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // タスクバーのアイコンを右クリック->「閉じる」で本当に終了する
+            closeForce = true;
+            Close();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -71,17 +98,14 @@ namespace SukuSuku
                 MessageBox.Show("実行を停止してからウインドウを閉じてください");
             }
 
+            if (closeForce) return;
+
+            // 常駐させる
             if (notifyIcon.Visible)
             {
-                //e.Cancel = true;
-                //Hide();
+                e.Cancel = true;
+                Hide();
             }
-        }
-
-        private void notifyIcon_Click(object sender, EventArgs e)
-        {
-            Show();
-            Activate();
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -94,18 +118,14 @@ namespace SukuSuku
             }
         }
 
-        protected override void WndProc(ref Message m)
+        //----------------------------------------------------------------------
+        // タスクバーのアイコンがダブルクリックされたら開く
+        //----------------------------------------------------------------------
+
+        private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
-            if (m.Msg == WM_HOTKEY)
-            {
-                hotKeyActions[m.LParam].Item2();
-/*                if (m.LParam == this.hotKeyLParam)
-                {
-                    ui.slowPlayFlag = true;
-                    Run();
-                }
-*/            }
-            base.WndProc(ref m);
+            Show();
+            Activate();
         }
 
         //----------------------------------------------------------------------
@@ -188,6 +208,7 @@ namespace SukuSuku
             blackForm = new BlackForm();
             blackForm.takeScreenshot(this);
         }
+
         //----------------------------------------------------------------------
         // 実行
         //----------------------------------------------------------------------
@@ -271,7 +292,7 @@ namespace SukuSuku
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            setTextBoxImages();
+            SetTextBoxImages();
         }
 
         private void 撮り直しRToolStripMenuItem_Click(object sender, EventArgs e)
@@ -302,9 +323,24 @@ namespace SukuSuku
             findDialog.Show(this);
         }
 
+        //----------------------------------------------------------------------
+        // スクリプト実行
+        //----------------------------------------------------------------------
+
         private void スクリプトの登録ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new ShortcutForm(this).Show();
         }
+
+        // ホットキーが押されたときの処理
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == WM_HOTKEY)
+            {
+                hotKeyActions[m.LParam].Item2();
+            }
+            base.WndProc(ref m);
+        }
+
     }
 }

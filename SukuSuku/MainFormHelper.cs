@@ -14,22 +14,58 @@ using Sgry.Azuki.Windows;
 
 namespace SukuSuku
 {
+    /// <summary>
+    /// メインフォームの補助関数群
+    /// </summary>
     public partial class MainForm : Form
     {
+        //----------------------------------------------------------------------
         // 変数宣言
-        string dirName = null;
-        string orgText = ""; // 編集を始めた時点でのテキストボックスの内容
-        Dictionary<string, Bitmap> templateBMPs = new Dictionary<string, Bitmap>();
-        Dictionary<string, IplImage> templates = new Dictionary<string, IplImage>();
-        int templateCnt = 0;
+        //----------------------------------------------------------------------
+
+        string dirName = null;  // 編集しているスクリプトのディレクトリ
+        string orgText = "";    // 編集を始めた時点でのテキストボックスの内容
+        int orgTemplateCnt = 0;    // 編集を始めた時点でのテンプレート画像の数
+
+        // 画像名とテンプレート画像の辞書
+        // マッチングのたびにBitmap => IplImageと変換するのはコストがかかりそうなのであらかじめ用意しておく
+        Dictionary<string, Bitmap> templateBMPs = new Dictionary<string, Bitmap>();     // Bitmap型
+        Dictionary<string, IplImage> templates = new Dictionary<string, IplImage>();    // IplImage型。
+
         Font defaultFontEditor = new Font("ＭＳ ゴシック", 12, System.Drawing.FontStyle.Regular); // デフォルトのエディタ用のフォント
-        Font fontEditor = new Font("ＭＳ ゴシック", 12, System.Drawing.FontStyle.Regular); // 現在のエディタのフォント
+        Font fontEditor = new Font("ＭＳ ゴシック", 12, System.Drawing.FontStyle.Regular);        // 現在のエディタのフォント
+
+
+        //----------------------------------------------------------------------
+        //
+        // 補助関数群
+        //
+        //----------------------------------------------------------------------
+
+        /// <summary>
+        /// 整数値から適当な画像名を返す
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        string GetImageName(int n) { return "image" + n; }
+
+        /// <summary>
+        /// 適当な画像名を返す
+        /// </summary>
+        /// <returns></returns>
+        public string GetImageName()
+        {
+            // "imageX"という名前でまだ使われていないXを見つける
+            int i = 0;
+            while (templates.Keys.Contains(GetImageName(i))) i++;
+            return GetImageName(i);
+        }
 
         /// <summary>
         /// 上書き可能なビットマップデータを返す
         /// 普通にnew Bitmap(path)で得られたデータを使うと上書き保存できなくなる
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">画像ファイルへのパス</param>
         /// <returns></returns>
         Bitmap GetBitmapFromFile(string path)
         {
@@ -44,50 +80,44 @@ namespace SukuSuku
             }
         }
 
-        string GetImageName(int index) { return "image" + index; }
-
-        /// <summary>
-        /// 適当な画像名を返す
-        /// </summary>
-        /// <returns></returns>
-        public string GetImageName()
-        {
-            int i = 0;
-            while (templates.Keys.Contains(GetImageName(i))) i++;
-            return GetImageName(i);
-        }
-
         /// <summary>
         /// サムネイル画像を作成
         /// </summary>
-        /// <param name="image"></param>
+        /// <param name="image">元画像</param>
         /// <returns></returns>
-        Image createThumbnail(Image image)
+        Image CreateThumbnail(Image image)
         {
             var w = thumbNailList.ImageSize.Width;
             var h = thumbNailList.ImageSize.Height;
-            var canvas = new Bitmap(w, h);
-
-            var g = Graphics.FromImage(canvas);
-//            g.FillRectangle(new SolidBrush(Color.LightGray), 0, 0, w, h);
-
             var fw = (float)w / (float)image.Width;
             var fh = (float)h / (float)image.Height;
-
             var scale = Math.Min(fw, fh);
             fw = image.Width * scale;
             fh = image.Height * scale;
 
-            g.DrawImage(image, (w - fw) / 2, (h - fh) / 2, fw, fh);
-            g.Dispose();
+            var canvas = new Bitmap(w, h);
+
+            using (var g = Graphics.FromImage(canvas))
+            {
+                g.DrawImage(image, (w - fw) / 2, (h - fh) / 2, fw, fh);
+            }
 
             return canvas;
         }
 
+        //----------------------------------------------------------------------
+        // スクリーンショット画像の追加・削除・クリア
+        //----------------------------------------------------------------------
+
+        /// <summary>
+        /// スクリーンショット画像をバッファに追加
+        /// </summary>
+        /// <param name="imageKey">画像名</param>
+        /// <param name="bmp">画像データ</param>
         void AddScreenshot(string imageKey, Bitmap bmp)
         {
             var index = thumbNailList.Images.Count;
-            thumbNailList.Images.Add(imageKey, createThumbnail(bmp));
+            thumbNailList.Images.Add(imageKey, CreateThumbnail(bmp));
             if (thumbNailView.Items.ContainsKey(imageKey))
             {
                 thumbNailView.Items[imageKey].ImageIndex = index;
@@ -95,50 +125,55 @@ namespace SukuSuku
             else
             {
                 thumbNailView.Items.Add(imageKey, imageKey, index);
-                templateCnt++;
             }
             templates[imageKey] = BitmapConverter.ToIplImage(bmp);
             templateBMPs[imageKey] = bmp;
         }
 
+        /// <summary>
+        /// スクリーンショット画像をバッファから消す
+        /// </summary>
+        /// <param name="imageKey">消したい画像の名前</param>
+        /// <returns>消した画像のビットマップデータ</returns>
         Bitmap DeleteScreenshot(string imageKey)
         {
             if (thumbNailView.Items.ContainsKey(imageKey) == false) return null;
-            var x = thumbNailView.Items[0];
             var bmp = templateBMPs[imageKey];
+            thumbNailList.Images[thumbNailView.Items.IndexOfKey(imageKey)].Dispose();
+//            thumbNailList.Images.RemoveAt(thumbNailView.Items.IndexOfKey(imageKey)); // これをやるとインデックスがずれて変なことになる
             thumbNailView.Items.RemoveByKey(imageKey);
-            thumbNailList.Images.RemoveByKey(imageKey);
             templates.Remove(imageKey);
             templateBMPs.Remove(imageKey);
-            templateCnt--;
             return bmp;
         }
 
+        /// <summary>
+        /// バッファからスクリーンショット画像をすべて消す
+        /// </summary>
         void ClearScreenshots()
         {
             thumbNailView.Clear();
+            foreach (Image x in thumbNailList.Images) x.Dispose();
             thumbNailList.Images.Clear();
+            foreach (var img in templates.Values) img.Dispose();
             templates.Clear();
+            foreach (var img in templateBMPs.Values) img.Dispose();
             templateBMPs.Clear();
-            templateCnt = 0;
         }
 
+        //----------------------------------------------------------------------
+        // エディタ画面への画像表示
+        //----------------------------------------------------------------------
+        
         /// <summary>
-        /// エディタ画面に画像表示するしないの設定を反映させる
+        /// エディタ画面に画像表示/非表示の設定を反映させる
         /// </summary>
-        void setTextBoxImages()
+        void SetTextBoxImages()
         {
             // 別スレッドから呼ばれることもあるのでInvokeにしておく
             Invoke((Action)(() =>
             {
-                if (showScreenshotCheckBox.Checked)
-                {
-                    textBox.Image = templateBMPs;
-                }
-                else
-                {
-                    textBox.Image = new Dictionary<string, Bitmap>();
-                }
+                textBox.Images = showScreenshotCheckBox.Checked ? templateBMPs : null;
                 textBox.Refresh();
             }));
         }
@@ -146,25 +181,15 @@ namespace SukuSuku
         /// <summary>
         /// エディタ画面の画像を消す
         /// </summary>
-        void clearTextBoxImages()
+        void ClearTextBoxImages()
         {
             // 別スレッドから呼ばれることもあるのでInvokeにしておく
             Invoke((Action)(() =>
             {
-                textBox.Image = new Dictionary<string, Bitmap>();
+                textBox.Images = null;
                 textBox.Refresh();
             }));
         }
-
-
-        void AddHotKeyAction(uint modifiers, Keys key, string text, Action action)
-        {
-            var lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
-            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
-            hotKeyActions[lparam] = new Tuple<string, Action>(text, action);
-        }
-
-        public void AddHotKeyActionByScript(uint modifiers, Keys key, string scriptName) { AddHotKeyAction(modifiers, key, scriptName, () => RunByScriptPath(scriptName)); }
 
 
         //----------------------------------------------------------------------
@@ -174,10 +199,7 @@ namespace SukuSuku
         /// <summary>
         /// メインウインドウのタイトルを設定
         /// </summary>
-        void SetTitle()
-        {
-            Text = "すくすく " + (dirName != null ? dirName : "");
-        }
+        void SetTitle() { Text = "すくすく " + (dirName != null ? dirName : ""); }
 
         /// <summary>
         /// 保存先のディレクトリ名を取得
@@ -239,7 +261,7 @@ namespace SukuSuku
                     File.Delete(path);
                     BitmapConverter.ToBitmap(pair.Value).Save(path, ImageFormat.Png);
                 }
-                templateCnt = templates.Count;
+                orgTemplateCnt = templates.Count;
             }
             catch (Exception e)
             {
@@ -258,7 +280,7 @@ namespace SukuSuku
         /// <returns></returns>
         bool CheckSave()
         {
-            if (orgText != textBox.Text || templates.Count != templateCnt)
+            if (orgText != textBox.Text || templates.Count != orgTemplateCnt)
             {
                 switch (MessageBox.Show(
                     this,
@@ -290,6 +312,7 @@ namespace SukuSuku
             dirName = null;
             textBox.Text = orgText = "";
             ClearScreenshots();
+            orgTemplateCnt = 0;
             return true;
         }
 
@@ -318,11 +341,13 @@ namespace SukuSuku
 
             // 画像を開く
             ClearScreenshots();
+            orgTemplateCnt = 0;
             foreach (var file in Directory.GetFiles(dirName, "*.png"))
             {
                 var bmp = GetBitmapFromFile(file);
                 var imageName = Path.GetFileNameWithoutExtension(file);
                 AddScreenshot(imageName, bmp);
+                orgTemplateCnt++;
             }
             
             return true;
@@ -487,9 +512,9 @@ namespace SukuSuku
 
             using (var g = Graphics.FromImage(bmp))
             {
-                clearTextBoxImages();   // エディタ画面の画像を一旦消す（エディタ画面の画像を認識してしまうのを防ぐため。ちょっとちらつくけど仕方ない）
+                ClearTextBoxImages();   // エディタ画面の画像を一旦消す（エディタ画面の画像を認識してしまうのを防ぐため。ちょっとちらつくけど仕方ない）
                 g.CopyFromScreen(rect.X, rect.Y, 0, 0, size, CopyPixelOperation.SourceCopy);
-                setTextBoxImages();
+                SetTextBoxImages();
             }
             
             return bmp;
@@ -525,7 +550,7 @@ namespace SukuSuku
                 return Rectangle.Empty;
             }
 
-            // thresholdが不当な値だったらthresholdUpDownに書かれている数値を使う
+            // thresholdが不当な値だったらthresholdUpDownの数値を使う
             if (threshold < 0 || 100 < threshold) threshold = (double)thresholdUpDown.Value;
 
             // 0 ~ 1.0にスケールを合わせる
@@ -542,31 +567,31 @@ namespace SukuSuku
             double min_val = 0, max_val = 0;
             CvPoint min_loc = CvPoint.Empty, max_loc = CvPoint.Empty;
 
-            // 異なる解像度の画像を用意し小さい方から順に試していく
-            // 期待値的に高速になるはず
             var invratio = 1.0;
 
+            // 異なる解像度の画像を用意し小さい方から順に試していく
+            // 期待値的に高速になるはず
             foreach (var ratio in new[] { 0.5/*, 0.5, 0.75*/, 1.0 })
             {
-//#if DEBUG
+#if DEBUG
                 Console.Write("[ratio = " + ratio + "] "); 
                 var stopwatch2 = new System.Diagnostics.Stopwatch();
                 stopwatch2.Start();
-//#endif
+#endif
                 // ビットマップ・IplImageは明示的に開放しないとメモリリークする
                 using (var bmp = TakeScreenshot(Screen.PrimaryScreen.Bounds))
                 using (var target = BitmapConverter.ToIplImage(bmp))
-                // 縮小した画像を用意する
                 using (var small_target = new IplImage((int)(target.Size.Width * ratio), (int)(target.Size.Height * ratio), target.Depth, target.NChannels))
                 using (var small_tmpl = new IplImage((int)(tmpl.Size.Width * ratio), (int)(tmpl.Size.Height * ratio), tmpl.Depth, tmpl.NChannels))
                 {
                     // 小さすぎたらマッチングは行わない
                     if (small_tmpl.Width <= 0 || small_tmpl.Height <= 0) continue;
 
+                    // 縮小した画像を用意
                     target.Resize(small_target);
                     tmpl.Resize(small_tmpl);
 
-                    // マッチング
+                    // 画像マッチング
                     var dstSize = new CvSize(small_target.Width - small_tmpl.Width + 1, small_target.Height - small_tmpl.Height + 1);
                     using (var dst = Cv.CreateImage(dstSize, BitDepth.F32, 1))
                     {
@@ -574,10 +599,10 @@ namespace SukuSuku
                         Cv.MinMaxLoc(dst, out min_val, out max_val, out min_loc, out max_loc, null);
                     }
                 }
-//#if DEBUG
+#if DEBUG
                 stopwatch2.Stop(); 
                 Console.WriteLine("max_val = " + max_val + "(" + stopwatch2.Elapsed.TotalSeconds + " s)");
-//#endif
+#endif
                 invratio = 1 / ratio;
 
                 // 閾値以上のマッチ率が得られたら打ち切る
@@ -586,14 +611,14 @@ namespace SukuSuku
 
             // 時間計測終了
             stopwatch.Stop();
-//#if DEBUG
+#if DEBUG
             Console.WriteLine("Ellapsed Time = " + stopwatch.Elapsed.TotalSeconds + " s");
             //Console.WriteLine("min_val = " + min_val);
             //Console.WriteLine("min_loc = " + min_loc);
             Console.WriteLine("max_val = " + max_val);
             //Console.WriteLine("max_loc = " + max_loc);
             Console.WriteLine("");
-//#endif
+#endif
 
             // max_valがthresholdを超えなければマッチしなかったと判断する
             if (threshold > max_val)
@@ -616,6 +641,35 @@ namespace SukuSuku
         private void SetFontEditor(Font font)
         {
             textBox.Font = fontEditor = font;
+        }
+
+        //----------------------------------------------------------------------
+        // ホットキー（ショートカットキー）の登録
+        //----------------------------------------------------------------------
+
+        /// <summary>
+        /// ホットキーを登録する
+        /// </summary>
+        /// <param name="modifiers">修飾キー</param>
+        /// <param name="key">キーコード</param>
+        /// <param name="text">ホットキーに対する注釈</param>
+        /// <param name="action">ホットキーが押されたときの動作</param>
+        void AddHotKeyAction(uint modifiers, Keys key, string text, Action action)
+        {
+            var lparam = new IntPtr(modifiers | ((uint)key * 0x10000));
+            RegisterHotKey(this.Handle, (Int32)lparam, modifiers, Convert.ToUInt32(key));
+            hotKeyActions[lparam] = new Tuple<string, Action>(text, action);
+        }
+
+        /// <summary>
+        /// ホットキーを登録する（実行するスクリプトを指定）
+        /// </summary>
+        /// <param name="modifiers">修飾キー</param>
+        /// <param name="key">キーコード</param>
+        /// <param name="scriptPath">実行するスクリプトへのパス</param>
+        public void AddHotKeyActionByScript(uint modifiers, Keys key, string scriptPath)
+        {
+            AddHotKeyAction(modifiers, key, scriptPath, () => RunByScriptPath(scriptPath));
         }
     }
 }

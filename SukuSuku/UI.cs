@@ -11,8 +11,10 @@ using System.Runtime.InteropServices;
 
 namespace SukuSuku
 {
-    // クリックやキー入力などのGUI操作を行う
+    /// <summary>
+    /// GUI操作関数群を定義しているクラス
     // スクリプト側ではこの中の関数が呼ばれることでGUI操作を行う
+    /// </summary>
     class UI
     {
         [DllImport("user32.dll")]
@@ -102,8 +104,6 @@ namespace SukuSuku
         //
         // 公開メソッドたち
         //
-        //-----------------------------------------------------------------------------------------
-
         //-----------------------------------------------------------------------------------------
         
         // 左クリック
@@ -249,6 +249,9 @@ namespace SukuSuku
         public string capture(Rectangle rect, string imageName = null) { return owner.TakeAndAddScreenshot(rect, imageName); }
         public string capture(int x, int y, int w, int h, string imageName = null) { return capture(new Rectangle(x, y, w ,h), imageName); }
 
+        //-----------------------------------------------------------------------------------------
+
+        // メッセージボックスの表示
         public void messageBox(string text) { MessageBox.Show(text); }
     }
 }

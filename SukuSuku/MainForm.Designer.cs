@@ -120,6 +120,8 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.showScreenshotCheckBox = new System.Windows.Forms.CheckBox();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.閉じるToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -141,6 +143,7 @@
             this.groupBox3.SuspendLayout();
             this.thumbNailContextMenuStrip.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.notifyIconContextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -411,8 +414,8 @@
             this.スクリプトの登録ToolStripMenuItem});
             this.syToolStripMenuItem.Font = new System.Drawing.Font("メイリオ", 12F);
             this.syToolStripMenuItem.Name = "syToolStripMenuItem";
-            this.syToolStripMenuItem.Size = new System.Drawing.Size(205, 34);
-            this.syToolStripMenuItem.Text = "ショートカット実行";
+            this.syToolStripMenuItem.Size = new System.Drawing.Size(265, 34);
+            this.syToolStripMenuItem.Text = "ショートカットキーの登録";
             // 
             // スクリプトの登録ToolStripMenuItem
             // 
@@ -439,7 +442,7 @@
             // 
             // thumbNailList
             // 
-            this.thumbNailList.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.thumbNailList.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
             this.thumbNailList.ImageSize = new System.Drawing.Size(200, 200);
             this.thumbNailList.TransparentColor = System.Drawing.Color.Transparent;
             // 
@@ -1091,7 +1094,7 @@
             this.textBox.Font = new System.Drawing.Font("ＭＳ ゴシック", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.textBox.ForeColor = System.Drawing.Color.Black;
             this.textBox.HighlightsCurrentLine = false;
-            this.textBox.Image = ((System.Collections.Generic.Dictionary<string, System.Drawing.Bitmap>)(resources.GetObject("textBox.Image")));
+            this.textBox.Images = ((System.Collections.Generic.Dictionary<string, System.Drawing.Bitmap>)(resources.GetObject("textBox.Images")));
             this.textBox.LinePadding = 30;
             this.textBox.Location = new System.Drawing.Point(0, 34);
             this.textBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1134,10 +1137,25 @@
             // 
             // notifyIcon
             // 
+            this.notifyIcon.ContextMenuStrip = this.notifyIconContextMenuStrip;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "すくすく";
             this.notifyIcon.Visible = true;
-            this.notifyIcon.Click += new System.EventHandler(this.notifyIcon_Click);
+            this.notifyIcon.DoubleClick += new System.EventHandler(this.notifyIcon_DoubleClick);
+            // 
+            // notifyIconContextMenuStrip
+            // 
+            this.notifyIconContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.閉じるToolStripMenuItem});
+            this.notifyIconContextMenuStrip.Name = "notifyIconContextMenuStrip";
+            this.notifyIconContextMenuStrip.Size = new System.Drawing.Size(126, 32);
+            // 
+            // 閉じるToolStripMenuItem
+            // 
+            this.閉じるToolStripMenuItem.Name = "閉じるToolStripMenuItem";
+            this.閉じるToolStripMenuItem.Size = new System.Drawing.Size(152, 28);
+            this.閉じるToolStripMenuItem.Text = "閉じる";
+            this.閉じるToolStripMenuItem.Click += new System.EventHandler(this.閉じるToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1186,6 +1204,7 @@
             this.thumbNailContextMenuStrip.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.notifyIconContextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1283,6 +1302,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolStripMenuItem syToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem スクリプトの登録ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip notifyIconContextMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem 閉じるToolStripMenuItem;
     }
 }
 

@@ -11,6 +11,9 @@ using Sgry.Azuki.Windows;
 
 namespace SukuSuku
 {
+    /// <summary>
+    /// 検索・置換ダイアログ
+    /// </summary>
     public partial class FindForm : Form
     {
         private enum Mode
@@ -23,7 +26,6 @@ namespace SukuSuku
         private AzukiControl textBox;
         private int findCount = 0;
         private string dialogTitle = "";
-
 
         public AzukiControl TargetTextBox
         {

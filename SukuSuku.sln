@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SukuSuku", "SukuSuku\SukuSuku.csproj", "{A0CD9F7B-C068-45A0-8FB0-01A278B8CE23}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8561BEC6-5739-4D3C-A78F-7E3EE9AD61C9}"
+	ProjectSection(SolutionItems) = preProject
+		Manual.txt = Manual.txt
+		README = README
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

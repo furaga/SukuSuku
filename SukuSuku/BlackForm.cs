@@ -1,19 +1,64 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SukuSuku
 {
+    /// <summary>
+    /// スクリーンショット撮るときの暗くなる画面
+    /// </summary>
     public partial class BlackForm : Form
     {
         Pen pen = new Pen(Color.Red, 2);
         Point? start = null;
         Point? end = null;
+
+        string __imageName = "";
+        Bitmap __screenshot = null;
+
+        /// <summary>
+        /// 2点から矩形を返す
+        /// </summary>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        private Rectangle GetRectangle(Point start, Point end)
+        {
+            var x = Math.Min(start.X, end.X);
+            var y = Math.Min(start.Y, end.Y);
+            var w = Math.Abs(start.X - end.X);
+            var h = Math.Abs(start.Y - end.Y);
+            return new Rectangle(x, y, w, h);
+        }
+
+        /// <summary>
+        /// スクリーンショットを撮ってownerのバッファに登録する
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public string takeScreenshot(MainForm owner)
+        {
+            var visible = owner.Visible;
+            __screenshot = owner.TakeScreenshot(Screen.PrimaryScreen.Bounds);
+            using (var form = new Form())
+            {
+                if (form.WindowState == FormWindowState.Maximized)
+                {
+                    form.WindowState = FormWindowState.Normal;
+                }
+                form.FormBorderStyle = FormBorderStyle.None;
+                form.WindowState = FormWindowState.Maximized;
+                form.Paint += (sender, e) => e.Graphics.DrawImage(__screenshot, Point.Empty);
+                form.Show();
+                form.Activate();
+
+                owner.Hide();
+                ShowDialog(owner);
+            }
+            if (visible) owner.Show();
+
+            return __imageName;
+        }
 
         public BlackForm()
         {
@@ -29,15 +74,6 @@ namespace SukuSuku
                 this.WindowState = FormWindowState.Normal;
             }
             this.WindowState = FormWindowState.Maximized;
-        }
-
-        private Rectangle GetRectangle(Point start, Point end)
-        {
-            var x = Math.Min(start.X, end.X);
-            var y = Math.Min(start.Y, end.Y);
-            var w = Math.Abs(start.X - end.X);
-            var h = Math.Abs(start.Y - end.Y);
-            return new Rectangle(x, y, w, h);
         }
 
         private void BlackForm_MouseDown(object sender, MouseEventArgs e)
@@ -79,32 +115,6 @@ namespace SukuSuku
                 pt2 = new Point(pt1.X, rect.Bottom);
                 g.DrawLine(pen, pt1, pt2);
             }
-        }
-
-        private string __imageName = "";
-        private Bitmap __screenshot = null;
-        public string takeScreenshot(MainForm owner)
-        {
-            var visible = owner.Visible;
-            __screenshot = owner.TakeScreenshot(Screen.PrimaryScreen.Bounds);
-            using (var form = new Form())
-            {
-                if (form.WindowState == FormWindowState.Maximized)
-                {
-                    form.WindowState = FormWindowState.Normal;
-                }
-                form.FormBorderStyle = FormBorderStyle.None;
-                form.WindowState = FormWindowState.Maximized;
-                form.Paint += (sender, e) => e.Graphics.DrawImage(__screenshot, Point.Empty);
-                form.Show();
-                form.Activate();
-
-                owner.Hide();
-                ShowDialog(owner);
-            }
-            if (visible) owner.Show();
-
-            return __imageName; 
         }
     }
 }
