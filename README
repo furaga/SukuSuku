@@ -1,27 +1,27 @@
--- ‚·‚­‚·‚­‚Æ‚Í
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½
 
-ƒXƒNƒŠ[ƒ“ƒVƒ‡ƒbƒg‰æ‘œ‚ð’l‚Æ‚µ‚Ä‚Æ‚ê‚éRubyƒXƒNƒŠƒvƒgƒGƒ“ƒWƒ“iIDE)
-ŠwZ‚Ìh‘è‚Åì‚è‚Ü‚µ‚½
-sikuli(http://sikuli.org/)‚ð^Ž—‚½‚à‚Ì‚Å‚·
-ƒoƒCƒiƒŠƒf[ƒ^‚Í http://furaga.sakura.ne.jp/ ‚ÅŒöŠJ‚µ‚Ä‚¢‚Ü‚·
+ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½Vï¿½ï¿½ï¿½bï¿½gï¿½æ‘œï¿½ï¿½ï¿½lï¿½Æ‚ï¿½ï¿½Ä‚Æ‚ï¿½ï¿½ï¿½Rubyï¿½Xï¿½Nï¿½ï¿½ï¿½vï¿½gï¿½Gï¿½ï¿½ï¿½Wï¿½ï¿½ï¿½iIDE)
+ï¿½wï¿½Zï¿½Ìhï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½
+sikuli(http://sikuli.org )ï¿½ï¿½ï¿½^ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚Å‚ï¿½
+ï¿½oï¿½Cï¿½iï¿½ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ http://furaga.sakura.ne.jp/ ï¿½ÅŒï¿½ï¿½Jï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½
 
---ŠJ”­ŠÂ‹«
+--ï¿½Jï¿½ï¿½ï¿½Â‹ï¿½
 
-EVisual Studio 2010(.NET Framework 4)
+ï¿½EVisual Studio 2010(.NET Framework 4)
 
---ŠO•”ƒ‰ƒCƒuƒ‰ƒŠ
+--ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½uï¿½ï¿½ï¿½ï¿½
 
-EIronRuby-1.0 http://www.ironruby.net
-EOpenCVSharp-2.3.1 http://code.google.com/p/opencvsharp
-EOpenCV-2.3.1 http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
-EAzuki1.5.8 http://azuki.sourceforge.jp/
-  ƒvƒƒOƒ‰ƒ€’†‚Å‚ÍƒGƒfƒBƒ^‰æ–Ê‚É‰æ‘œ‚ð•\Ž¦‚Å‚«‚é‚æ‚¤‚É‰ü‘¢‚µ‚½‚à‚Ì‚ðŽg—p‚µ‚Ä‚¢‚Ü‚·
-  ‰ü‘¢”Å‚ÌAzuki.dll‚Í http://furaga.sakura.ne.jp/ ‚ÉŒöŠJ’†‚ÌƒoƒCƒiƒŠ‚É“¯«‚³‚ê‚Ä‚¢‚Ü‚·
+ï¿½EIronRuby-1.0 http://www.ironruby.net
+ï¿½EOpenCVSharp-2.3.1 http://code.google.com/p/opencvsharp
+ï¿½EOpenCV-2.3.1 http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
+ï¿½EAzuki1.5.8 http://azuki.sourceforge.jp/
+  ï¿½vï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å‚Ì“Gï¿½fï¿½Bï¿½^ï¿½ï¿½ï¿½Ê‚É‰æ‘œï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½
+  ï¿½ï¿½ï¿½ï¿½ï¿½Å‚ï¿½Azuki.dllï¿½ï¿½ http://furaga.sakura.ne.jp/ ï¿½ÉŒï¿½ï¿½Jï¿½ï¿½ï¿½Ìƒoï¿½Cï¿½iï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½
 
---ƒRƒ“ƒpƒCƒ‹EŽÀs
+--ï¿½Rï¿½ï¿½ï¿½pï¿½Cï¿½ï¿½ï¿½Eï¿½ï¿½ï¿½s
 
-1. IronRuby-1.0, OpenCVShapr-2.3.1, Azuki1.5.8‚ÌŠeDLLƒtƒ@ƒCƒ‹‚ðŽQÆ‚É’Ç‰Á
-2. OpenCV-2.3.1‚ÌŠeDLLƒtƒ@ƒCƒ‹‚ðƒpƒX‚Ì’Ê‚Á‚½ƒfƒBƒŒƒNƒgƒŠ‚É’u‚­
+1. IronRuby-1.0, OpenCVShapr-2.3.1, Azuki1.5.8ï¿½ÌŠeDLLï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½Æ‚É’Ç‰ï¿½
+2. OpenCV-2.3.1ï¿½ÌŠeDLLï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½pï¿½Xï¿½Ì’Ê‚ï¿½ï¿½ï¿½ï¿½fï¿½Bï¿½ï¿½ï¿½Nï¿½gï¿½ï¿½ï¿½É’uï¿½ï¿½
 
-‚Æ‚·‚ê‚Î‘½•ªs‚¯‚é‚ÆŽv‚¢‚Ü‚·B
-ŠeDLLƒtƒ@ƒCƒ‹‚Í http://furaga.sakura.ne.jp/ ‚ÉŒöŠJ’†‚ÌƒoƒCƒiƒŠ‚É“¯«‚³‚ê‚Ä‚¢‚Ü‚·
+ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½Î‘ï¿½ï¿½ï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½ÆŽvï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+ï¿½eDLLï¿½tï¿½@ï¿½Cï¿½ï¿½ï¿½ï¿½ http://furaga.sakura.ne.jp/ ï¿½ÉŒï¿½ï¿½Jï¿½ï¿½ï¿½Ìƒoï¿½Cï¿½iï¿½ï¿½ï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½Ü‚ï¿½
