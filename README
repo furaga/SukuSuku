@@ -1,27 +1,24 @@
--- ���������Ƃ�
+-- すくすくとは
 
-�X�N���[���V���b�g�摜���l�Ƃ��ĂƂ���Ruby�X�N���v�g�G���W���iIDE)
-�w�Z�̏h���ō����܂���
-sikuli(http://sikuli.org )���^�������̂ł�
-�o�C�i���f�[�^�� http://furaga.sakura.ne.jp/ �Ō��J���Ă��܂�
+スクリーンショットを用いたスクリプトエンジン（IDE)
+sikuliを真似て使ったものです（ http://sikuli.org ）
+学校の宿題で作りました
+バイナリは http://furaga.sakura.ne.jp/ で公開中です
 
---�J����
+--実装環境
 
-�EVisual Studio 2010(.NET Framework 4)
+Visual Studio 2010(.NET Framework 4)
 
---�O�����C�u����
+--ライブラリ
 
-�EIronRuby-1.0 http://www.ironruby.net
-�EOpenCVSharp-2.3.1 http://code.google.com/p/opencvsharp
-�EOpenCV-2.3.1 http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
-�EAzuki1.5.8 http://azuki.sourceforge.jp/
-  �v���O�������ł̓G�f�B�^���ʂɉ摜���\���ł����悤�ɉ����������̂��g�p���Ă��܂�
-  �����ł�Azuki.dll�� http://furaga.sakura.ne.jp/ �Ɍ��J���̃o�C�i���ɓ��������Ă��܂�
+IronRuby-1.0 http://www.ironruby.net
+OpenCVSharp-2.3.1 http://code.google.com/p/opencvsharp
+OpenCV-2.3.1 http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
+Azuki1.5.8 http://azuki.sourceforge.jp/
 
---�R���p�C���E���s
+Azukiはエディタ画面に画像を表示できるように改造しています
+改造版のAzuki.dllは http://furaga.sakura.ne.jp/ で公開中のバイナリに同梱しています
 
-1. IronRuby-1.0, OpenCVShapr-2.3.1, Azuki1.5.8�̊eDLL�t�@�C�����Q�Ƃɒǉ�
-2. OpenCV-2.3.1�̊eDLL�t�@�C�����p�X�̒ʂ����f�B���N�g���ɒu��
+--コンパイル・実行
 
-�Ƃ����Α����s�����Ǝv���܂��B
-�eDLL�t�@�C���� http://furaga.sakura.ne.jp/ �Ɍ��J���̃o�C�i���ɓ��������Ă��܂�
+http://furaga.sakura.ne.jp/ で公開中のバイナリのbinフォルダ内のDLLファイルを参照に追加してコンパイルしてください
