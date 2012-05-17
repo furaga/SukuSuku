@@ -1,223 +1,273 @@
 
+※ 以下で示される座標はすべてスクリーン座標で、単位はピクセルです
+
 - GUI操作関数
 
+-- カーソル位置取得（プロパティ）
 
-※ 以下で示される座標はすべてスクリーン座標で、単位はピクセルです
+    Position ui.CursorPosition
+
+        現在のマウスカーソルの位置を取得します。
+        ui.CursorPosition.X, ui.CursorPosition.Y がそれぞれマウスカーソルのX座標、Y座標になっています。
+
 
 -- 左クリック
 
-	void ui.leftClick(int x, int y)
+    void ui.leftClick(int x, int y)
 
-		点(x, y)を左クリック
+        点(x, y)を左クリック
 
-	void ui.leftClick(Rectangle rect)
+    void ui.leftClick(Rectangle rect)
 
-		矩形rectの中心座標を左クリック
+        矩形rectの中心座標を左クリック
 
-	void ui.leftClick(string imageName, double threshold = -1)
-	
-		スクリーンから画像を検出し、その中心を左クリック
-	
-		imageNameは登録されたスクリーンショット画像中の画像名
-	
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    void ui.leftClick(string imageName, double threshold = -1)
+    
+        スクリーンから画像を検出し、その中心を左クリック
+    
+        imageNameは登録されたスクリーンショット画像中の画像名
+    
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 
 -- 右クリック
 
-	void ui.rightClick(int x, int y) 
-	
-		点(x, y)を右クリック
+    void ui.rightClick(int x, int y) 
+    
+        点(x, y)を右クリック
 
-	void ui.rightClick(Rectangle rect) 
-	
-		矩形rectの中心座標を右クリック
+    void ui.rightClick(Rectangle rect) 
+    
+        矩形rectの中心座標を右クリック
 
-	void ui.rightClick(string imageName, double threshold = -1)
+    void ui.rightClick(string imageName, double threshold = -1)
 
-		スクリーンから画像を検出し、その中心を右クリック
-	
-		imageNameは登録されたスクリーンショット画像中の画像名
-	
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+        スクリーンから画像を検出し、その中心を右クリック
+    
+        imageNameは登録されたスクリーンショット画像中の画像名
+    
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 
 -- ダブルクリック
 
-	void ui.doubleClick(int x, int y)
-	
-		点(x, y)をダブルクリック
+    void ui.doubleClick(int x, int y)
+    
+        点(x, y)をダブルクリック
 
-	void ui.doubleClick(Rectangle rect)
-	
-		矩形rectの中心座標をダブルクリック
+    void ui.doubleClick(Rectangle rect)
+    
+        矩形rectの中心座標をダブルクリック
 
-	void ui.doubleClick(string imageName, double threshold = -1)
-	
-		スクリーンから画像を検出し、その中心をダブルクリック
-	
-		imageNameは登録されたスクリーンショット画像中の画像名
-	
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    void ui.doubleClick(string imageName, double threshold = -1)
+    
+        スクリーンから画像を検出し、その中心をダブルクリック
+    
+        imageNameは登録されたスクリーンショット画像中の画像名
+    
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 
 -- マウスカーソルを移動させる
 
-	void ui.mouseMove(int x, int y)
+    void ui.mouseMove(int x, int y)
 
-		点(x, y)にマウスカーソルを移動
+        点(x, y)にマウスカーソルを移動
 
-	void ui.mouseMove(Rectangle rect)
-	
-		矩形rectの中心座標にマウスカーソルを移動
+    void ui.mouseMove(Rectangle rect)
+    
+        矩形rectの中心座標にマウスカーソルを移動
 
-	void ui.mouseMove(string imageName, double threshold = -1)
-	
-		スクリーンから画像を検出し、その中心にマウスカーソルを移動
-	
-		imageNameは登録されたスクリーンショット画像中の画像名
-	
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    void ui.mouseMove(string imageName, double threshold = -1)
+    
+        スクリーンから画像を検出し、その中心にマウスカーソルを移動
+    
+        imageNameは登録されたスクリーンショット画像中の画像名
+    
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
+
+
+-- ドラッグ
+
+    void ui.drag(int x, int y)
+
+        点(x, y)をドラッグ
+
+    void ui.drag(Rectangle rect)
+    
+        矩形rectの中心座標をドラッグ
+
+    void ui.drag(string imageName, double threshold = -1)
+    
+        スクリーンから画像を検出し、その中心をドラッグ
+    
+        imageNameは登録されたスクリーンショット画像中の画像名
+    
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
+
+
+-- ドロップ
+
+    void ui.drag(int x, int y)
+
+        点(x, y)へドロップ
+
+    void ui.drag(Rectangle rect)
+    
+        矩形rectの中心座標へドロップ
+
+    void ui.drag(string imageName, double threshold = -1)
+    
+        スクリーンから画像を検出し、その中心へドロップ
+    
+        imageNameは登録されたスクリーンショット画像中の画像名
+    
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 
 -- ドラッグアンドドロップ
+    void ui.dragAndDrop(int x1, int y1, int x2, int y2)
+    
+        点(x1, y1)から点(x2, y2)へドラッグアンドドロップ
 
-	void ui.dragAndDrop(int x1, int y1, int x2, int y2)
-	
-		点(x1, y1)から点(x2, y2)へドラッグアンドドロップ
+    void ui.dragAndDrop(Rectangle rect1, Rectangle rect2)
+    
+        矩形rect1の中心座標から矩形rect2の中心座標へドラッグアンドドロップ
 
-	void ui.dragAndDrop(Rectangle rect1, Rectangle rect2)
-	
-		矩形rect1の中心座標から矩形rect2の中心座標へドラッグアンドドロップ
-
-	void ui.dragAndDrop(string imageName1, string imageName2, double threshold1 = -1, double threshold2 = -1)
-	
-		imageName1の中心 から imageName2の中心 へドラッグアンドドロップ
-	
-		imageName1, imageName2は登録されたスクリーンショット画像中の画像名
-	
-		threshold1(threshold2)はスクリーンとimageName1(imageName2)がマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    void ui.dragAndDrop(string imageName1, string imageName2, double threshold1 = -1, double threshold2 = -1)
+    
+        imageName1の中心 から imageName2の中心 へドラッグアンドドロップ
+    
+        imageName1, imageName2は登録されたスクリーンショット画像中の画像名
+    
+        threshold1(threshold2)はスクリーンとimageName1(imageName2)がマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 
 -- キー入力
 
-	void ui.type(string text)
+    void ui.type(string text)
 
-		textを入力
+        textを入力
 
-	void ui.type(int x, int y, string text)
+    void ui.type(int x, int y, string text)
 
-		点(x, y)を左クリックした後textを入力
+        点(x, y)を左クリックした後textを入力
 
-	void ui.type(Rectangle rect, string text)
+    void ui.type(Rectangle rect, string text)
 
-		rectの中心座標を左クリックした後textを入力
+        rectの中心座標を左クリックした後textを入力
 
-	void ui.type(string imageName, string text, double threshold = -1)
+    void ui.type(string imageName, string text, double threshold = -1)
 
-		スクリーンから画像を検出し、その中心を左クリックした後textを入力
-		
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+        スクリーンから画像を検出し、その中心を左クリックした後textを入力
+        
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 -- 貼り付け
 
-	void ui.paste(string text)
+    void ui.paste(string text)
 
-		textをクリップボードに登録し、Ctrl + V を入力
+        textをクリップボードに登録し、Ctrl + V を入力
 
-	void ui.paste(int x, int y, string text)
-	
-		点(x, y)を左クリックした後textをクリップボードに登録し、Ctrl + V を入力
+    void ui.paste(int x, int y, string text)
+    
+        点(x, y)を左クリックした後textをクリップボードに登録し、Ctrl + V を入力
 
-	void ui.paste(Rectangle rect, string text) 
-	
-		rectの中心座標を左クリックした後textをクリップボードに登録し、Ctrl + V を入力
+    void ui.paste(Rectangle rect, string text) 
+    
+        rectの中心座標を左クリックした後textをクリップボードに登録し、Ctrl + V を入力
 
-	void ui.paste(string imageName, string text, double threshold = -1) 
-	
-		スクリーンから画像を検出し、その中心を左クリックした後textをクリップボードに登録し、Ctrl + V を入力
-		
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    void ui.paste(string imageName, string text, double threshold = -1) 
+    
+        スクリーンから画像を検出し、その中心を左クリックした後textをクリップボードに登録し、Ctrl + V を入力
+        
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 
 -- 画像が見つかるまで待機（ポーリング）
 
-	Rectangle wait(string imageName, int timeout = 100, double threshold = -1)
-	
-		画像がスクリーン内に見つかるまで待機。見つかったら検出領域を返す
-		
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    Rectangle wait(string imageName, int timeout = 100, double threshold = -1)
+    
+        画像がスクリーン内に見つかるまで待機。見つかったら検出領域を返す
+        
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 -- 画像がスクリーンから消えるまで待機（ポーリング）
 
-	void ui.waitVanish(string imageName, int timeout = 100, double threshold = -1)
-	
-		画像がスクリーン内から消えるまで待機
+    void ui.waitVanish(string imageName, int timeout = 100, double threshold = -1)
+    
+        画像がスクリーン内から消えるまで待機
 
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
         
 -- 指定された画像が存在するか
 
-	bool exist(string imageName, double threshold = -1)
-		
-		画像がスクリーン内にあるか
-		
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    bool exist(string imageName, double threshold = -1)
+        
+        画像がスクリーン内にあるか
+        
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
-	Rectangle find(string imageName, double threshold = -1)
-	
-		画像をスクリーンから検出し、検出領域を返す。wait()との違いはスクリーン内に画像が見つからければ待たずにRectangle.Emptyを返す点
-		
-		thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
-		完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
-		thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
-		画面右欄の「画像マッチ判定の閾値」の値が使われます
+    Rectangle find(string imageName, double threshold = -1)
+    
+        画像をスクリーンから検出し、検出領域を返す。wait()との違いはスクリーン内に画像が見つからければ待たずにRectangle.Emptyを返す点
+        
+        thresholdはスクリーンとimageNameがマッチしているとみなす最低のマッチ率（0 ~ 100）
+        完全一致のときのみ検出したいなら100に近い値にします（誤差に対応するため100ピッタリにはしないほうがいいです）
+        thresholdが設定されなかったり、[0, 100]に含まれない数が設定されたら
+        画面右欄の「画像マッチ判定の閾値」の値が使われます
 
 -- スクリーンショットを撮る
 
-	string capture(int x, int y, int w, int h, string imageName = null)
+    string capture(int x, int y, int w, int h, string imageName = null)
 
-		スクリーンショットを撮ってバッファに登録する。撮影領域は、左上の座標(x, y)、幅w、高さhの矩形
-		imageNameは撮影するスクリーンショット画像の名前
+        スクリーンショットを撮ってバッファに登録する。撮影領域は、左上の座標(x, y)、幅w、高さhの矩形
+        imageNameは撮影するスクリーンショット画像の名前
 
-	string capture(Rectangle rect, string imageName = null)
+    string capture(Rectangle rect, string imageName = null)
 
-		スクリーンショットを撮る。撮影領域はrect
-		imageNameは撮影するスクリーンショット画像の名前
-	
+        スクリーンショットを撮る。撮影領域はrect
+        imageNameは撮影するスクリーンショット画像の名前
+    
 
 -- メッセージボックスの表示
 
-	void ui.messageBox(string text)
-	
-		メッセージボックスを表示、textはメッセージボックス中に表示する文字列
+    void ui.messageBox(string text)
+    
+        メッセージボックスを表示、textはメッセージボックス中に表示する文字列

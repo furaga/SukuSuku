@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Threading;
 
 namespace SukuSuku
 {
@@ -60,18 +56,20 @@ namespace SukuSuku
             return new Point(x, y);
         }
 
-        //        Form form = new Form();
+
         void HighlightPoint(int x, int y)
         {
+            // Ctrlキーを押すとマウスカーソルを強調表示するように設定してれば、これで強調されるはず
+            // キーボードによって挙動が変わる？
             SendKeys.SendWait("^");
-            System.Threading.Thread.Sleep(800);
+            Thread.Sleep(800);
         }
 
         // クリック系のテンプレート関数
         void click(int x, int y, MouseEventFlags flg1, MouseEventFlags flg2, int cnt)
         {
             // マウスクリックの前後、少し待たないと後続のマウス・キー入力がうまく行われない。なんで？
-            System.Threading.Thread.Sleep(30);
+            Thread.Sleep(30);
 
             mouseMove(x, y);
 
@@ -89,7 +87,7 @@ namespace SukuSuku
             }
 
             // マウスクリックの前後、少し待たないと後続のマウス・キー入力がうまく行われない。なんで？
-            System.Threading.Thread.Sleep(30);
+            Thread.Sleep(30);
         }
 
         // クリック系のテンプレート関数
@@ -106,6 +104,9 @@ namespace SukuSuku
         //
         //-----------------------------------------------------------------------------------------
         
+        // マウスカーソルの位置を取得
+        public Point CursorPosition { get { return Cursor.Position; } }
+
         // 左クリック
         public void leftClick(int x, int y) { click(x, y, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTUP, 1); }
         public void leftClick(Rectangle rect) { leftClick(rect.X + rect.Width / 2, rect.Y + rect.Height / 2); }
@@ -143,7 +144,7 @@ namespace SukuSuku
                 dx *= dd;
                 dy *= dd;
                 Cursor.Position = new Point(sx + (int)dx, sy + (int)dy);
-                System.Threading.Thread.Sleep(30);  // 気持ち30fpsくらい
+                Thread.Sleep(30);  // 気持ち30fpsくらい
             }
 
             Cursor.Position = new Point(x, y);
@@ -155,24 +156,55 @@ namespace SukuSuku
             mouseMove(pos.Value.X, pos.Value.Y);
         }
 
+        // ドラッグ
+        public void drag(int x, int y)
+        {
+
+            // マウスクリックの前後、少し待たないと後続のマウス・キー入力がうまく行われない。なんで？
+            Thread.Sleep(30);
+
+            mouseMove(x, y);
+
+            // スローモーション実行ならクリックする先を強調する
+            if (slowPlayFlag)
+            {
+                HighlightPoint(x, y);
+                Cursor.Position = new Point(x, y);
+            }
+            {
+                mouse_event((UInt32)MouseEventFlags.LEFTDOWN, (uint)x, (uint)y, 0, IntPtr.Zero);
+            }
+
+            // マウスクリックの前後、少し待たないと後続のマウス・キー入力がうまく行われない。なんで？
+            Thread.Sleep(30);    
+            //click(x, y, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTDOWN, 1);
+        }
+        public void drag(Rectangle rect) { drag(rect.X + rect.Width / 2, rect.Y + rect.Height / 2); }
+        public void drag(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.LEFTDOWN, MouseEventFlags.LEFTDOWN, 1, threshold); }
+
+        // ドロップ
+        public void drop(int x, int y) { click(x, y, MouseEventFlags.LEFTUP, MouseEventFlags.LEFTUP, 1); }
+        public void drop(Rectangle rect) { drop(rect.X + rect.Width / 2, rect.Y + rect.Height / 2); }
+        public void drop(string imageName, double threshold = -1) { click(imageName, MouseEventFlags.LEFTUP, MouseEventFlags.LEFTUP, 1, threshold); }
+
         // ドラッグアンドドロップ
         public void dragAndDrop(int x1, int y1, int x2, int y2)
         {
             // マウスカーソルを(x1, y1)にセット
             mouseMove(x1, y1);
-            System.Threading.Thread.Sleep(30);
+            Thread.Sleep(30);
 
             // 左ボタンを押す
             mouse_event((UInt32)MouseEventFlags.LEFTDOWN, 0, 0, 0, IntPtr.Zero);
-            System.Threading.Thread.Sleep(30);
+            Thread.Sleep(30);
 
             // マウスカーソルを(x2, y2)の移動
             mouseMove(x2, y2);
-            System.Threading.Thread.Sleep(30);
+            Thread.Sleep(30);
 
             // 左ボタンを離す
             mouse_event((UInt32)MouseEventFlags.LEFTUP, 0, 0, 0, IntPtr.Zero);
-            System.Threading.Thread.Sleep(30);
+            Thread.Sleep(30);
         }
 
         public void dragAndDrop(Rectangle rect1, Rectangle rect2)
@@ -190,13 +222,22 @@ namespace SukuSuku
         //-----------------------------------------------------------------------------------------
 
         // キー入力
-        public void type(string text) { SendKeys.SendWait(text); }
+        public void type(string text)
+        {
+            Thread.Sleep(30); 
+            SendKeys.SendWait(text);
+            Thread.Sleep(30);
+        }
         public void type(int x, int y, string text) { leftClick(x, y); type(text); }
         public void type(Rectangle rect, string text) { type(rect.X + rect.Width / 2, rect.Y + rect.Height / 2, text); }
         public void type(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); type(text); }
 
         // 貼り付け
-        public void paste(string text) { owner.Invoke((Action)(() => Clipboard.SetText(text))); type("^v"); }
+        public void paste(string text) {
+            Thread.Sleep(30);
+            owner.Invoke((Action)(() => Clipboard.SetText(text))); type("^v");
+            Thread.Sleep(30);
+        }
         public void paste(int x, int y, string text) { leftClick(x, y); paste(text); }
         public void paste(Rectangle rect, string text) { paste(rect.X + rect.Width / 2, rect.Y + rect.Height / 2, text); }
         public void paste(string imageName, string text, double threshold = -1) { leftClick(imageName, threshold); paste(text); }

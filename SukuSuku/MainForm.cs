@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Threading;
-using OpenCvSharp;
-using Sgry.Azuki;
 using Sgry.Azuki.Highlighter;
 
 namespace SukuSuku
@@ -71,6 +63,8 @@ namespace SukuSuku
             AddHotKeyAction(MOD_WIN, Keys.S, "スローモーションで実行", () => { ui.slowPlayFlag = true; Run(textBox.Text); });
             AddHotKeyAction(MOD_WIN, Keys.Q, "実行停止", () => 停止SToolStripMenuItem_Click(null, null));
             AddHotKeyAction(MOD_CONTROL, Keys.PrintScreen, "スクリーンショットを撮る", () => new BlackForm().takeScreenshot(this));
+
+            LoadConfigData();
         }
 
         //----------------------------------------------------------------------
@@ -287,7 +281,14 @@ namespace SukuSuku
 
         private void thumbNailView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            textBox.Document.Replace('"' + thumbNailView.SelectedItems[0].Text + '"');
+            try
+            {
+                textBox.Document.Replace('"' + thumbNailView.SelectedItems[0].Text + '"');
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

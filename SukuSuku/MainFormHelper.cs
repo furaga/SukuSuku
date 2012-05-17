@@ -1,16 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 using OpenCvSharp;
-using Sgry.Azuki.Windows;
 
 namespace SukuSuku
 {
@@ -207,6 +202,7 @@ namespace SukuSuku
         /// <returns>保存先のディレクトリ名</returns>
         string GetSaveDirName()
         {
+            saveFileDialog.Title = "保存先のディレクトリ名を入力してください";
             saveFileDialog.Filter = "ディレクトリ|*";
             saveFileDialog.RestoreDirectory = true;
             if (saveFileDialog.ShowDialog() == DialogResult.OK) return saveFileDialog.FileName;
@@ -219,7 +215,8 @@ namespace SukuSuku
         /// <returns>開きたいファイル群のあるディレクトリ名</returns>
         string GetOpenDirName()
         {
-            openFileDialog.Filter = "ディレクトリ|*";
+            openFileDialog.Title = "スクリプトファイルを選択してください";
+            openFileDialog.Filter = "Rubyファイル(*.rb)|*.rb";
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK) return Path.GetDirectoryName(openFileDialog.FileName);
             return null;
@@ -669,7 +666,24 @@ namespace SukuSuku
         /// <param name="scriptPath">実行するスクリプトへのパス</param>
         public void AddHotKeyActionByScript(uint modifiers, Keys key, string scriptPath)
         {
-            AddHotKeyAction(modifiers, key, scriptPath, () => RunByScriptPath(scriptPath));
+            AddHotKeyAction(modifiers, key, scriptPath, () => { ui.slowPlayFlag = true; RunByScriptPath(scriptPath); });
         }
+
+        /// <summary>
+        /// 設定ファイル(configPath)の内容を読みこんでホットキーを適宜登録する
+        /// </summary>
+        void LoadConfigData()
+        {
+            foreach (var line in System.IO.File.ReadLines(ShortcutForm.configPath).Where(s => s.Trim().Length >= 1 && s.Trim()[0] != '#'))
+            {
+                var tokens = line.Split(new[] { ',' }).Select(s => s.Trim()).ToArray();
+                if (tokens.Length != 2) continue;
+                uint id;
+                if (uint.TryParse(tokens[0], out id) == false) continue;   // IDをパース
+                if (tokens[1].EndsWith(".rb") == false || System.IO.File.Exists(tokens[1]) == false) continue; // ファイル名が不正でないか
+                AddHotKeyActionByScript(id & 0xffff, (Keys)(id / 0x10000), tokens[1]);
+            }
+        }
+
     }
 }

@@ -1,3 +1,10 @@
+-- すくすくとは
+
+スクリーンショット画像を値としてとれるRubyスクリプトエンジン（IDE)
+学校の宿題で作りました
+sikuli(http://sikuli.org/)を真似たものです
+バイナリデータは http://furaga.sakura.ne.jp/ で公開しています
+
 --開発環境
 
 ・Visual Studio 2010(.NET Framework 4)
@@ -8,8 +15,8 @@
 ・OpenCVSharp-2.3.1 http://code.google.com/p/opencvsharp
 ・OpenCV-2.3.1 http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.3.1
 ・Azuki1.5.8 http://azuki.sourceforge.jp/
-  プログラム中ではエディタ画面に画像を表示できるように改造したものを使用しています。
-  改造版のAzuki.dllは近日中に公開予定のすくすくバイナリに同梱するつもりです。
+  プログラム中ではエディタ画面に画像を表示できるように改造したものを使用しています
+  改造版のAzuki.dllは http://furaga.sakura.ne.jp/ に公開中のバイナリに同梱されています
 
 --コンパイル・実行
 
@@ -17,4 +24,4 @@
 2. OpenCV-2.3.1の各DLLファイルをパスの通ったディレクトリに置く
 
 とすれば多分行けると思います。
-各DLLファイルは近日中公開予定のバイナリに同梱するつもりです。
+各DLLファイルは http://furaga.sakura.ne.jp/ に公開中のバイナリに同梱されています
