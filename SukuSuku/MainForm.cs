@@ -93,13 +93,14 @@ namespace SukuSuku
             }
 
             if (closeForce) return;
-
+            /*
             // 常駐させる
             if (notifyIcon.Visible)
             {
                 e.Cancel = true;
                 Hide();
             }
+             */
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
